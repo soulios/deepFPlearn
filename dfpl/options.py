@@ -16,8 +16,8 @@ class Options:
     """
     Dataclass for all options necessary for training the neural nets
     """
-    configFile: str = "./example/train.json"
-    inputFile: str = "/deepFPlearn/CMPNN/data/tox21.csv"
+    configFile: str = "/home/zadubrov/dfpl/example/train.json"
+    inputFile: str = ""
     outputDir: str = "."
     outputFile: str = ""
     ecWeightsFile: str = "AE.encoder.weights.hdf5"
@@ -60,6 +60,8 @@ class Options:
     aeWabTracking: str = ""  # Wand & Biases autoencoder tracking
     wabTracking: str = ""  # Wand & Biases FNN tracking
     wabTarget: str = "ER"  # Wand & Biases target used for showing training progress
+
+
 
     def saveToFile(self, file: str) -> None:
         """

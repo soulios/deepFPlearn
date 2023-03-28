@@ -409,6 +409,24 @@ def fit_and_evaluate_model(x_train: np.ndarray, x_test: np.ndarray, y_train: np.
     trainTime = str(round((time() - start) / 60, ndigits=2))
     logging.info(f"Computation time for training the single-label model for {target}: {trainTime} min")
 
+
+    ######################################
+    # SHAP extension
+    ######################################
+    # from . import shap_dfpl as sd
+ 
+    # sd.shap_explain(x_train, model, target, opts.outputDir, drop_values=False, save_values=True)
+    ######################################
+
+
+
+    # Dump shap_value object to a pickle to work with it outside dfpl
+    # import pickle
+    # with open("/home/zadubrov/output/results_train/T_shap_values_full.pickle", "wb") as pkl:
+    #     pickle.dump(shap_values, pkl)
+
+
+
     # Save and plot model history
     pd.DataFrame(hist.history).to_csv(
         path_or_buf=f"{model_file_prefix}.history.csv")
