@@ -1,0 +1,927 @@
+WARNING:tensorflow:`period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+WARNING  `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+Epoch 1/10
+2023-05-09 08:54:27.674101: I tensorflow/core/grappler/devices.cc:66] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 4
+2023-05-09 08:54:27.674574: I tensorflow/core/grappler/clusters/single_machine.cc:357] Starting new session
+2023-05-09 08:54:27.743935: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 78600 MB memory:  -> device: 0, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:17:00.0, compute capability: 8.0
+2023-05-09 08:54:27.745575: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 78600 MB memory:  -> device: 1, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:65:00.0, compute capability: 8.0
+2023-05-09 08:54:27.748793: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:2 with 78600 MB memory:  -> device: 2, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:ca:00.0, compute capability: 8.0
+2023-05-09 08:54:27.750372: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:3 with 78600 MB memory:  -> device: 3, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:e3:00.0, compute capability: 8.0
+2023-05-09 08:54:27.786004: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:1137] Optimization results for grappler item: graph_to_optimize
+  function_optimizer: function_optimizer did nothing. time = 0.057ms.
+  function_optimizer: function_optimizer did nothing. time = 0.004ms.
+WARNING:tensorflow:From /home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/tensorflow/python/ops/math_ops.py:3777: tensor_shape_from_node_def_name (from tensorflow.python.framework.graph_util_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.compat.v1.graph_util.tensor_shape_from_node_def_name`
+WARNING  From /home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/tensorflow/python/ops/math_ops.py:3777: tensor_shape_from_node_def_name (from tensorflow.python.framework.graph_util_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.compat.v1.graph_util.tensor_shape_from_node_def_name`
+2023-05-09 08:54:28.084608: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:185] None of the MLIR Optimization Passes are enabled (registered 2)
+2023-05-09 08:54:35.039796: I tensorflow/stream_executor/cuda/cuda_blas.cc:1760] TensorFloat-32 will be used for the matrix multiplication. This will only be logged once.
+37/37 - 8s - loss: 0.5083 - accuracy: 0.8129 - auc: 0.5030 - precision: 0.2468 - recall: 0.0224 - balanced_accuracy: 0.5042 - val_loss: 0.4495 - val_accuracy: 0.8218 - val_auc: 0.6183 - val_precision: 1.0000 - val_recall: 0.0047 - val_balanced_accuracy: 0.5021
+Epoch 2/10
+37/37 - 0s - loss: 0.4815 - accuracy: 0.8118 - auc: 0.5735 - precision: 0.3136 - recall: 0.0437 - balanced_accuracy: 0.5107 - val_loss: 0.4290 - val_accuracy: 0.8345 - val_auc: 0.6784 - val_precision: 0.9444 - val_recall: 0.0802 - val_balanced_accuracy: 0.5372
+Epoch 3/10
+37/37 - 1s - loss: 0.4580 - accuracy: 0.8201 - auc: 0.6336 - precision: 0.4818 - recall: 0.0779 - balanced_accuracy: 0.5304 - val_loss: 0.4143 - val_accuracy: 0.8446 - val_auc: 0.7144 - val_precision: 0.9118 - val_recall: 0.1462 - val_balanced_accuracy: 0.5676
+Epoch 4/10
+37/37 - 0s - loss: 0.4503 - accuracy: 0.8251 - auc: 0.6476 - precision: 0.5613 - recall: 0.1027 - balanced_accuracy: 0.5442 - val_loss: 0.4031 - val_accuracy: 0.8497 - val_auc: 0.7383 - val_precision: 0.9250 - val_recall: 0.1745 - val_balanced_accuracy: 0.5806
+Epoch 5/10
+37/37 - 0s - loss: 0.4333 - accuracy: 0.8329 - auc: 0.6801 - precision: 0.6556 - recall: 0.1393 - balanced_accuracy: 0.5620 - val_loss: 0.3942 - val_accuracy: 0.8514 - val_auc: 0.7535 - val_precision: 0.9091 - val_recall: 0.1887 - val_balanced_accuracy: 0.5862
+Epoch 6/10
+37/37 - 1s - loss: 0.4226 - accuracy: 0.8370 - auc: 0.7078 - precision: 0.6829 - recall: 0.1653 - balanced_accuracy: 0.5726 - val_loss: 0.3867 - val_accuracy: 0.8530 - val_auc: 0.7680 - val_precision: 0.8654 - val_recall: 0.2123 - val_balanced_accuracy: 0.5967
+Epoch 7/10
+37/37 - 0s - loss: 0.4169 - accuracy: 0.8353 - auc: 0.7193 - precision: 0.6618 - recall: 0.1617 - balanced_accuracy: 0.5708 - val_loss: 0.3805 - val_accuracy: 0.8530 - val_auc: 0.7772 - val_precision: 0.8519 - val_recall: 0.2170 - val_balanced_accuracy: 0.5986
+Epoch 8/10
+37/37 - 0s - loss: 0.4167 - accuracy: 0.8412 - auc: 0.7143 - precision: 0.7021 - recall: 0.1948 - balanced_accuracy: 0.5902 - val_loss: 0.3747 - val_accuracy: 0.8530 - val_auc: 0.7859 - val_precision: 0.8519 - val_recall: 0.2170 - val_balanced_accuracy: 0.5986
+Epoch 9/10
+37/37 - 1s - loss: 0.4074 - accuracy: 0.8408 - auc: 0.7320 - precision: 0.6946 - recall: 0.1960 - balanced_accuracy: 0.5884 - val_loss: 0.3701 - val_accuracy: 0.8505 - val_auc: 0.7943 - val_precision: 0.7692 - val_recall: 0.2358 - val_balanced_accuracy: 0.6036
+Epoch 10/10
+37/37 - 0s - loss: 0.3816 - accuracy: 0.8496 - auc: 0.7794 - precision: 0.7368 - recall: 0.2479 - balanced_accuracy: 0.6124 - val_loss: 0.3657 - val_accuracy: 0.8497 - val_auc: 0.7990 - val_precision: 0.7500 - val_recall: 0.2406 - val_balanced_accuracy: 0.6051
+Epoch 00010: val_loss improved from inf to 0.36574, saving model to /gpfs0/home/zadubrov/deepFPlearn_exai/example/results_train/AR_single-labeled_Fold-0.model.weights.hdf5
+INFO     Computation time for training the single-label model for AR: 0.25 min
+INFO     Network type: FNN
+INFO     Model: "sequential"
+INFO     _________________________________________________________________
+INFO     Layer (type)                 Output Shape              Param #
+INFO     =================================================================
+INFO     dense (Dense)                (None, 1024)              2098176
+INFO     _________________________________________________________________
+INFO     alpha_dropout (AlphaDropout) (None, 1024)              0
+INFO     _________________________________________________________________
+INFO     dense_1 (Dense)              (None, 512)               524800
+INFO     _________________________________________________________________
+INFO     alpha_dropout_1 (AlphaDropou (None, 512)               0
+INFO     _________________________________________________________________
+INFO     dense_2 (Dense)              (None, 256)               131328
+INFO     _________________________________________________________________
+INFO     alpha_dropout_2 (AlphaDropou (None, 256)               0
+INFO     _________________________________________________________________
+INFO     dense_3 (Dense)              (None, 128)               32896
+INFO     _________________________________________________________________
+INFO     alpha_dropout_3 (AlphaDropou (None, 128)               0
+INFO     _________________________________________________________________
+INFO     dense_4 (Dense)              (None, 1)                 129
+INFO     =================================================================
+INFO     Total params: 2,787,329
+INFO     Trainable params: 2,787,329
+INFO     Non-trainable params: 0
+INFO     _________________________________________________________________
+INFO     Evaluating trained model 'AR single-labeled Fold-0' on test data
+21/37 [================>.............] - ETA: 0s - loss: 1.1768 - accuracy: 0.1890 - auc: 0.5105 - precision: 0.1840 - recall: 0.9683 - balanced_accuracy: 0.4913
+INFO     Loss: 1.1879
+INFO     Accuracy: 0.1841
+INFO     AUC: 0.5281
+INFO     Precision: 0.1778
+INFO     Recall: 0.9811
+INFO     Balanced Accuracy: 0.4976
+INFO     MCC: -0.0304
+INFO     Network type: FNN
+INFO     Model: "sequential_1"
+INFO     _________________________________________________________________
+INFO     Layer (type)                 Output Shape              Param #
+INFO     =================================================================
+INFO     dense_5 (Dense)              (None, 1024)              2098176
+INFO     _________________________________________________________________
+INFO     alpha_dropout_4 (AlphaDropou (None, 1024)              0
+INFO     _________________________________________________________________
+INFO     dense_6 (Dense)              (None, 512)               524800
+INFO     _________________________________________________________________
+INFO     alpha_dropout_5 (AlphaDropou (None, 512)               0
+INFO     _________________________________________________________________
+INFO     dense_7 (Dense)              (None, 256)               131328
+INFO     _________________________________________________________________
+INFO     alpha_dropout_6 (AlphaDropou (None, 256)               0
+INFO     _________________________________________________________________
+INFO     dense_8 (Dense)              (None, 128)               32896
+INFO     _________________________________________________________________
+INFO     alpha_dropout_7 (AlphaDropou (None, 128)               0
+INFO     _________________________________________________________________
+INFO     dense_9 (Dense)              (None, 1)                 129
+INFO     =================================================================
+INFO     Total params: 2,787,329
+INFO     Trainable params: 2,787,329
+INFO     Non-trainable params: 0
+INFO     _________________________________________________________________
+2023-05-09 08:54:52.569810: W tensorflow/python/util/util.cc:348] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+INFO:tensorflow:Assets written to: /gpfs0/home/zadubrov/deepFPlearn_exai/example/results_train/AR_saved_model/assets
+INFO     Assets written to: /gpfs0/home/zadubrov/deepFPlearn_exai/example/results_train/AR_saved_model/assets
+INFO     Preparing training data matrices
+INFO     Using uncompressed fingerprints
+INFO     DataSet has 5590 valid entries in fp and ER
+INFO     Fraction sampling is OFF
+INFO     Number of sampling values: {0.0: 4252, 1.0: 1338}
+INFO     X training matrix of shape (5590, 2048) and type bool
+INFO     Y training matrix of shape (5590,) and type int16
+INFO     Training of fold number: 0
+INFO     Initial bias for last sigmoid layer: -1.1567048454998552
+INFO     Network type: FNN
+INFO     Model: "sequential_2"
+INFO     _________________________________________________________________
+INFO     Layer (type)                 Output Shape              Param #
+INFO     =================================================================
+INFO     dense_10 (Dense)             (None, 1024)              2098176
+INFO     _________________________________________________________________
+INFO     alpha_dropout_8 (AlphaDropou (None, 1024)              0
+INFO     _________________________________________________________________
+INFO     dense_11 (Dense)             (None, 512)               524800
+INFO     _________________________________________________________________
+INFO     alpha_dropout_9 (AlphaDropou (None, 512)               0
+INFO     _________________________________________________________________
+INFO     dense_12 (Dense)             (None, 256)               131328
+INFO     _________________________________________________________________
+INFO     alpha_dropout_10 (AlphaDropo (None, 256)               0
+INFO     _________________________________________________________________
+INFO     dense_13 (Dense)             (None, 128)               32896
+INFO     _________________________________________________________________
+INFO     alpha_dropout_11 (AlphaDropo (None, 128)               0
+INFO     _________________________________________________________________
+INFO     dense_14 (Dense)             (None, 1)                 129
+INFO     =================================================================
+INFO     Total params: 2,787,329
+INFO     Trainable params: 2,787,329
+INFO     Non-trainable params: 0
+INFO     _________________________________________________________________
+WARNING:tensorflow:`period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+
+37/37 [==============================] - 2s 8ms/step - loss: 1.1879 - accuracy: 0.1841 - auc: 0.5281 - precision: 0.1778 - recall: 0.9811 - balanced_accuracy: 0.4976
+Epoch 1/10
+2023-05-09 08:54:53.732695: I tensorflow/core/grappler/devices.cc:66] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 4
+2023-05-09 08:54:53.732859: I tensorflow/core/grappler/clusters/single_machine.cc:357] Starting new session
+2023-05-09 08:54:53.748773: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 78600 MB memory:  -> device: 0, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:17:00.0, compute capability: 8.0
+2023-05-09 08:54:53.749776: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 78600 MB memory:  -> device: 1, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:65:00.0, compute capability: 8.0
+2023-05-09 08:54:53.750713: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:2 with 78600 MB memory:  -> device: 2, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:ca:00.0, compute capability: 8.0
+2023-05-09 08:54:53.751627: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:3 with 78600 MB memory:  -> device: 3, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:e3:00.0, compute capability: 8.0
+2023-05-09 08:54:53.759751: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:1137] Optimization results for grappler item: graph_to_optimize
+  function_optimizer: function_optimizer did nothing. time = 0.012ms.
+  function_optimizer: function_optimizer did nothing. time = 0.001ms.
+35/35 - 2s - loss: 0.5937 - accuracy: 0.7180 - auc_2: 0.5315 - precision_2: 0.2558 - recall_2: 0.0935 - balanced_accuracy: 0.5045 - val_loss: 0.5325 - val_accuracy: 0.7674 - val_auc_2: 0.6189 - val_precision_2: 0.8333 - val_recall_2: 0.0373 - val_balanced_accuracy: 0.5174
+Epoch 2/10
+35/35 - 0s - loss: 0.5674 - accuracy: 0.7406 - auc_2: 0.5757 - precision_2: 0.3676 - recall_2: 0.1168 - balanced_accuracy: 0.5271 - val_loss: 0.5114 - val_accuracy: 0.7800 - val_auc_2: 0.6718 - val_precision_2: 0.9231 - val_recall_2: 0.0896 - val_balanced_accuracy: 0.5438
+Epoch 3/10
+35/35 - 1s - loss: 0.5397 - accuracy: 0.7518 - auc_2: 0.6328 - precision_2: 0.4474 - recall_2: 0.1589 - balanced_accuracy: 0.5488 - val_loss: 0.4964 - val_accuracy: 0.7880 - val_auc_2: 0.7012 - val_precision_2: 0.8444 - val_recall_2: 0.1418 - val_balanced_accuracy: 0.5665
+Epoch 4/10
+35/35 - 0s - loss: 0.5150 - accuracy: 0.7659 - auc_2: 0.6790 - precision_2: 0.5294 - recall_2: 0.1935 - balanced_accuracy: 0.5704 - val_loss: 0.4859 - val_accuracy: 0.7952 - val_auc_2: 0.7178 - val_precision_2: 0.8421 - val_recall_2: 0.1791 - val_balanced_accuracy: 0.5857
+Epoch 5/10
+35/35 - 0s - loss: 0.5068 - accuracy: 0.7726 - auc_2: 0.6908 - precision_2: 0.5632 - recall_2: 0.2206 - balanced_accuracy: 0.5843 - val_loss: 0.4779 - val_accuracy: 0.7970 - val_auc_2: 0.7295 - val_precision_2: 0.7971 - val_recall_2: 0.2052 - val_balanced_accuracy: 0.5954
+Epoch 6/10
+35/35 - 0s - loss: 0.4910 - accuracy: 0.7829 - auc_2: 0.7148 - precision_2: 0.6133 - recall_2: 0.2505 - balanced_accuracy: 0.5994 - val_loss: 0.4710 - val_accuracy: 0.7943 - val_auc_2: 0.7410 - val_precision_2: 0.7317 - val_recall_2: 0.2239 - val_balanced_accuracy: 0.6000
+Epoch 7/10
+35/35 - 1s - loss: 0.4906 - accuracy: 0.7806 - auc_2: 0.7153 - precision_2: 0.5895 - recall_2: 0.2738 - balanced_accuracy: 0.6062 - val_loss: 0.4653 - val_accuracy: 0.7961 - val_auc_2: 0.7496 - val_precision_2: 0.7273 - val_recall_2: 0.2388 - val_balanced_accuracy: 0.6067
+Epoch 8/10
+35/35 - 0s - loss: 0.4783 - accuracy: 0.7905 - auc_2: 0.7358 - precision_2: 0.6371 - recall_2: 0.2888 - balanced_accuracy: 0.6169 - val_loss: 0.4601 - val_accuracy: 0.7961 - val_auc_2: 0.7579 - val_precision_2: 0.6887 - val_recall_2: 0.2724 - val_balanced_accuracy: 0.6197
+Epoch 9/10
+35/35 - 0s - loss: 0.4652 - accuracy: 0.7900 - auc_2: 0.7582 - precision_2: 0.6297 - recall_2: 0.2972 - balanced_accuracy: 0.6228 - val_loss: 0.4557 - val_accuracy: 0.8005 - val_auc_2: 0.7652 - val_precision_2: 0.6800 - val_recall_2: 0.3172 - val_balanced_accuracy: 0.6364
+Epoch 10/10
+INFO     Computation time for training the single-label model for ER: 0.14 min
+35/35 - 1s - loss: 0.4549 - accuracy: 0.8005 - auc_2: 0.7688 - precision_2: 0.6718 - recall_2: 0.3252 - balanced_accuracy: 0.6390 - val_loss: 0.4522 - val_accuracy: 0.8032 - val_auc_2: 0.7692 - val_precision_2: 0.6818 - val_recall_2: 0.3358 - val_balanced_accuracy: 0.6461
+Epoch 00010: val_loss improved from inf to 0.45224, saving model to /gpfs0/home/zadubrov/deepFPlearn_exai/example/results_train/ER_single-labeled_Fold-0.model.weights.hdf5
+35/35 [==============================] - 1s 4ms/step - loss: 0.5990 - accuracy: 0.7603 - auc: 0.4670 - precision: 0.0000e+00 - recall: 0.0000e+00 - balanced_accuracy: 0.5000
+INFO     Network type: FNN
+INFO     Model: "sequential"
+INFO     _________________________________________________________________
+INFO     Layer (type)                 Output Shape              Param #
+INFO     =================================================================
+INFO     dense (Dense)                (None, 1024)              2098176
+INFO     _________________________________________________________________
+INFO     alpha_dropout (AlphaDropout) (None, 1024)              0
+INFO     _________________________________________________________________
+INFO     dense_1 (Dense)              (None, 512)               524800
+INFO     _________________________________________________________________
+INFO     alpha_dropout_1 (AlphaDropou (None, 512)               0
+INFO     _________________________________________________________________
+INFO     dense_2 (Dense)              (None, 256)               131328
+INFO     _________________________________________________________________
+INFO     alpha_dropout_2 (AlphaDropou (None, 256)               0
+INFO     _________________________________________________________________
+INFO     dense_3 (Dense)              (None, 128)               32896
+INFO     _________________________________________________________________
+INFO     alpha_dropout_3 (AlphaDropou (None, 128)               0
+INFO     _________________________________________________________________
+INFO     dense_4 (Dense)              (None, 1)                 129
+INFO     =================================================================
+INFO     Total params: 2,787,329
+INFO     Trainable params: 2,787,329
+INFO     Non-trainable params: 0
+INFO     _________________________________________________________________
+INFO     Evaluating trained model 'ER single-labeled Fold-0' on test data
+/home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+INFO     Loss: 0.599
+INFO     Accuracy: 0.7603
+INFO     AUC: 0.467
+INFO     Precision: 0.0
+INFO     Recall: 0.0
+INFO     Balanced Accuracy: 0.5
+INFO     MCC: 0.0
+INFO     Network type: FNN
+INFO     Model: "sequential_1"
+INFO     _________________________________________________________________
+INFO     Layer (type)                 Output Shape              Param #
+INFO     =================================================================
+INFO     dense_5 (Dense)              (None, 1024)              2098176
+INFO     _________________________________________________________________
+INFO     alpha_dropout_4 (AlphaDropou (None, 1024)              0
+INFO     _________________________________________________________________
+INFO     dense_6 (Dense)              (None, 512)               524800
+INFO     _________________________________________________________________
+INFO     alpha_dropout_5 (AlphaDropou (None, 512)               0
+INFO     _________________________________________________________________
+INFO     dense_7 (Dense)              (None, 256)               131328
+INFO     _________________________________________________________________
+INFO     alpha_dropout_6 (AlphaDropou (None, 256)               0
+INFO     _________________________________________________________________
+INFO     dense_8 (Dense)              (None, 128)               32896
+INFO     _________________________________________________________________
+INFO     alpha_dropout_7 (AlphaDropou (None, 128)               0
+INFO     _________________________________________________________________
+INFO     dense_9 (Dense)              (None, 1)                 129
+INFO     =================================================================
+INFO     Total params: 2,787,329
+INFO     Trainable params: 2,787,329
+INFO     Non-trainable params: 0
+INFO     _________________________________________________________________
+INFO:tensorflow:Assets written to: /gpfs0/home/zadubrov/deepFPlearn_exai/example/results_train/ER_saved_model/assets
+INFO     Assets written to: /gpfs0/home/zadubrov/deepFPlearn_exai/example/results_train/ER_saved_model/assets
+INFO     Preparing training data matrices
+INFO     Using uncompressed fingerprints
+INFO     DataSet has 6055 valid entries in fp and GR
+INFO     Fraction sampling is OFF
+INFO     Number of sampling values: {0.0: 5454, 1.0: 601}
+INFO     X training matrix of shape (6055, 2048) and type bool
+INFO     Y training matrix of shape (6055,) and type int16
+INFO     Training of fold number: 0
+INFO     Initial bias for last sigmoid layer: -2.2050479030178485
+INFO     Network type: FNN
+INFO     Model: "sequential_2"
+INFO     _________________________________________________________________
+INFO     Layer (type)                 Output Shape              Param #
+INFO     =================================================================
+INFO     dense_10 (Dense)             (None, 1024)              2098176
+INFO     _________________________________________________________________
+INFO     alpha_dropout_8 (AlphaDropou (None, 1024)              0
+INFO     _________________________________________________________________
+INFO     dense_11 (Dense)             (None, 512)               524800
+INFO     _________________________________________________________________
+INFO     alpha_dropout_9 (AlphaDropou (None, 512)               0
+INFO     _________________________________________________________________
+INFO     dense_12 (Dense)             (None, 256)               131328
+INFO     _________________________________________________________________
+INFO     alpha_dropout_10 (AlphaDropo (None, 256)               0
+INFO     _________________________________________________________________
+INFO     dense_13 (Dense)             (None, 128)               32896
+INFO     _________________________________________________________________
+INFO     alpha_dropout_11 (AlphaDropo (None, 128)               0
+INFO     _________________________________________________________________
+INFO     dense_14 (Dense)             (None, 1)                 129
+INFO     =================================================================
+INFO     Total params: 2,787,329
+INFO     Trainable params: 2,787,329
+INFO     Non-trainable params: 0
+INFO     _________________________________________________________________
+WARNING:tensorflow:`period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+WARNING  `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+2023-05-09 08:55:11.864029: I tensorflow/core/grappler/devices.cc:66] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 4
+2023-05-09 08:55:11.864228: I tensorflow/core/grappler/clusters/single_machine.cc:357] Starting new session
+2023-05-09 08:55:11.900402: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 78600 MB memory:  -> device: 0, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:17:00.0, compute capability: 8.0
+2023-05-09 08:55:11.903907: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 78600 MB memory:  -> device: 1, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:65:00.0, compute capability: 8.0
+2023-05-09 08:55:11.905232: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:2 with 78600 MB memory:  -> device: 2, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:ca:00.0, compute capability: 8.0
+2023-05-09 08:55:11.906374: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:3 with 78600 MB memory:  -> device: 3, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:e3:00.0, compute capability: 8.0
+2023-05-09 08:55:11.929825: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:1137] Optimization results for grappler item: graph_to_optimize
+  function_optimizer: function_optimizer did nothing. time = 0.012ms.
+  function_optimizer: function_optimizer did nothing. time = 0.002ms.
+Epoch 1/10
+38/38 - 2s - loss: 0.3343 - accuracy: 0.9007 - auc_2: 0.5253 - precision_2: 0.0000e+00 - recall_2: 0.0000e+00 - balanced_accuracy: 0.5000 - val_loss: 0.3055 - val_accuracy: 0.9009 - val_auc_2: 0.6783 - val_precision_2: 0.0000e+00 - val_recall_2: 0.0000e+00 - val_balanced_accuracy: 0.5000
+Epoch 2/10
+38/38 - 1s - loss: 0.3162 - accuracy: 0.9009 - auc_2: 0.6133 - precision_2: 1.0000 - recall_2: 0.0021 - balanced_accuracy: 0.5012 - val_loss: 0.2912 - val_accuracy: 0.9009 - val_auc_2: 0.7267 - val_precision_2: 0.0000e+00 - val_recall_2: 0.0000e+00 - val_balanced_accuracy: 0.5000
+Epoch 3/10
+38/38 - 0s - loss: 0.3028 - accuracy: 0.9034 - auc_2: 0.6652 - precision_2: 0.9333 - recall_2: 0.0291 - balanced_accuracy: 0.5144 - val_loss: 0.2813 - val_accuracy: 0.9092 - val_auc_2: 0.7470 - val_precision_2: 1.0000 - val_recall_2: 0.0833 - val_balanced_accuracy: 0.5416
+Epoch 4/10
+38/38 - 0s - loss: 0.2899 - accuracy: 0.9063 - auc_2: 0.6945 - precision_2: 1.0000 - recall_2: 0.0561 - balanced_accuracy: 0.5269 - val_loss: 0.2742 - val_accuracy: 0.9125 - val_auc_2: 0.7576 - val_precision_2: 1.0000 - val_recall_2: 0.1167 - val_balanced_accuracy: 0.5566
+Epoch 5/10
+38/38 - 0s - loss: 0.2803 - accuracy: 0.9114 - auc_2: 0.7218 - precision_2: 0.9643 - recall_2: 0.1123 - balanced_accuracy: 0.5545 - val_loss: 0.2689 - val_accuracy: 0.9116 - val_auc_2: 0.7669 - val_precision_2: 0.8421 - val_recall_2: 0.1333 - val_balanced_accuracy: 0.5637
+Epoch 6/10
+38/38 - 1s - loss: 0.2705 - accuracy: 0.9162 - auc_2: 0.7482 - precision_2: 0.9032 - recall_2: 0.1746 - balanced_accuracy: 0.5876 - val_loss: 0.2648 - val_accuracy: 0.9149 - val_auc_2: 0.7715 - val_precision_2: 0.8696 - val_recall_2: 0.1667 - val_balanced_accuracy: 0.5838
+Epoch 7/10
+38/38 - 0s - loss: 0.2657 - accuracy: 0.9211 - auc_2: 0.7483 - precision_2: 0.9806 - recall_2: 0.2100 - balanced_accuracy: 0.6045 - val_loss: 0.2613 - val_accuracy: 0.9149 - val_auc_2: 0.7779 - val_precision_2: 0.8400 - val_recall_2: 0.1750 - val_balanced_accuracy: 0.5879
+Epoch 8/10
+38/38 - 0s - loss: 0.2602 - accuracy: 0.9218 - auc_2: 0.7664 - precision_2: 0.9322 - recall_2: 0.2287 - balanced_accuracy: 0.6174 - val_loss: 0.2581 - val_accuracy: 0.9158 - val_auc_2: 0.7845 - val_precision_2: 0.8214 - val_recall_2: 0.1917 - val_balanced_accuracy: 0.5948
+Epoch 9/10
+38/38 - 0s - loss: 0.2530 - accuracy: 0.9216 - auc_2: 0.7856 - precision_2: 0.9106 - recall_2: 0.2328 - balanced_accuracy: 0.6199 - val_loss: 0.2554 - val_accuracy: 0.9158 - val_auc_2: 0.7883 - val_precision_2: 0.8000 - val_recall_2: 0.2000 - val_balanced_accuracy: 0.5982
+Epoch 10/10
+38/38 - 1s - loss: 0.2506 - accuracy: 0.9224 - auc_2: 0.7852 - precision_2: 0.9268 - recall_2: 0.2370 - balanced_accuracy: 0.6131 - val_loss: 0.2536 - val_accuracy: 0.9158 - val_auc_2: 0.7923 - val_precision_2: 0.8000 - val_recall_2: 0.2000 - val_balanced_accuracy: 0.5982
+Epoch 00010: val_loss improved from inf to 0.25361, saving model to /gpfs0/home/zadubrov/deepFPlearn_exai/example/results_train/GR_single-labeled_Fold-0.model.weights.hdf5
+INFO     Computation time for training the single-label model for GR: 0.13 min
+38/38 [==============================] - 1s 4ms/step - loss: 0.8321 - accuracy: 0.2841 - auc: 0.4723 - precision: 0.0936 - recall: 0.7167 - balanced_accuracy: nan
+INFO     Network type: FNN
+INFO     Model: "sequential"
+INFO     _________________________________________________________________
+INFO     Layer (type)                 Output Shape              Param #
+INFO     =================================================================
+INFO     dense (Dense)                (None, 1024)              2098176
+INFO     _________________________________________________________________
+INFO     alpha_dropout (AlphaDropout) (None, 1024)              0
+INFO     _________________________________________________________________
+INFO     dense_1 (Dense)              (None, 512)               524800
+INFO     _________________________________________________________________
+INFO     alpha_dropout_1 (AlphaDropou (None, 512)               0
+INFO     _________________________________________________________________
+INFO     dense_2 (Dense)              (None, 256)               131328
+INFO     _________________________________________________________________
+INFO     alpha_dropout_2 (AlphaDropou (None, 256)               0
+INFO     _________________________________________________________________
+INFO     dense_3 (Dense)              (None, 128)               32896
+INFO     _________________________________________________________________
+INFO     alpha_dropout_3 (AlphaDropou (None, 128)               0
+INFO     _________________________________________________________________
+INFO     dense_4 (Dense)              (None, 1)                 129
+INFO     =================================================================
+INFO     Total params: 2,787,329
+INFO     Trainable params: 2,787,329
+INFO     Non-trainable params: 0
+INFO     _________________________________________________________________
+INFO     Evaluating trained model 'GR single-labeled Fold-0' on test data
+INFO     Loss: 0.8321
+INFO     Accuracy: 0.2841
+INFO     AUC: 0.4723
+INFO     Precision: 0.0936
+INFO     Recall: 0.7167
+INFO     Balanced Accuracy: nan
+INFO     MCC: -0.0327
+INFO     Network type: FNN
+INFO     Model: "sequential_1"
+INFO     _________________________________________________________________
+INFO     Layer (type)                 Output Shape              Param #
+INFO     =================================================================
+INFO     dense_5 (Dense)              (None, 1024)              2098176
+INFO     _________________________________________________________________
+INFO     alpha_dropout_4 (AlphaDropou (None, 1024)              0
+INFO     _________________________________________________________________
+INFO     dense_6 (Dense)              (None, 512)               524800
+INFO     _________________________________________________________________
+INFO     alpha_dropout_5 (AlphaDropou (None, 512)               0
+INFO     _________________________________________________________________
+INFO     dense_7 (Dense)              (None, 256)               131328
+INFO     _________________________________________________________________
+INFO     alpha_dropout_6 (AlphaDropou (None, 256)               0
+INFO     _________________________________________________________________
+INFO     dense_8 (Dense)              (None, 128)               32896
+INFO     _________________________________________________________________
+INFO     alpha_dropout_7 (AlphaDropou (None, 128)               0
+INFO     _________________________________________________________________
+INFO     dense_9 (Dense)              (None, 1)                 129
+INFO     =================================================================
+INFO     Total params: 2,787,329
+INFO     Trainable params: 2,787,329
+INFO     Non-trainable params: 0
+INFO     _________________________________________________________________
+Epoch 1/10
+INFO:tensorflow:Assets written to: /gpfs0/home/zadubrov/deepFPlearn_exai/example/results_train/GR_saved_model/assets
+INFO     Assets written to: /gpfs0/home/zadubrov/deepFPlearn_exai/example/results_train/GR_saved_model/assets
+INFO     Preparing training data matrices
+INFO     Using uncompressed fingerprints
+INFO     DataSet has 6154 valid entries in fp and Aromatase
+INFO     Fraction sampling is OFF
+INFO     Number of sampling values: {0.0: 5457, 1.0: 697}
+INFO     X training matrix of shape (6154, 2048) and type bool
+INFO     Y training matrix of shape (6154,) and type int16
+INFO     Training of fold number: 0
+INFO     Initial bias for last sigmoid layer: -2.0570145058923917
+INFO     Network type: FNN
+INFO     Model: "sequential_2"
+INFO     _________________________________________________________________
+INFO     Layer (type)                 Output Shape              Param #
+INFO     =================================================================
+INFO     dense_10 (Dense)             (None, 1024)              2098176
+INFO     _________________________________________________________________
+INFO     alpha_dropout_8 (AlphaDropou (None, 1024)              0
+INFO     _________________________________________________________________
+INFO     dense_11 (Dense)             (None, 512)               524800
+INFO     _________________________________________________________________
+INFO     alpha_dropout_9 (AlphaDropou (None, 512)               0
+INFO     _________________________________________________________________
+INFO     dense_12 (Dense)             (None, 256)               131328
+INFO     _________________________________________________________________
+INFO     alpha_dropout_10 (AlphaDropo (None, 256)               0
+INFO     _________________________________________________________________
+INFO     dense_13 (Dense)             (None, 128)               32896
+INFO     _________________________________________________________________
+INFO     alpha_dropout_11 (AlphaDropo (None, 128)               0
+INFO     _________________________________________________________________
+INFO     dense_14 (Dense)             (None, 1)                 129
+INFO     =================================================================
+INFO     Total params: 2,787,329
+INFO     Trainable params: 2,787,329
+INFO     Non-trainable params: 0
+INFO     _________________________________________________________________
+WARNING:tensorflow:`period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+WARNING  `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+2023-05-09 08:55:29.101946: I tensorflow/core/grappler/devices.cc:66] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 4
+2023-05-09 08:55:29.102112: I tensorflow/core/grappler/clusters/single_machine.cc:357] Starting new session
+2023-05-09 08:55:29.122395: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 78600 MB memory:  -> device: 0, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:17:00.0, compute capability: 8.0
+2023-05-09 08:55:29.123400: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 78600 MB memory:  -> device: 1, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:65:00.0, compute capability: 8.0
+2023-05-09 08:55:29.124323: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:2 with 78600 MB memory:  -> device: 2, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:ca:00.0, compute capability: 8.0
+2023-05-09 08:55:29.125269: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:3 with 78600 MB memory:  -> device: 3, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:e3:00.0, compute capability: 8.0
+2023-05-09 08:55:29.152042: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:1137] Optimization results for grappler item: graph_to_optimize
+  function_optimizer: function_optimizer did nothing. time = 0.016ms.
+  function_optimizer: function_optimizer did nothing. time = 0.002ms.
+39/39 - 2s - loss: 0.3792 - accuracy: 0.8850 - auc_2: 0.5048 - precision_2: 0.0000e+00 - recall_2: 0.0000e+00 - balanced_accuracy: 0.4991 - val_loss: 0.3450 - val_accuracy: 0.8871 - val_auc_2: 0.5973 - val_precision_2: 0.0000e+00 - val_recall_2: 0.0000e+00 - val_balanced_accuracy: 0.5000
+Epoch 2/10
+39/39 - 0s - loss: 0.3599 - accuracy: 0.8867 - auc_2: 0.5764 - precision_2: 0.5000 - recall_2: 0.0054 - balanced_accuracy: 0.5022 - val_loss: 0.3332 - val_accuracy: 0.8871 - val_auc_2: 0.6629 - val_precision_2: 0.0000e+00 - val_recall_2: 0.0000e+00 - val_balanced_accuracy: 0.5000
+Epoch 3/10
+39/39 - 1s - loss: 0.3438 - accuracy: 0.8865 - auc_2: 0.6332 - precision_2: 0.4444 - recall_2: 0.0072 - balanced_accuracy: 0.5031 - val_loss: 0.3232 - val_accuracy: 0.8887 - val_auc_2: 0.7047 - val_precision_2: 1.0000 - val_recall_2: 0.0144 - val_balanced_accuracy: 0.5063
+Epoch 4/10
+39/39 - 0s - loss: 0.3399 - accuracy: 0.8893 - auc_2: 0.6423 - precision_2: 0.8421 - recall_2: 0.0287 - balanced_accuracy: 0.5149 - val_loss: 0.3162 - val_accuracy: 0.8903 - val_auc_2: 0.7270 - val_precision_2: 1.0000 - val_recall_2: 0.0288 - val_balanced_accuracy: 0.5139
+Epoch 5/10
+39/39 - 0s - loss: 0.3299 - accuracy: 0.8903 - auc_2: 0.6774 - precision_2: 0.9091 - recall_2: 0.0358 - balanced_accuracy: 0.5167 - val_loss: 0.3106 - val_accuracy: 0.8960 - val_auc_2: 0.7398 - val_precision_2: 1.0000 - val_recall_2: 0.0791 - val_balanced_accuracy: 0.5358
+Epoch 6/10
+39/39 - 1s - loss: 0.3207 - accuracy: 0.8917 - auc_2: 0.7073 - precision_2: 0.8049 - recall_2: 0.0591 - balanced_accuracy: 0.5278 - val_loss: 0.3058 - val_accuracy: 0.8976 - val_auc_2: 0.7508 - val_precision_2: 1.0000 - val_recall_2: 0.0935 - val_balanced_accuracy: 0.5420
+Epoch 7/10
+39/39 - 0s - loss: 0.3142 - accuracy: 0.8944 - auc_2: 0.7242 - precision_2: 0.8519 - recall_2: 0.0824 - balanced_accuracy: 0.5380 - val_loss: 0.3024 - val_accuracy: 0.8976 - val_auc_2: 0.7546 - val_precision_2: 1.0000 - val_recall_2: 0.0935 - val_balanced_accuracy: 0.5420
+Epoch 8/10
+39/39 - 0s - loss: 0.3041 - accuracy: 0.8958 - auc_2: 0.7526 - precision_2: 0.9091 - recall_2: 0.0896 - balanced_accuracy: 0.5441 - val_loss: 0.2997 - val_accuracy: 0.8976 - val_auc_2: 0.7598 - val_precision_2: 1.0000 - val_recall_2: 0.0935 - val_balanced_accuracy: 0.5420
+Epoch 9/10
+39/39 - 0s - loss: 0.3016 - accuracy: 0.8954 - auc_2: 0.7548 - precision_2: 0.7654 - recall_2: 0.1111 - balanced_accuracy: 0.5523 - val_loss: 0.2971 - val_accuracy: 0.8993 - val_auc_2: 0.7627 - val_precision_2: 1.0000 - val_recall_2: 0.1079 - val_balanced_accuracy: 0.5535
+Epoch 10/10
+39/39 - 1s - loss: 0.2952 - accuracy: 0.8958 - auc_2: 0.7732 - precision_2: 0.7848 - recall_2: 0.1111 - balanced_accuracy: 0.5568 - val_loss: 0.2952 - val_accuracy: 0.8976 - val_auc_2: 0.7649 - val_precision_2: 0.8824 - val_recall_2: 0.1079 - val_balanced_accuracy: 0.5526
+Epoch 00010: val_loss improved from inf to 0.29524, saving model to /gpfs0/home/zadubrov/deepFPlearn_exai/example/results_train/Aromatase_single-labeled_Fold-0.model.weights.hdf5
+INFO     Computation time for training the single-label model for Aromatase: 0.13 min
+INFO     Network type: FNN
+INFO     Model: "sequential"
+INFO     _________________________________________________________________
+INFO     Layer (type)                 Output Shape              Param #
+INFO     =================================================================
+INFO     dense (Dense)                (None, 1024)              2098176
+INFO     _________________________________________________________________
+INFO     alpha_dropout (AlphaDropout) (None, 1024)              0
+INFO     _________________________________________________________________
+INFO     dense_1 (Dense)              (None, 512)               524800
+INFO     _________________________________________________________________
+INFO     alpha_dropout_1 (AlphaDropou (None, 512)               0
+INFO     _________________________________________________________________
+INFO     dense_2 (Dense)              (None, 256)               131328
+INFO     _________________________________________________________________
+INFO     alpha_dropout_2 (AlphaDropou (None, 256)               0
+INFO     _________________________________________________________________
+INFO     dense_3 (Dense)              (None, 128)               32896
+INFO     _________________________________________________________________
+INFO     alpha_dropout_3 (AlphaDropou (None, 128)               0
+INFO     _________________________________________________________________
+INFO     dense_4 (Dense)              (None, 1)                 129
+INFO     =================================================================
+INFO     Total params: 2,787,329
+INFO     Trainable params: 2,787,329
+INFO     Non-trainable params: 0
+INFO     _________________________________________________________________
+INFO     Evaluating trained model 'Aromatase single-labeled Fold-0' on test data
+INFO     Loss: 0.7517
+INFO     Accuracy: 0.4159
+INFO     AUC: 0.5334
+INFO     Precision: 0.1214
+INFO     Recall: 0.6691
+INFO     Balanced Accuracy: nan
+INFO     MCC: 0.0344
+INFO     Network type: FNN
+INFO     Model: "sequential_1"
+INFO     _________________________________________________________________
+INFO     Layer (type)                 Output Shape              Param #
+INFO     =================================================================
+INFO     dense_5 (Dense)              (None, 1024)              2098176
+INFO     _________________________________________________________________
+INFO     alpha_dropout_4 (AlphaDropou (None, 1024)              0
+INFO     _________________________________________________________________
+INFO     dense_6 (Dense)              (None, 512)               524800
+INFO     _________________________________________________________________
+INFO     alpha_dropout_5 (AlphaDropou (None, 512)               0
+INFO     _________________________________________________________________
+INFO     dense_7 (Dense)              (None, 256)               131328
+INFO     _________________________________________________________________
+INFO     alpha_dropout_6 (AlphaDropou (None, 256)               0
+INFO     _________________________________________________________________
+INFO     dense_8 (Dense)              (None, 128)               32896
+INFO     _________________________________________________________________
+INFO     alpha_dropout_7 (AlphaDropou (None, 128)               0
+INFO     _________________________________________________________________
+INFO     dense_9 (Dense)              (None, 1)                 129
+INFO     =================================================================
+INFO     Total params: 2,787,329
+INFO     Trainable params: 2,787,329
+INFO     Non-trainable params: 0
+INFO     _________________________________________________________________
+39/39 [==============================] - 1s 6ms/step - loss: 0.7517 - accuracy: 0.4159 - auc: 0.5334 - precision: 0.1214 - recall: 0.6691 - balanced_accuracy: nan
+INFO:tensorflow:Assets written to: /gpfs0/home/zadubrov/deepFPlearn_exai/example/results_train/Aromatase_saved_model/assets
+INFO     Assets written to: /gpfs0/home/zadubrov/deepFPlearn_exai/example/results_train/Aromatase_saved_model/assets
+INFO      Your training data is extremely unbalanced (TR): 0 - 4999, and 1 - 373 values.
+INFO      I will not down-sample your data automatically.
+INFO      Consider to enable down sampling of the 0 values with --sampleDown option.
+INFO     Preparing training data matrices
+INFO     Using uncompressed fingerprints
+INFO     DataSet has 5372 valid entries in fp and TR
+INFO     Fraction sampling is OFF
+INFO     Number of sampling values: {0.0: 4999, 1.0: 373}
+INFO     X training matrix of shape (5372, 2048) and type bool
+INFO     Y training matrix of shape (5372,) and type int16
+INFO     Training of fold number: 0
+INFO     Initial bias for last sigmoid layer: -2.596706122341414
+INFO     Network type: FNN
+INFO     Model: "sequential_2"
+INFO     _________________________________________________________________
+INFO     Layer (type)                 Output Shape              Param #
+INFO     =================================================================
+INFO     dense_10 (Dense)             (None, 1024)              2098176
+INFO     _________________________________________________________________
+INFO     alpha_dropout_8 (AlphaDropou (None, 1024)              0
+INFO     _________________________________________________________________
+INFO     dense_11 (Dense)             (None, 512)               524800
+INFO     _________________________________________________________________
+INFO     alpha_dropout_9 (AlphaDropou (None, 512)               0
+INFO     _________________________________________________________________
+INFO     dense_12 (Dense)             (None, 256)               131328
+INFO     _________________________________________________________________
+INFO     alpha_dropout_10 (AlphaDropo (None, 256)               0
+INFO     _________________________________________________________________
+INFO     dense_13 (Dense)             (None, 128)               32896
+INFO     _________________________________________________________________
+INFO     alpha_dropout_11 (AlphaDropo (None, 128)               0
+INFO     _________________________________________________________________
+INFO     dense_14 (Dense)             (None, 1)                 129
+INFO     =================================================================
+INFO     Total params: 2,787,329
+INFO     Trainable params: 2,787,329
+INFO     Non-trainable params: 0
+INFO     _________________________________________________________________
+WARNING:tensorflow:`period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+WARNING  `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+2023-05-09 08:55:47.126752: I tensorflow/core/grappler/devices.cc:66] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 4
+2023-05-09 08:55:47.126909: I tensorflow/core/grappler/clusters/single_machine.cc:357] Starting new session
+2023-05-09 08:55:47.155945: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 78600 MB memory:  -> device: 0, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:17:00.0, compute capability: 8.0
+2023-05-09 08:55:47.158599: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 78600 MB memory:  -> device: 1, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:65:00.0, compute capability: 8.0
+2023-05-09 08:55:47.160062: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:2 with 78600 MB memory:  -> device: 2, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:ca:00.0, compute capability: 8.0
+2023-05-09 08:55:47.161237: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:3 with 78600 MB memory:  -> device: 3, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:e3:00.0, compute capability: 8.0
+2023-05-09 08:55:47.168772: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:1137] Optimization results for grappler item: graph_to_optimize
+  function_optimizer: function_optimizer did nothing. time = 0.012ms.
+  function_optimizer: function_optimizer did nothing. time = 0.002ms.
+Epoch 1/10
+34/34 - 2s - loss: 0.2762 - accuracy: 0.9297 - auc_2: 0.4913 - precision_2: 0.0000e+00 - recall_2: 0.0000e+00 - balanced_accuracy: 0.4995 - val_loss: 0.2551 - val_accuracy: 0.9302 - val_auc_2: 0.5399 - val_precision_2: 0.0000e+00 - val_recall_2: 0.0000e+00 - val_balanced_accuracy: 0.5000
+Epoch 2/10
+34/34 - 1s - loss: 0.2643 - accuracy: 0.9306 - auc_2: 0.5409 - precision_2: 0.0000e+00 - recall_2: 0.0000e+00 - balanced_accuracy: 0.5000 - val_loss: 0.2510 - val_accuracy: 0.9302 - val_auc_2: 0.5821 - val_precision_2: 0.0000e+00 - val_recall_2: 0.0000e+00 - val_balanced_accuracy: 0.5000
+Epoch 3/10
+34/34 - 0s - loss: 0.2569 - accuracy: 0.9309 - auc_2: 0.5777 - precision_2: 1.0000 - recall_2: 0.0034 - balanced_accuracy: 0.5025 - val_loss: 0.2474 - val_accuracy: 0.9302 - val_auc_2: 0.6202 - val_precision_2: 0.0000e+00 - val_recall_2: 0.0000e+00 - val_balanced_accuracy: 0.5000
+Epoch 4/10
+34/34 - 0s - loss: 0.2507 - accuracy: 0.9304 - auc_2: 0.6114 - precision_2: 0.0000e+00 - recall_2: 0.0000e+00 - balanced_accuracy: 0.4999 - val_loss: 0.2438 - val_accuracy: 0.9302 - val_auc_2: 0.6486 - val_precision_2: 0.0000e+00 - val_recall_2: 0.0000e+00 - val_balanced_accuracy: 0.5000
+Epoch 5/10
+34/34 - 0s - loss: 0.2452 - accuracy: 0.9304 - auc_2: 0.6405 - precision_2: 0.0000e+00 - recall_2: 0.0000e+00 - balanced_accuracy: 0.4999 - val_loss: 0.2412 - val_accuracy: 0.9302 - val_auc_2: 0.6641 - val_precision_2: 0.0000e+00 - val_recall_2: 0.0000e+00 - val_balanced_accuracy: 0.5000
+Epoch 6/10
+INFO     Computation time for training the single-label model for TR: 0.12 min
+34/34 - 1s - loss: 0.2371 - accuracy: 0.9309 - auc_2: 0.6829 - precision_2: 1.0000 - recall_2: 0.0034 - balanced_accuracy: 0.5018 - val_loss: 0.2387 - val_accuracy: 0.9302 - val_auc_2: 0.6807 - val_precision_2: 0.0000e+00 - val_recall_2: 0.0000e+00 - val_balanced_accuracy: 0.5000
+Epoch 7/10
+34/34 - 0s - loss: 0.2402 - accuracy: 0.9304 - auc_2: 0.6729 - precision_2: 0.3333 - recall_2: 0.0034 - balanced_accuracy: 0.5011 - val_loss: 0.2369 - val_accuracy: 0.9302 - val_auc_2: 0.6918 - val_precision_2: 0.0000e+00 - val_recall_2: 0.0000e+00 - val_balanced_accuracy: 0.5000
+Epoch 8/10
+34/34 - 0s - loss: 0.2304 - accuracy: 0.9313 - auc_2: 0.7161 - precision_2: 0.6667 - recall_2: 0.0201 - balanced_accuracy: 0.5107 - val_loss: 0.2355 - val_accuracy: 0.9302 - val_auc_2: 0.7037 - val_precision_2: 0.0000e+00 - val_recall_2: 0.0000e+00 - val_balanced_accuracy: 0.5000
+Epoch 9/10
+34/34 - 0s - loss: 0.2267 - accuracy: 0.9304 - auc_2: 0.7329 - precision_2: 0.4286 - recall_2: 0.0101 - balanced_accuracy: 0.5044 - val_loss: 0.2336 - val_accuracy: 0.9302 - val_auc_2: 0.7101 - val_precision_2: 0.5000 - val_recall_2: 0.0133 - val_balanced_accuracy: 0.5106
+Epoch 10/10
+34/34 - 1s - loss: 0.2260 - accuracy: 0.9304 - auc_2: 0.7370 - precision_2: 0.3333 - recall_2: 0.0034 - balanced_accuracy: 0.5022 - val_loss: 0.2324 - val_accuracy: 0.9312 - val_auc_2: 0.7168 - val_precision_2: 0.6667 - val_recall_2: 0.0267 - val_balanced_accuracy: 0.5199
+Epoch 00010: val_loss improved from inf to 0.23236, saving model to /gpfs0/home/zadubrov/deepFPlearn_exai/example/results_train/TR_single-labeled_Fold-0.model.weights.hdf5
+INFO     Network type: FNN
+INFO     Model: "sequential"
+INFO     _________________________________________________________________
+INFO     Layer (type)                 Output Shape              Param #
+INFO     =================================================================
+INFO     dense (Dense)                (None, 1024)              2098176
+INFO     _________________________________________________________________
+INFO     alpha_dropout (AlphaDropout) (None, 1024)              0
+INFO     _________________________________________________________________
+INFO     dense_1 (Dense)              (None, 512)               524800
+INFO     _________________________________________________________________
+INFO     alpha_dropout_1 (AlphaDropou (None, 512)               0
+INFO     _________________________________________________________________
+INFO     dense_2 (Dense)              (None, 256)               131328
+INFO     _________________________________________________________________
+INFO     alpha_dropout_2 (AlphaDropou (None, 256)               0
+INFO     _________________________________________________________________
+INFO     dense_3 (Dense)              (None, 128)               32896
+INFO     _________________________________________________________________
+INFO     alpha_dropout_3 (AlphaDropou (None, 128)               0
+INFO     _________________________________________________________________
+INFO     dense_4 (Dense)              (None, 1)                 129
+INFO     =================================================================
+INFO     Total params: 2,787,329
+INFO     Trainable params: 2,787,329
+INFO     Non-trainable params: 0
+INFO     _________________________________________________________________
+INFO     Evaluating trained model 'TR single-labeled Fold-0' on test data
+INFO     Loss: 1.1749
+INFO     Accuracy: 0.0977
+INFO     AUC: 0.5166
+INFO     Precision: 0.0718
+INFO     Recall: 1.0
+INFO     Balanced Accuracy: nan
+INFO     MCC: 0.0464
+INFO     Network type: FNN
+INFO     Model: "sequential_1"
+INFO     _________________________________________________________________
+INFO     Layer (type)                 Output Shape              Param #
+INFO     =================================================================
+INFO     dense_5 (Dense)              (None, 1024)              2098176
+INFO     _________________________________________________________________
+INFO     alpha_dropout_4 (AlphaDropou (None, 1024)              0
+INFO     _________________________________________________________________
+INFO     dense_6 (Dense)              (None, 512)               524800
+INFO     _________________________________________________________________
+INFO     alpha_dropout_5 (AlphaDropou (None, 512)               0
+INFO     _________________________________________________________________
+INFO     dense_7 (Dense)              (None, 256)               131328
+INFO     _________________________________________________________________
+INFO     alpha_dropout_6 (AlphaDropou (None, 256)               0
+INFO     _________________________________________________________________
+INFO     dense_8 (Dense)              (None, 128)               32896
+INFO     _________________________________________________________________
+INFO     alpha_dropout_7 (AlphaDropou (None, 128)               0
+INFO     _________________________________________________________________
+INFO     dense_9 (Dense)              (None, 1)                 129
+INFO     =================================================================
+INFO     Total params: 2,787,329
+INFO     Trainable params: 2,787,329
+INFO     Non-trainable params: 0
+INFO     _________________________________________________________________
+INFO:tensorflow:Assets written to: /gpfs0/home/zadubrov/deepFPlearn_exai/example/results_train/TR_saved_model/assets
+INFO     Assets written to: /gpfs0/home/zadubrov/deepFPlearn_exai/example/results_train/TR_saved_model/assets
+INFO     Preparing training data matrices
+INFO     Using uncompressed fingerprints
+INFO     DataSet has 5456 valid entries in fp and PPARg
+INFO     Fraction sampling is OFF
+INFO     Number of sampling values: {0.0: 4880, 1.0: 576}
+INFO     X training matrix of shape (5456, 2048) and type bool
+INFO     Y training matrix of shape (5456,) and type int16
+INFO     Training of fold number: 0
+INFO     Initial bias for last sigmoid layer: -2.1361027241839663
+INFO     Network type: FNN
+INFO     Model: "sequential_2"
+INFO     _________________________________________________________________
+INFO     Layer (type)                 Output Shape              Param #
+INFO     =================================================================
+INFO     dense_10 (Dense)             (None, 1024)              2098176
+INFO     _________________________________________________________________
+INFO     alpha_dropout_8 (AlphaDropou (None, 1024)              0
+INFO     _________________________________________________________________
+INFO     dense_11 (Dense)             (None, 512)               524800
+INFO     _________________________________________________________________
+INFO     alpha_dropout_9 (AlphaDropou (None, 512)               0
+INFO     _________________________________________________________________
+INFO     dense_12 (Dense)             (None, 256)               131328
+INFO     _________________________________________________________________
+INFO     alpha_dropout_10 (AlphaDropo (None, 256)               0
+INFO     _________________________________________________________________
+INFO     dense_13 (Dense)             (None, 128)               32896
+INFO     _________________________________________________________________
+INFO     alpha_dropout_11 (AlphaDropo (None, 128)               0
+INFO     _________________________________________________________________
+INFO     dense_14 (Dense)             (None, 1)                 129
+INFO     =================================================================
+INFO     Total params: 2,787,329
+INFO     Trainable params: 2,787,329
+INFO     Non-trainable params: 0
+INFO     _________________________________________________________________
+WARNING:tensorflow:`period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+WARNING  `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+2023-05-09 08:56:02.354571: I tensorflow/core/grappler/devices.cc:66] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 4
+2023-05-09 08:56:02.354678: I tensorflow/core/grappler/clusters/single_machine.cc:357] Starting new session
+2023-05-09 08:56:02.374332: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 78600 MB memory:  -> device: 0, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:17:00.0, compute capability: 8.0
+2023-05-09 08:56:02.376951: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 78600 MB memory:  -> device: 1, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:65:00.0, compute capability: 8.0
+2023-05-09 08:56:02.377953: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:2 with 78600 MB memory:  -> device: 2, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:ca:00.0, compute capability: 8.0
+2023-05-09 08:56:02.378947: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:3 with 78600 MB memory:  -> device: 3, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:e3:00.0, compute capability: 8.0
+2023-05-09 08:56:02.386201: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:1137] Optimization results for grappler item: graph_to_optimize
+  function_optimizer: function_optimizer did nothing. time = 0.006ms.
+  function_optimizer: function_optimizer did nothing. time = 0.001ms.
+34/34 [==============================] - 1s 4ms/step - loss: 1.1749 - accuracy: 0.0977 - auc: 0.5166 - precision: 0.0718 - recall: 1.0000 - balanced_accuracy: nan
+Epoch 1/10
+35/35 - 2s - loss: 0.3705 - accuracy: 0.8921 - auc_2: 0.5084 - precision_2: 0.2222 - recall_2: 0.0087 - balanced_accuracy: nan - val_loss: 0.3347 - val_accuracy: 0.8947 - val_auc_2: 0.5667 - val_precision_2: 0.0000e+00 - val_recall_2: 0.0000e+00 - val_balanced_accuracy: 0.5000
+Epoch 2/10
+35/35 - 0s - loss: 0.3624 - accuracy: 0.8925 - auc_2: 0.5166 - precision_2: 0.1667 - recall_2: 0.0043 - balanced_accuracy: nan - val_loss: 0.3282 - val_accuracy: 0.8947 - val_auc_2: 0.6232 - val_precision_2: 0.0000e+00 - val_recall_2: 0.0000e+00 - val_balanced_accuracy: 0.5000
+Epoch 3/10
+35/35 - 0s - loss: 0.3472 - accuracy: 0.8930 - auc_2: 0.5750 - precision_2: 0.2500 - recall_2: 0.0065 - balanced_accuracy: 0.5022 - val_loss: 0.3217 - val_accuracy: 0.8947 - val_auc_2: 0.6621 - val_precision_2: 0.0000e+00 - val_recall_2: 0.0000e+00 - val_balanced_accuracy: 0.5000
+Epoch 4/10
+35/35 - 1s - loss: 0.3445 - accuracy: 0.8944 - auc_2: 0.5800 - precision_2: 0.5000 - recall_2: 0.0108 - balanced_accuracy: 0.5039 - val_loss: 0.3171 - val_accuracy: 0.8947 - val_auc_2: 0.6932 - val_precision_2: 0.0000e+00 - val_recall_2: 0.0000e+00 - val_balanced_accuracy: 0.5000
+Epoch 5/10
+35/35 - 0s - loss: 0.3349 - accuracy: 0.8937 - auc_2: 0.6197 - precision_2: 0.3333 - recall_2: 0.0065 - balanced_accuracy: 0.5028 - val_loss: 0.3127 - val_accuracy: 0.8947 - val_auc_2: 0.7156 - val_precision_2: 0.0000e+00 - val_recall_2: 0.0000e+00 - val_balanced_accuracy: 0.5000
+Epoch 6/10
+35/35 - 0s - loss: 0.3313 - accuracy: 0.8937 - auc_2: 0.6393 - precision_2: 0.3846 - recall_2: 0.0108 - balanced_accuracy: 0.5044 - val_loss: 0.3089 - val_accuracy: 0.8947 - val_auc_2: 0.7305 - val_precision_2: 0.0000e+00 - val_recall_2: 0.0000e+00 - val_balanced_accuracy: 0.5000
+Epoch 7/10
+35/35 - 0s - loss: 0.3246 - accuracy: 0.8930 - auc_2: 0.6682 - precision_2: 0.2500 - recall_2: 0.0065 - balanced_accuracy: 0.5018 - val_loss: 0.3051 - val_accuracy: 0.8947 - val_auc_2: 0.7461 - val_precision_2: 0.0000e+00 - val_recall_2: 0.0000e+00 - val_balanced_accuracy: 0.5000
+Epoch 8/10
+35/35 - 1s - loss: 0.3224 - accuracy: 0.8951 - auc_2: 0.6598 - precision_2: 0.6154 - recall_2: 0.0174 - balanced_accuracy: 0.5101 - val_loss: 0.3021 - val_accuracy: 0.8947 - val_auc_2: 0.7536 - val_precision_2: 0.0000e+00 - val_recall_2: 0.0000e+00 - val_balanced_accuracy: 0.5000
+Epoch 9/10
+35/35 - 0s - loss: 0.3150 - accuracy: 0.8964 - auc_2: 0.6905 - precision_2: 0.6800 - recall_2: 0.0369 - balanced_accuracy: 0.5165 - val_loss: 0.2997 - val_accuracy: 0.8938 - val_auc_2: 0.7607 - val_precision_2: 0.0000e+00 - val_recall_2: 0.0000e+00 - val_balanced_accuracy: 0.4995
+Epoch 10/10
+INFO     Computation time for training the single-label model for PPARg: 0.11 min
+35/35 - 0s - loss: 0.3155 - accuracy: 0.8937 - auc_2: 0.6889 - precision_2: 0.4000 - recall_2: 0.0130 - balanced_accuracy: nan - val_loss: 0.2978 - val_accuracy: 0.8938 - val_auc_2: 0.7656 - val_precision_2: 0.0000e+00 - val_recall_2: 0.0000e+00 - val_balanced_accuracy: 0.4995
+Epoch 00010: val_loss improved from inf to 0.29782, saving model to /gpfs0/home/zadubrov/deepFPlearn_exai/example/results_train/PPARg_single-labeled_Fold-0.model.weights.hdf5
+INFO     Network type: FNN
+INFO     Model: "sequential"
+INFO     _________________________________________________________________
+INFO     Layer (type)                 Output Shape              Param #
+INFO     =================================================================
+INFO     dense (Dense)                (None, 1024)              2098176
+INFO     _________________________________________________________________
+INFO     alpha_dropout (AlphaDropout) (None, 1024)              0
+INFO     _________________________________________________________________
+INFO     dense_1 (Dense)              (None, 512)               524800
+INFO     _________________________________________________________________
+INFO     alpha_dropout_1 (AlphaDropou (None, 512)               0
+INFO     _________________________________________________________________
+INFO     dense_2 (Dense)              (None, 256)               131328
+INFO     _________________________________________________________________
+INFO     alpha_dropout_2 (AlphaDropou (None, 256)               0
+INFO     _________________________________________________________________
+INFO     dense_3 (Dense)              (None, 128)               32896
+INFO     _________________________________________________________________
+INFO     alpha_dropout_3 (AlphaDropou (None, 128)               0
+INFO     _________________________________________________________________
+INFO     dense_4 (Dense)              (None, 1)                 129
+INFO     =================================================================
+INFO     Total params: 2,787,329
+INFO     Trainable params: 2,787,329
+INFO     Non-trainable params: 0
+INFO     _________________________________________________________________
+INFO     Evaluating trained model 'PPARg single-labeled Fold-0' on test data
+/home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+/home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/sklearn/metrics/_classification.py:1318: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+INFO     Loss: 0.3885
+INFO     Accuracy: 0.8947
+INFO     AUC: 0.461
+INFO     Precision: 0.0
+INFO     Recall: 0.0
+INFO     Balanced Accuracy: 0.5
+INFO     MCC: 0.0
+INFO     Network type: FNN
+INFO     Model: "sequential_1"
+INFO     _________________________________________________________________
+INFO     Layer (type)                 Output Shape              Param #
+INFO     =================================================================
+INFO     dense_5 (Dense)              (None, 1024)              2098176
+INFO     _________________________________________________________________
+INFO     alpha_dropout_4 (AlphaDropou (None, 1024)              0
+INFO     _________________________________________________________________
+INFO     dense_6 (Dense)              (None, 512)               524800
+INFO     _________________________________________________________________
+INFO     alpha_dropout_5 (AlphaDropou (None, 512)               0
+INFO     _________________________________________________________________
+INFO     dense_7 (Dense)              (None, 256)               131328
+INFO     _________________________________________________________________
+INFO     alpha_dropout_6 (AlphaDropou (None, 256)               0
+INFO     _________________________________________________________________
+INFO     dense_8 (Dense)              (None, 128)               32896
+INFO     _________________________________________________________________
+INFO     alpha_dropout_7 (AlphaDropou (None, 128)               0
+INFO     _________________________________________________________________
+INFO     dense_9 (Dense)              (None, 1)                 129
+INFO     =================================================================
+INFO     Total params: 2,787,329
+INFO     Trainable params: 2,787,329
+INFO     Non-trainable params: 0
+INFO     _________________________________________________________________
+35/35 [==============================] - 1s 4ms/step - loss: 0.3885 - accuracy: 0.8947 - auc: 0.4610 - precision: 0.0000e+00 - recall: 0.0000e+00 - balanced_accuracy: 0.5000
+INFO:tensorflow:Assets written to: /gpfs0/home/zadubrov/deepFPlearn_exai/example/results_train/PPARg_saved_model/assets
+INFO     Assets written to: /gpfs0/home/zadubrov/deepFPlearn_exai/example/results_train/PPARg_saved_model/assets
+INFO     Preparing training data matrices
+INFO     Using uncompressed fingerprints
+INFO     DataSet has 7248 valid entries in fp and ED
+INFO     Fraction sampling is OFF
+INFO     Number of sampling values: {0: 5032, 1: 2216}
+INFO     X training matrix of shape (7248, 2048) and type bool
+INFO     Y training matrix of shape (7248,) and type int16
+INFO     Training of fold number: 0
+INFO     Initial bias for last sigmoid layer: -0.8198518837784559
+INFO     Network type: FNN
+INFO     Model: "sequential_2"
+INFO     _________________________________________________________________
+INFO     Layer (type)                 Output Shape              Param #
+INFO     =================================================================
+INFO     dense_10 (Dense)             (None, 1024)              2098176
+INFO     _________________________________________________________________
+INFO     alpha_dropout_8 (AlphaDropou (None, 1024)              0
+INFO     _________________________________________________________________
+INFO     dense_11 (Dense)             (None, 512)               524800
+INFO     _________________________________________________________________
+INFO     alpha_dropout_9 (AlphaDropou (None, 512)               0
+INFO     _________________________________________________________________
+INFO     dense_12 (Dense)             (None, 256)               131328
+INFO     _________________________________________________________________
+INFO     alpha_dropout_10 (AlphaDropo (None, 256)               0
+INFO     _________________________________________________________________
+INFO     dense_13 (Dense)             (None, 128)               32896
+INFO     _________________________________________________________________
+INFO     alpha_dropout_11 (AlphaDropo (None, 128)               0
+INFO     _________________________________________________________________
+INFO     dense_14 (Dense)             (None, 1)                 129
+INFO     =================================================================
+INFO     Total params: 2,787,329
+INFO     Trainable params: 2,787,329
+INFO     Non-trainable params: 0
+INFO     _________________________________________________________________
+WARNING:tensorflow:`period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+WARNING  `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+2023-05-09 08:56:17.286958: I tensorflow/core/grappler/devices.cc:66] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 4
+2023-05-09 08:56:17.287039: I tensorflow/core/grappler/clusters/single_machine.cc:357] Starting new session
+2023-05-09 08:56:17.323591: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 78600 MB memory:  -> device: 0, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:17:00.0, compute capability: 8.0
+2023-05-09 08:56:17.324759: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 78600 MB memory:  -> device: 1, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:65:00.0, compute capability: 8.0
+2023-05-09 08:56:17.326882: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:2 with 78600 MB memory:  -> device: 2, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:ca:00.0, compute capability: 8.0
+2023-05-09 08:56:17.328704: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:3 with 78600 MB memory:  -> device: 3, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:e3:00.0, compute capability: 8.0
+2023-05-09 08:56:17.336233: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:1137] Optimization results for grappler item: graph_to_optimize
+  function_optimizer: function_optimizer did nothing. time = 0.009ms.
+  function_optimizer: function_optimizer did nothing. time = 0.002ms.
+Epoch 1/10
+46/46 - 2s - loss: 0.6591 - accuracy: 0.6483 - auc_2: 0.5146 - precision_2: 0.3116 - recall_2: 0.1241 - balanced_accuracy: 0.5025 - val_loss: 0.5998 - val_accuracy: 0.6952 - val_auc_2: 0.6296 - val_precision_2: 0.5082 - val_recall_2: 0.0700 - val_balanced_accuracy: 0.5256
+Epoch 2/10
+46/46 - 0s - loss: 0.6309 - accuracy: 0.6692 - auc_2: 0.5693 - precision_2: 0.4062 - recall_2: 0.1771 - balanced_accuracy: 0.5332 - val_loss: 0.5759 - val_accuracy: 0.7124 - val_auc_2: 0.6969 - val_precision_2: 0.6182 - val_recall_2: 0.1535 - val_balanced_accuracy: 0.5615
+Epoch 3/10
+46/46 - 1s - loss: 0.6080 - accuracy: 0.6820 - auc_2: 0.6131 - precision_2: 0.4557 - recall_2: 0.2059 - balanced_accuracy: 0.5476 - val_loss: 0.5606 - val_accuracy: 0.7228 - val_auc_2: 0.7245 - val_precision_2: 0.6323 - val_recall_2: 0.2212 - val_balanced_accuracy: 0.5912
+Epoch 4/10
+46/46 - 1s - loss: 0.5832 - accuracy: 0.7002 - auc_2: 0.6602 - precision_2: 0.5206 - recall_2: 0.2499 - balanced_accuracy: 0.5739 - val_loss: 0.5501 - val_accuracy: 0.7338 - val_auc_2: 0.7377 - val_precision_2: 0.6462 - val_recall_2: 0.2844 - val_balanced_accuracy: 0.6177
+Epoch 5/10
+46/46 - 0s - loss: 0.5770 - accuracy: 0.7087 - auc_2: 0.6690 - precision_2: 0.5504 - recall_2: 0.2589 - balanced_accuracy: 0.5850 - val_loss: 0.5418 - val_accuracy: 0.7407 - val_auc_2: 0.7476 - val_precision_2: 0.6379 - val_recall_2: 0.3499 - val_balanced_accuracy: 0.6413
+Epoch 6/10
+46/46 - 1s - loss: 0.5644 - accuracy: 0.7240 - auc_2: 0.6900 - precision_2: 0.5929 - recall_2: 0.3113 - balanced_accuracy: 0.6075 - val_loss: 0.5351 - val_accuracy: 0.7400 - val_auc_2: 0.7548 - val_precision_2: 0.6231 - val_recall_2: 0.3770 - val_balanced_accuracy: 0.6483
+Epoch 7/10
+46/46 - 0s - loss: 0.5522 - accuracy: 0.7342 - auc_2: 0.7109 - precision_2: 0.6189 - recall_2: 0.3407 - balanced_accuracy: 0.6238 - val_loss: 0.5276 - val_accuracy: 0.7448 - val_auc_2: 0.7599 - val_precision_2: 0.6420 - val_recall_2: 0.3725 - val_balanced_accuracy: 0.6507
+Epoch 8/10
+46/46 - 0s - loss: 0.5436 - accuracy: 0.7389 - auc_2: 0.7231 - precision_2: 0.6348 - recall_2: 0.3440 - balanced_accuracy: 0.6275 - val_loss: 0.5247 - val_accuracy: 0.7441 - val_auc_2: 0.7652 - val_precision_2: 0.6184 - val_recall_2: 0.4244 - val_balanced_accuracy: 0.6636
+Epoch 9/10
+46/46 - 1s - loss: 0.5384 - accuracy: 0.7378 - auc_2: 0.7307 - precision_2: 0.6295 - recall_2: 0.3469 - balanced_accuracy: 0.6299 - val_loss: 0.5197 - val_accuracy: 0.7455 - val_auc_2: 0.7686 - val_precision_2: 0.6233 - val_recall_2: 0.4221 - val_balanced_accuracy: 0.6640
+Epoch 10/10
+46/46 - 0s - loss: 0.5288 - accuracy: 0.7420 - auc_2: 0.7462 - precision_2: 0.6260 - recall_2: 0.3880 - balanced_accuracy: 0.6436 - val_loss: 0.5150 - val_accuracy: 0.7517 - val_auc_2: 0.7725 - val_precision_2: 0.6397 - val_recall_2: 0.4289 - val_balanced_accuracy: 0.6708
+Epoch 00010: val_loss improved from inf to 0.51497, saving model to /gpfs0/home/zadubrov/deepFPlearn_exai/example/results_train/ED_single-labeled_Fold-0.model.weights.hdf5
+INFO     Computation time for training the single-label model for ED: 0.15 min
+INFO     Network type: FNN
+INFO     Model: "sequential"
+INFO     _________________________________________________________________
+INFO     Layer (type)                 Output Shape              Param #
+INFO     =================================================================
+INFO     dense (Dense)                (None, 1024)              2098176
+INFO     _________________________________________________________________
+INFO     alpha_dropout (AlphaDropout) (None, 1024)              0
+INFO     _________________________________________________________________
+INFO     dense_1 (Dense)              (None, 512)               524800
+INFO     _________________________________________________________________
+INFO     alpha_dropout_1 (AlphaDropou (None, 512)               0
+INFO     _________________________________________________________________
+INFO     dense_2 (Dense)              (None, 256)               131328
+INFO     _________________________________________________________________
+INFO     alpha_dropout_2 (AlphaDropou (None, 256)               0
+INFO     _________________________________________________________________
+INFO     dense_3 (Dense)              (None, 128)               32896
+INFO     _________________________________________________________________
+INFO     alpha_dropout_3 (AlphaDropou (None, 128)               0
+INFO     _________________________________________________________________
+INFO     dense_4 (Dense)              (None, 1)                 129
+INFO     =================================================================
+INFO     Total params: 2,787,329
+INFO     Trainable params: 2,787,329
+INFO     Non-trainable params: 0
+INFO     _________________________________________________________________
+INFO     Evaluating trained model 'ED single-labeled Fold-0' on test data
+INFO     Loss: 0.8997
+INFO     Accuracy: 0.3179
+INFO     AUC: 0.494
+INFO     Precision: 0.3004
+INFO     Recall: 0.9278
+INFO     Balanced Accuracy: 0.4835
+INFO     MCC: -0.045
+INFO     Network type: FNN
+INFO     Model: "sequential_1"
+INFO     _________________________________________________________________
+INFO     Layer (type)                 Output Shape              Param #
+INFO     =================================================================
+INFO     dense_5 (Dense)              (None, 1024)              2098176
+INFO     _________________________________________________________________
+INFO     alpha_dropout_4 (AlphaDropou (None, 1024)              0
+INFO     _________________________________________________________________
+INFO     dense_6 (Dense)              (None, 512)               524800
+INFO     _________________________________________________________________
+INFO     alpha_dropout_5 (AlphaDropou (None, 512)               0
+INFO     _________________________________________________________________
+INFO     dense_7 (Dense)              (None, 256)               131328
+INFO     _________________________________________________________________
+INFO     alpha_dropout_6 (AlphaDropou (None, 256)               0
+INFO     _________________________________________________________________
+INFO     dense_8 (Dense)              (None, 128)               32896
+INFO     _________________________________________________________________
+INFO     alpha_dropout_7 (AlphaDropou (None, 128)               0
+INFO     _________________________________________________________________
+INFO     dense_9 (Dense)              (None, 1)                 129
+INFO     =================================================================
+INFO     Total params: 2,787,329
+INFO     Trainable params: 2,787,329
+INFO     Non-trainable params: 0
+INFO     _________________________________________________________________
+INFO:tensorflow:Assets written to: /gpfs0/home/zadubrov/deepFPlearn_exai/example/results_train/ED_saved_model/assets
+INFO     Assets written to: /gpfs0/home/zadubrov/deepFPlearn_exai/example/results_train/ED_saved_model/assets
+46/46 [==============================] - 1s 4ms/step - loss: 0.8997 - accuracy: 0.3179 - auc: 0.4940 - precision: 0.3004 - recall: 0.9278 - balanced_accuracy: 0.4835

@@ -1,0 +1,87 @@
+WARNING:tensorflow:`period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+WARNING  `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+Epoch 1/10
+2023-04-04 10:41:10.281124: I tensorflow/core/grappler/devices.cc:66] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 4
+2023-04-04 10:41:10.281389: I tensorflow/core/grappler/clusters/single_machine.cc:357] Starting new session
+2023-04-04 10:41:10.299050: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 78600 MB memory:  -> device: 0, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:17:00.0, compute capability: 8.0
+2023-04-04 10:41:10.300038: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 78600 MB memory:  -> device: 1, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:65:00.0, compute capability: 8.0
+2023-04-04 10:41:10.300954: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:2 with 78600 MB memory:  -> device: 2, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:ca:00.0, compute capability: 8.0
+2023-04-04 10:41:10.301879: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:3 with 78600 MB memory:  -> device: 3, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:e3:00.0, compute capability: 8.0
+2023-04-04 10:41:10.333983: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:1137] Optimization results for grappler item: graph_to_optimize
+  function_optimizer: function_optimizer did nothing. time = 0.056ms.
+  function_optimizer: function_optimizer did nothing. time = 0.004ms.
+WARNING:tensorflow:From /home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/tensorflow/python/ops/math_ops.py:3777: tensor_shape_from_node_def_name (from tensorflow.python.framework.graph_util_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.compat.v1.graph_util.tensor_shape_from_node_def_name`
+WARNING  From /home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/tensorflow/python/ops/math_ops.py:3777: tensor_shape_from_node_def_name (from tensorflow.python.framework.graph_util_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.compat.v1.graph_util.tensor_shape_from_node_def_name`
+2023-04-04 10:41:10.618313: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:185] None of the MLIR Optimization Passes are enabled (registered 2)
+2023-04-04 10:41:16.763964: I tensorflow/stream_executor/cuda/cuda_blas.cc:1760] TensorFloat-32 will be used for the matrix multiplication. This will only be logged once.
+37/37 - 7s - loss: 0.5139 - accuracy: 0.8013 - auc: 0.5014 - precision: 0.1385 - recall: 0.0213 - balanced_accuracy: 0.4957 - val_loss: 0.4575 - val_accuracy: 0.8209 - val_auc: 0.6190 - val_precision: 0.0000e+00 - val_recall: 0.0000e+00 - val_balanced_accuracy: 0.5000
+Epoch 2/10
+37/37 - 0s - loss: 0.4842 - accuracy: 0.8177 - auc: 0.5597 - precision: 0.3974 - recall: 0.0366 - balanced_accuracy: 0.5125 - val_loss: 0.4350 - val_accuracy: 0.8218 - val_auc: 0.6863 - val_precision: 1.0000 - val_recall: 0.0047 - val_balanced_accuracy: 0.5019
+Epoch 3/10
+37/37 - 0s - loss: 0.4633 - accuracy: 0.8182 - auc: 0.6148 - precision: 0.4205 - recall: 0.0437 - balanced_accuracy: 0.5155 - val_loss: 0.4203 - val_accuracy: 0.8387 - val_auc: 0.7171 - val_precision: 1.0000 - val_recall: 0.0991 - val_balanced_accuracy: 0.5464
+Epoch 4/10
+37/37 - 0s - loss: 0.4472 - accuracy: 0.8270 - auc: 0.6497 - precision: 0.6094 - recall: 0.0921 - balanced_accuracy: 0.5389 - val_loss: 0.4101 - val_accuracy: 0.8454 - val_auc: 0.7345 - val_precision: 0.9677 - val_recall: 0.1415 - val_balanced_accuracy: 0.5641
+Epoch 5/10
+37/37 - 0s - loss: 0.4359 - accuracy: 0.8302 - auc: 0.6803 - precision: 0.6503 - recall: 0.1098 - balanced_accuracy: 0.5489 - val_loss: 0.4022 - val_accuracy: 0.8497 - val_auc: 0.7474 - val_precision: 0.9474 - val_recall: 0.1698 - val_balanced_accuracy: 0.5768
+Epoch 6/10
+37/37 - 0s - loss: 0.4185 - accuracy: 0.8376 - auc: 0.7174 - precision: 0.7241 - recall: 0.1488 - balanced_accuracy: 0.5669 - val_loss: 0.3958 - val_accuracy: 0.8505 - val_auc: 0.7576 - val_precision: 0.8723 - val_recall: 0.1934 - val_balanced_accuracy: 0.5857
+Epoch 7/10
+37/37 - 0s - loss: 0.4176 - accuracy: 0.8380 - auc: 0.7126 - precision: 0.7000 - recall: 0.1653 - balanced_accuracy: 0.5737 - val_loss: 0.3902 - val_accuracy: 0.8522 - val_auc: 0.7643 - val_precision: 0.8776 - val_recall: 0.2028 - val_balanced_accuracy: 0.5898
+Epoch 8/10
+37/37 - 0s - loss: 0.4036 - accuracy: 0.8414 - auc: 0.7402 - precision: 0.7069 - recall: 0.1936 - balanced_accuracy: 0.5891 - val_loss: 0.3859 - val_accuracy: 0.8530 - val_auc: 0.7711 - val_precision: 0.8393 - val_recall: 0.2217 - val_balanced_accuracy: 0.6012
+Epoch 9/10
+37/37 - 0s - loss: 0.3970 - accuracy: 0.8441 - auc: 0.7542 - precision: 0.7380 - recall: 0.1995 - balanced_accuracy: 0.5909 - val_loss: 0.3825 - val_accuracy: 0.8514 - val_auc: 0.7758 - val_precision: 0.8000 - val_recall: 0.2264 - val_balanced_accuracy: 0.6002
+Epoch 10/10
+37/37 - 0s - loss: 0.3897 - accuracy: 0.8452 - auc: 0.7661 - precision: 0.7176 - recall: 0.2220 - balanced_accuracy: 0.6012 - val_loss: 0.3789 - val_accuracy: 0.8530 - val_auc: 0.7801 - val_precision: 0.8065 - val_recall: 0.2358 - val_balanced_accuracy: 0.6047
+Epoch 00010: val_loss improved from inf to 0.37889, saving model to /home/zadubrov/output/results_train/AR_single-labeled_Fold-0.model.weights.hdf5
+INFO     Computation time for training the single-label model for AR: 0.21 min
+<IPython.core.display.HTML object>
+<keras.engine.sequential.Sequential object at 0x2b27824a67f0>
+[[0 0 0 ... 0 0 0]
+ [0 0 1 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ ...
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]]
+<class 'numpy.ndarray'>	4735
+<class 'tuple'>	2
+
+
+Permutation explainer:   0%|                                                                                                 | 4/4735 [02:39<70:00:21, 53.27s/it]
+Traceback (most recent call last):
+  File "/home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/gpfs0/home/zadubrov/deepFPlearn_exai/dfpl/__main__.py", line 415, in <module>
+    main()
+  File "/gpfs0/home/zadubrov/deepFPlearn_exai/dfpl/__main__.py", line 392, in main
+    train(fixed_opts)
+  File "/gpfs0/home/zadubrov/deepFPlearn_exai/dfpl/__main__.py", line 190, in train
+    sl.train_single_label_models(df=df, opts=opts)
+  File "/gpfs0/home/zadubrov/deepFPlearn_exai/dfpl/single_label_model.py", line 551, in train_single_label_models
+    performance = fit_and_evaluate_model(x_train=x_train, x_test=x_test, y_train=y_train, y_test=y_test,
+  File "/gpfs0/home/zadubrov/deepFPlearn_exai/dfpl/single_label_model.py", line 422, in fit_and_evaluate_model
+    sd.shap_explain(x_train, model, target, opts.outputDir, drop_values=True, threshold=10, save_values=True)
+  File "/gpfs0/home/zadubrov/deepFPlearn_exai/dfpl/shap_dfpl.py", line 26, in shap_explain
+    shap_values = explainer(x_train_to_explain)
+  File "/home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/shap/explainers/_permutation.py", line 68, in __call__
+    return super().__call__(
+  File "/home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/shap/explainers/_permutation.py", line 82, in __call__
+    return super().__call__(
+  File "/home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/shap/explainers/_explainer.py", line 266, in __call__
+    row_result = self.explain_row(
+  File "/home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/shap/explainers/_permutation.py", line 140, in explain_row
+    outputs = fm(masks, zero_index=0, batch_size=batch_size)
+  File "/home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/shap/utils/_masked_model.py", line 57, in __call__
+    return self._delta_masking_call(masks, zero_index=zero_index, batch_size=batch_size)
+  File "/home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/shap/utils/_masked_model.py", line 193, in _delta_masking_call
+    masked_inputs, varying_rows = self.masker(masks, *self.args)
+  File "/home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/shap/maskers/_tabular.py", line 108, in __call__
+    _delta_masking(
+KeyboardInterrupt

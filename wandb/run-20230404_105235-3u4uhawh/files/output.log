@@ -1,0 +1,60 @@
+WARNING:tensorflow:`period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+WARNING  `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+Epoch 1/10
+2023-04-04 10:52:56.869387: I tensorflow/core/grappler/devices.cc:66] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 4
+2023-04-04 10:52:56.869636: I tensorflow/core/grappler/clusters/single_machine.cc:357] Starting new session
+2023-04-04 10:52:56.932820: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 78600 MB memory:  -> device: 0, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:17:00.0, compute capability: 8.0
+2023-04-04 10:52:56.934282: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 78600 MB memory:  -> device: 1, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:65:00.0, compute capability: 8.0
+2023-04-04 10:52:56.938381: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:2 with 78600 MB memory:  -> device: 2, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:ca:00.0, compute capability: 8.0
+2023-04-04 10:52:56.940023: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:3 with 78600 MB memory:  -> device: 3, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:e3:00.0, compute capability: 8.0
+2023-04-04 10:52:56.977112: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:1137] Optimization results for grappler item: graph_to_optimize
+  function_optimizer: function_optimizer did nothing. time = 0.059ms.
+  function_optimizer: function_optimizer did nothing. time = 0.004ms.
+WARNING:tensorflow:From /home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/tensorflow/python/ops/math_ops.py:3777: tensor_shape_from_node_def_name (from tensorflow.python.framework.graph_util_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.compat.v1.graph_util.tensor_shape_from_node_def_name`
+WARNING  From /home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/tensorflow/python/ops/math_ops.py:3777: tensor_shape_from_node_def_name (from tensorflow.python.framework.graph_util_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.compat.v1.graph_util.tensor_shape_from_node_def_name`
+2023-04-04 10:52:57.259135: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:185] None of the MLIR Optimization Passes are enabled (registered 2)
+37/37 - 5s - loss: 0.5187 - accuracy: 0.8101 - auc: 0.5063 - precision: 0.2593 - recall: 0.0331 - balanced_accuracy: 0.5057 - val_loss: 0.4704 - val_accuracy: 0.8184 - val_auc: 0.5685 - val_precision: 0.0000e+00 - val_recall: 0.0000e+00 - val_balanced_accuracy: 0.4986
+Epoch 2/10
+37/37 - 0s - loss: 0.4804 - accuracy: 0.8131 - auc: 0.5882 - precision: 0.3643 - recall: 0.0602 - balanced_accuracy: 0.5195 - val_loss: 0.4445 - val_accuracy: 0.8201 - val_auc: 0.6614 - val_precision: 0.4444 - val_recall: 0.0189 - val_balanced_accuracy: 0.5177
+Epoch 3/10
+2023-04-04 10:53:01.014584: I tensorflow/stream_executor/cuda/cuda_blas.cc:1760] TensorFloat-32 will be used for the matrix multiplication. This will only be logged once.
+37/37 - 0s - loss: 0.4606 - accuracy: 0.8188 - auc: 0.6385 - precision: 0.4682 - recall: 0.0956 - balanced_accuracy: 0.5347 - val_loss: 0.4266 - val_accuracy: 0.8294 - val_auc: 0.7009 - val_precision: 0.7500 - val_recall: 0.0708 - val_balanced_accuracy: 0.5416
+Epoch 4/10
+37/37 - 0s - loss: 0.4524 - accuracy: 0.8215 - auc: 0.6521 - precision: 0.5061 - recall: 0.0980 - balanced_accuracy: 0.5398 - val_loss: 0.4140 - val_accuracy: 0.8429 - val_auc: 0.7199 - val_precision: 0.8611 - val_recall: 0.1462 - val_balanced_accuracy: 0.5755
+Epoch 5/10
+37/37 - 0s - loss: 0.4334 - accuracy: 0.8308 - auc: 0.6912 - precision: 0.6000 - recall: 0.1629 - balanced_accuracy: 0.5697 - val_loss: 0.4050 - val_accuracy: 0.8471 - val_auc: 0.7347 - val_precision: 0.8163 - val_recall: 0.1887 - val_balanced_accuracy: 0.5906
+Epoch 6/10
+37/37 - 0s - loss: 0.4296 - accuracy: 0.8300 - auc: 0.7001 - precision: 0.5897 - recall: 0.1629 - balanced_accuracy: 0.5691 - val_loss: 0.3977 - val_accuracy: 0.8505 - val_auc: 0.7426 - val_precision: 0.8302 - val_recall: 0.2075 - val_balanced_accuracy: 0.5990
+Epoch 7/10
+37/37 - 0s - loss: 0.4148 - accuracy: 0.8389 - auc: 0.7199 - precision: 0.6628 - recall: 0.2019 - balanced_accuracy: 0.5920 - val_loss: 0.3924 - val_accuracy: 0.8522 - val_auc: 0.7512 - val_precision: 0.8136 - val_recall: 0.2264 - val_balanced_accuracy: 0.6071
+Epoch 8/10
+37/37 - 0s - loss: 0.4019 - accuracy: 0.8467 - auc: 0.7425 - precision: 0.7318 - recall: 0.2255 - balanced_accuracy: 0.6016 - val_loss: 0.3876 - val_accuracy: 0.8556 - val_auc: 0.7584 - val_precision: 0.8154 - val_recall: 0.2500 - val_balanced_accuracy: 0.6169
+Epoch 9/10
+37/37 - 0s - loss: 0.3915 - accuracy: 0.8496 - auc: 0.7620 - precision: 0.7352 - recall: 0.2491 - balanced_accuracy: 0.6146 - val_loss: 0.3834 - val_accuracy: 0.8564 - val_auc: 0.7643 - val_precision: 0.8088 - val_recall: 0.2594 - val_balanced_accuracy: 0.6209
+Epoch 10/10
+37/37 - 0s - loss: 0.3883 - accuracy: 0.8452 - auc: 0.7685 - precision: 0.7080 - recall: 0.2290 - balanced_accuracy: 0.6045 - val_loss: 0.3793 - val_accuracy: 0.8556 - val_auc: 0.7707 - val_precision: 0.7808 - val_recall: 0.2689 - val_balanced_accuracy: 0.6240
+Epoch 00010: val_loss improved from inf to 0.37928, saving model to /home/zadubrov/output/results_train/AR_single-labeled_Fold-0.model.weights.hdf5
+INFO     Computation time for training the single-label model for AR: 0.17 min
+<IPython.core.display.HTML object>
+Traceback (most recent call last):
+  File "/home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/gpfs0/home/zadubrov/deepFPlearn_exai/dfpl/__main__.py", line 415, in <module>
+    main()
+  File "/gpfs0/home/zadubrov/deepFPlearn_exai/dfpl/__main__.py", line 392, in main
+    train(fixed_opts)
+  File "/gpfs0/home/zadubrov/deepFPlearn_exai/dfpl/__main__.py", line 190, in train
+    sl.train_single_label_models(df=df, opts=opts)
+  File "/gpfs0/home/zadubrov/deepFPlearn_exai/dfpl/single_label_model.py", line 551, in train_single_label_models
+    performance = fit_and_evaluate_model(x_train=x_train, x_test=x_test, y_train=y_train, y_test=y_test,
+  File "/gpfs0/home/zadubrov/deepFPlearn_exai/dfpl/single_label_model.py", line 422, in fit_and_evaluate_model
+    sd.shap_explain(x_train, model, target, opts.outputDir, drop_values=True, threshold=10, save_values=True)
+  File "/gpfs0/home/zadubrov/deepFPlearn_exai/dfpl/shap_dfpl.py", line 21, in shap_explain
+    print(x_train[np.sum(x_train, axis=0, dtype=np.int32, keepdims=True) >= threshold])
+IndexError: boolean index did not match indexed array along dimension 0; dimension is 4735 but corresponding boolean dimension is 1

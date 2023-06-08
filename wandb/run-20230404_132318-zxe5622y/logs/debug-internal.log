@@ -1,0 +1,355 @@
+2023-04-04 13:23:28,849 INFO    MainThread:4829 [internal.py:wandb_internal():90] W&B internal server running at pid: 4829, started at: 2023-04-04 13:23:28.847151
+2023-04-04 13:23:28,855 INFO    WriterThread:4829 [datastore.py:open_for_write():75] open: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/run-zxe5622y.wandb
+2023-04-04 13:23:28,860 DEBUG   SenderThread:4829 [sender.py:send():236] send: header
+2023-04-04 13:23:28,861 DEBUG   SenderThread:4829 [sender.py:send():236] send: run
+2023-04-04 13:23:29,118 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: check_version
+2023-04-04 13:23:29,154 INFO    SenderThread:4829 [dir_watcher.py:__init__():216] watching files in: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files
+2023-04-04 13:23:29,155 INFO    SenderThread:4829 [sender.py:_start_run_threads():815] run started: zxe5622y with start time 1680607399
+2023-04-04 13:23:29,155 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:29,157 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:29,157 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: check_version
+2023-04-04 13:23:29,302 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: run_start
+2023-04-04 13:23:29,315 DEBUG   HandlerThread:4829 [meta.py:__init__():35] meta init
+2023-04-04 13:23:29,315 DEBUG   HandlerThread:4829 [meta.py:__init__():49] meta init done
+2023-04-04 13:23:29,315 DEBUG   HandlerThread:4829 [meta.py:probe():209] probe
+2023-04-04 13:23:29,365 DEBUG   HandlerThread:4829 [meta.py:_setup_git():199] setup git
+2023-04-04 13:23:29,409 DEBUG   HandlerThread:4829 [meta.py:_setup_git():206] setup git done
+2023-04-04 13:23:29,410 DEBUG   HandlerThread:4829 [meta.py:_save_pip():53] save pip
+2023-04-04 13:23:29,413 DEBUG   HandlerThread:4829 [meta.py:_save_pip():67] save pip done
+2023-04-04 13:23:29,415 DEBUG   HandlerThread:4829 [meta.py:_save_conda():74] save conda
+2023-04-04 13:23:30,159 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_created():269] file/dir created: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/conda-environment.yaml
+2023-04-04 13:23:30,160 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_created():269] file/dir created: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/wandb-summary.json
+2023-04-04 13:23:30,161 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_created():269] file/dir created: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/requirements.txt
+2023-04-04 13:23:35,160 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_created():269] file/dir created: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/output.log
+2023-04-04 13:23:37,162 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_modified():286] file/dir modified: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/output.log
+2023-04-04 13:23:37,966 DEBUG   HandlerThread:4829 [meta.py:_save_conda():84] save conda done
+2023-04-04 13:23:37,966 DEBUG   HandlerThread:4829 [meta.py:probe():247] probe done
+2023-04-04 13:23:38,163 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_modified():286] file/dir modified: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/conda-environment.yaml
+2023-04-04 13:23:38,169 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_created():269] file/dir created: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/wandb-metadata.json
+2023-04-04 13:23:38,411 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: stop_status
+2023-04-04 13:23:38,412 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: stop_status
+2023-04-04 13:23:38,419 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: get_summary
+2023-04-04 13:23:38,629 DEBUG   SenderThread:4829 [sender.py:send():236] send: telemetry
+2023-04-04 13:23:38,630 DEBUG   SenderThread:4829 [sender.py:send():236] send: telemetry
+2023-04-04 13:23:38,630 DEBUG   SenderThread:4829 [sender.py:send():236] send: telemetry
+2023-04-04 13:23:38,630 DEBUG   SenderThread:4829 [sender.py:send():236] send: files
+2023-04-04 13:23:38,630 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file model-best.h5 with policy live
+2023-04-04 13:23:38,631 DEBUG   SenderThread:4829 [sender.py:send():236] send: files
+2023-04-04 13:23:38,631 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-metadata.json with policy now
+2023-04-04 13:23:39,262 INFO    Thread-11 :4829 [upload_job.py:push():138] Uploaded file /tmp/tmp_d8ccsxqwandb/x50bz2zo-wandb-metadata.json
+2023-04-04 13:23:39,267 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:39,269 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:40,166 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_modified():286] file/dir modified: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/wandb-summary.json
+2023-04-04 13:23:41,166 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_modified():286] file/dir modified: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/output.log
+2023-04-04 13:23:47,017 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: partial_history
+2023-04-04 13:23:47,018 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: partial_history
+2023-04-04 13:23:47,024 DEBUG   SenderThread:4829 [sender.py:send():236] send: history
+2023-04-04 13:23:47,025 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:47,027 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:47,027 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:47,029 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:47,029 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:47,031 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:47,172 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_modified():286] file/dir modified: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/output.log
+2023-04-04 13:23:47,173 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_modified():286] file/dir modified: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/wandb-summary.json
+2023-04-04 13:23:47,498 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: partial_history
+2023-04-04 13:23:47,499 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: partial_history
+2023-04-04 13:23:47,502 DEBUG   SenderThread:4829 [sender.py:send():236] send: history
+2023-04-04 13:23:47,502 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:47,504 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:47,505 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:47,506 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:47,507 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:47,508 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:47,941 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: partial_history
+2023-04-04 13:23:47,942 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: partial_history
+2023-04-04 13:23:47,944 DEBUG   SenderThread:4829 [sender.py:send():236] send: history
+2023-04-04 13:23:47,945 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:47,947 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:47,947 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:47,949 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:47,951 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:47,953 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:48,173 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_modified():286] file/dir modified: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/wandb-summary.json
+2023-04-04 13:23:48,406 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: partial_history
+2023-04-04 13:23:48,406 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: partial_history
+2023-04-04 13:23:48,409 DEBUG   SenderThread:4829 [sender.py:send():236] send: history
+2023-04-04 13:23:48,410 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:48,416 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:48,416 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:48,418 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:48,418 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:48,420 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:48,890 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: partial_history
+2023-04-04 13:23:48,891 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: partial_history
+2023-04-04 13:23:48,894 DEBUG   SenderThread:4829 [sender.py:send():236] send: history
+2023-04-04 13:23:48,895 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:48,898 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:48,899 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:48,900 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:48,901 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:48,902 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:49,175 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_modified():286] file/dir modified: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/output.log
+2023-04-04 13:23:49,176 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_modified():286] file/dir modified: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/wandb-summary.json
+2023-04-04 13:23:49,358 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: partial_history
+2023-04-04 13:23:49,359 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: partial_history
+2023-04-04 13:23:49,362 DEBUG   SenderThread:4829 [sender.py:send():236] send: history
+2023-04-04 13:23:49,363 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:49,364 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:49,365 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:49,367 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:49,367 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:49,369 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:49,840 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: partial_history
+2023-04-04 13:23:49,841 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: partial_history
+2023-04-04 13:23:49,843 DEBUG   SenderThread:4829 [sender.py:send():236] send: history
+2023-04-04 13:23:49,844 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:49,846 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:49,847 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:49,849 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:49,849 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:49,851 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:50,176 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_modified():286] file/dir modified: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/wandb-summary.json
+2023-04-04 13:23:50,284 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: partial_history
+2023-04-04 13:23:50,285 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: partial_history
+2023-04-04 13:23:50,288 DEBUG   SenderThread:4829 [sender.py:send():236] send: history
+2023-04-04 13:23:50,289 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:50,291 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:50,292 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:50,293 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:50,294 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:50,296 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:50,708 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: partial_history
+2023-04-04 13:23:50,709 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: partial_history
+2023-04-04 13:23:50,711 DEBUG   SenderThread:4829 [sender.py:send():236] send: history
+2023-04-04 13:23:50,712 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:50,719 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:50,720 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:50,722 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:50,723 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:50,724 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:51,177 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_modified():286] file/dir modified: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/output.log
+2023-04-04 13:23:51,178 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_modified():286] file/dir modified: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/wandb-summary.json
+2023-04-04 13:23:51,241 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: partial_history
+2023-04-04 13:23:51,242 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: partial_history
+2023-04-04 13:23:51,245 DEBUG   SenderThread:4829 [sender.py:send():236] send: history
+2023-04-04 13:23:51,246 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:51,248 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:51,249 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:51,250 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:51,251 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:23:51,253 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:23:52,178 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_modified():286] file/dir modified: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/wandb-summary.json
+2023-04-04 13:23:53,179 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_modified():286] file/dir modified: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/output.log
+2023-04-04 13:23:53,648 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: stop_status
+2023-04-04 13:23:53,649 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: stop_status
+2023-04-04 13:23:55,182 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_modified():286] file/dir modified: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/output.log
+2023-04-04 13:23:59,186 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_modified():286] file/dir modified: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/config.yaml
+2023-04-04 13:23:59,239 DEBUG   SenderThread:4829 [sender.py:send():236] send: stats
+2023-04-04 13:24:08,876 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: stop_status
+2023-04-04 13:24:08,877 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: stop_status
+2023-04-04 13:24:24,246 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: stop_status
+2023-04-04 13:24:24,246 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: stop_status
+2023-04-04 13:24:30,929 DEBUG   SenderThread:4829 [sender.py:send():236] send: stats
+2023-04-04 13:24:39,491 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: stop_status
+2023-04-04 13:24:39,492 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: stop_status
+2023-04-04 13:24:54,738 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: stop_status
+2023-04-04 13:24:54,739 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: stop_status
+2023-04-04 13:25:02,593 DEBUG   SenderThread:4829 [sender.py:send():236] send: stats
+2023-04-04 13:25:09,974 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: stop_status
+2023-04-04 13:25:09,974 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: stop_status
+2023-04-04 13:25:25,203 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: stop_status
+2023-04-04 13:25:25,204 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: stop_status
+2023-04-04 13:25:34,232 DEBUG   SenderThread:4829 [sender.py:send():236] send: stats
+2023-04-04 13:25:40,453 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: stop_status
+2023-04-04 13:25:40,453 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: stop_status
+2023-04-04 13:25:55,705 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: stop_status
+2023-04-04 13:25:55,706 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: stop_status
+2023-04-04 13:26:05,849 DEBUG   SenderThread:4829 [sender.py:send():236] send: stats
+2023-04-04 13:26:10,959 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: stop_status
+2023-04-04 13:26:10,960 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: stop_status
+2023-04-04 13:26:26,187 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: stop_status
+2023-04-04 13:26:26,188 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: stop_status
+2023-04-04 13:26:37,514 DEBUG   SenderThread:4829 [sender.py:send():236] send: stats
+2023-04-04 13:26:41,423 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: stop_status
+2023-04-04 13:26:41,424 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: stop_status
+2023-04-04 13:26:56,658 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: stop_status
+2023-04-04 13:26:56,659 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: stop_status
+2023-04-04 13:27:09,159 DEBUG   SenderThread:4829 [sender.py:send():236] send: stats
+2023-04-04 13:27:11,878 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: stop_status
+2023-04-04 13:27:11,878 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: stop_status
+2023-04-04 13:27:27,097 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: stop_status
+2023-04-04 13:27:27,097 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: stop_status
+2023-04-04 13:27:27,400 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_modified():286] file/dir modified: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/output.log
+2023-04-04 13:27:29,401 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_modified():286] file/dir modified: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/output.log
+2023-04-04 13:27:29,531 DEBUG   SenderThread:4829 [sender.py:send():236] send: telemetry
+2023-04-04 13:27:31,403 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_modified():286] file/dir modified: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/output.log
+2023-04-04 13:27:31,783 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:31,784 DEBUG   SenderThread:4829 [sender.py:send():236] send: exit
+2023-04-04 13:27:31,784 INFO    SenderThread:4829 [sender.py:send_exit():372] handling exit code: 1
+2023-04-04 13:27:31,785 INFO    SenderThread:4829 [sender.py:send_exit():374] handling runtime: 242
+2023-04-04 13:27:31,788 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:27:31,789 INFO    SenderThread:4829 [sender.py:send_exit():380] send defer
+2023-04-04 13:27:31,789 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:31,791 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: defer
+2023-04-04 13:27:31,791 INFO    HandlerThread:4829 [handler.py:handle_request_defer():163] handle defer: 0
+2023-04-04 13:27:31,792 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: defer
+2023-04-04 13:27:31,792 INFO    SenderThread:4829 [sender.py:send_request_defer():389] handle sender defer: 0
+2023-04-04 13:27:31,792 INFO    SenderThread:4829 [sender.py:transition_state():393] send defer: 1
+2023-04-04 13:27:31,793 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: defer
+2023-04-04 13:27:31,793 INFO    HandlerThread:4829 [handler.py:handle_request_defer():163] handle defer: 1
+2023-04-04 13:27:31,952 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:31,953 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: defer
+2023-04-04 13:27:31,954 INFO    SenderThread:4829 [sender.py:send_request_defer():389] handle sender defer: 1
+2023-04-04 13:27:31,954 INFO    SenderThread:4829 [sender.py:transition_state():393] send defer: 2
+2023-04-04 13:27:31,965 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: defer
+2023-04-04 13:27:31,965 INFO    HandlerThread:4829 [handler.py:handle_request_defer():163] handle defer: 2
+2023-04-04 13:27:32,216 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:32,216 DEBUG   SenderThread:4829 [sender.py:send():236] send: stats
+2023-04-04 13:27:32,217 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: defer
+2023-04-04 13:27:32,218 INFO    SenderThread:4829 [sender.py:send_request_defer():389] handle sender defer: 2
+2023-04-04 13:27:32,218 INFO    SenderThread:4829 [sender.py:transition_state():393] send defer: 3
+2023-04-04 13:27:32,219 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: defer
+2023-04-04 13:27:32,219 INFO    HandlerThread:4829 [handler.py:handle_request_defer():163] handle defer: 3
+2023-04-04 13:27:32,220 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: defer
+2023-04-04 13:27:32,220 INFO    SenderThread:4829 [sender.py:send_request_defer():389] handle sender defer: 3
+2023-04-04 13:27:32,220 INFO    SenderThread:4829 [sender.py:transition_state():393] send defer: 4
+2023-04-04 13:27:32,221 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: defer
+2023-04-04 13:27:32,222 INFO    HandlerThread:4829 [handler.py:handle_request_defer():163] handle defer: 4
+2023-04-04 13:27:32,223 DEBUG   SenderThread:4829 [sender.py:send():236] send: summary
+2023-04-04 13:27:32,225 INFO    SenderThread:4829 [sender.py:_save_file():952] saving file wandb-summary.json with policy end
+2023-04-04 13:27:32,226 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: defer
+2023-04-04 13:27:32,226 INFO    SenderThread:4829 [sender.py:send_request_defer():389] handle sender defer: 4
+2023-04-04 13:27:32,226 INFO    SenderThread:4829 [sender.py:transition_state():393] send defer: 5
+2023-04-04 13:27:32,227 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: defer
+2023-04-04 13:27:32,227 INFO    HandlerThread:4829 [handler.py:handle_request_defer():163] handle defer: 5
+2023-04-04 13:27:32,227 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: defer
+2023-04-04 13:27:32,228 INFO    SenderThread:4829 [sender.py:send_request_defer():389] handle sender defer: 5
+2023-04-04 13:27:32,228 INFO    SenderThread:4829 [sender.py:transition_state():393] send defer: 6
+2023-04-04 13:27:32,229 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: defer
+2023-04-04 13:27:32,229 INFO    HandlerThread:4829 [handler.py:handle_request_defer():163] handle defer: 6
+2023-04-04 13:27:32,229 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: defer
+2023-04-04 13:27:32,229 INFO    SenderThread:4829 [sender.py:send_request_defer():389] handle sender defer: 6
+2023-04-04 13:27:32,230 INFO    SenderThread:4829 [dir_watcher.py:finish():353] shutting down directory watcher
+2023-04-04 13:27:32,321 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:32,405 INFO    Thread-7  :4829 [dir_watcher.py:_on_file_modified():286] file/dir modified: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/output.log
+2023-04-04 13:27:32,406 INFO    SenderThread:4829 [dir_watcher.py:_on_file_modified():286] file/dir modified: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/wandb-summary.json
+2023-04-04 13:27:32,407 INFO    SenderThread:4829 [dir_watcher.py:_on_file_modified():286] file/dir modified: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/config.yaml
+2023-04-04 13:27:32,407 INFO    SenderThread:4829 [dir_watcher.py:finish():383] scan: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files
+2023-04-04 13:27:32,408 INFO    SenderThread:4829 [dir_watcher.py:finish():397] scan save: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/conda-environment.yaml conda-environment.yaml
+2023-04-04 13:27:32,408 INFO    SenderThread:4829 [dir_watcher.py:finish():397] scan save: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/wandb-metadata.json wandb-metadata.json
+2023-04-04 13:27:32,409 INFO    SenderThread:4829 [dir_watcher.py:finish():397] scan save: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/config.yaml config.yaml
+2023-04-04 13:27:32,418 INFO    SenderThread:4829 [dir_watcher.py:finish():397] scan save: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/requirements.txt requirements.txt
+2023-04-04 13:27:32,419 INFO    SenderThread:4829 [dir_watcher.py:finish():397] scan save: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/wandb-summary.json wandb-summary.json
+2023-04-04 13:27:32,435 INFO    SenderThread:4829 [dir_watcher.py:finish():397] scan save: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/output.log output.log
+2023-04-04 13:27:32,437 INFO    SenderThread:4829 [sender.py:transition_state():393] send defer: 7
+2023-04-04 13:27:32,437 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:32,439 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: defer
+2023-04-04 13:27:32,439 INFO    HandlerThread:4829 [handler.py:handle_request_defer():163] handle defer: 7
+2023-04-04 13:27:32,440 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: defer
+2023-04-04 13:27:32,440 INFO    SenderThread:4829 [sender.py:send_request_defer():389] handle sender defer: 7
+2023-04-04 13:27:32,440 INFO    SenderThread:4829 [file_pusher.py:finish():171] shutting down file pusher
+2023-04-04 13:27:32,561 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:32,561 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:32,664 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:32,665 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:32,768 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:32,768 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:32,871 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:32,872 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:32,974 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:32,975 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:33,078 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:33,078 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:33,181 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:33,181 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:33,284 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:33,284 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:33,387 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:33,388 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:33,490 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:33,491 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:33,593 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:33,594 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:33,696 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:33,697 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:33,799 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:33,800 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:33,903 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:33,903 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:34,006 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:34,007 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:34,109 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:34,110 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:34,212 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:34,213 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:34,316 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:34,316 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:34,419 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:34,419 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:34,522 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:34,523 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:34,626 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:34,626 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:34,729 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:34,730 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:34,832 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:34,833 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:34,936 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:34,936 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:35,039 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:35,040 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:35,142 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:35,143 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:35,245 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:35,246 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:35,349 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:35,349 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:35,452 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:35,453 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:35,555 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:35,556 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:35,658 INFO    Thread-13 :4829 [upload_job.py:push():138] Uploaded file /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/config.yaml
+2023-04-04 13:27:35,660 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:35,660 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:35,668 INFO    Thread-16 :4829 [upload_job.py:push():138] Uploaded file /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/output.log
+2023-04-04 13:27:35,761 INFO    Thread-12 :4829 [upload_job.py:push():138] Uploaded file /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/conda-environment.yaml
+2023-04-04 13:27:35,763 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:35,764 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:35,817 INFO    Thread-14 :4829 [upload_job.py:push():138] Uploaded file /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/requirements.txt
+2023-04-04 13:27:35,860 INFO    Thread-15 :4829 [upload_job.py:push():138] Uploaded file /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/files/wandb-summary.json
+2023-04-04 13:27:35,866 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:35,867 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:35,970 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:35,970 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:36,061 INFO    Thread-6  :4829 [sender.py:transition_state():393] send defer: 8
+2023-04-04 13:27:36,062 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: defer
+2023-04-04 13:27:36,062 INFO    HandlerThread:4829 [handler.py:handle_request_defer():163] handle defer: 8
+2023-04-04 13:27:36,062 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: defer
+2023-04-04 13:27:36,063 INFO    SenderThread:4829 [sender.py:send_request_defer():389] handle sender defer: 8
+2023-04-04 13:27:36,073 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:36,699 INFO    SenderThread:4829 [sender.py:transition_state():393] send defer: 9
+2023-04-04 13:27:36,700 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:36,701 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: defer
+2023-04-04 13:27:36,701 INFO    HandlerThread:4829 [handler.py:handle_request_defer():163] handle defer: 9
+2023-04-04 13:27:36,702 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: defer
+2023-04-04 13:27:36,702 INFO    SenderThread:4829 [sender.py:send_request_defer():389] handle sender defer: 9
+2023-04-04 13:27:36,702 INFO    SenderThread:4829 [sender.py:transition_state():393] send defer: 10
+2023-04-04 13:27:36,704 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: defer
+2023-04-04 13:27:36,704 INFO    HandlerThread:4829 [handler.py:handle_request_defer():163] handle defer: 10
+2023-04-04 13:27:36,704 DEBUG   SenderThread:4829 [sender.py:send():236] send: final
+2023-04-04 13:27:36,705 DEBUG   SenderThread:4829 [sender.py:send():236] send: footer
+2023-04-04 13:27:36,705 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: defer
+2023-04-04 13:27:36,705 INFO    SenderThread:4829 [sender.py:send_request_defer():389] handle sender defer: 10
+2023-04-04 13:27:36,803 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: poll_exit
+2023-04-04 13:27:36,803 DEBUG   SenderThread:4829 [sender.py:send_request():250] send_request: poll_exit
+2023-04-04 13:27:36,804 INFO    SenderThread:4829 [file_pusher.py:join():176] waiting for file pusher
+2023-04-04 13:27:37,308 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: sampled_history
+2023-04-04 13:27:37,312 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: get_summary
+2023-04-04 13:27:37,315 DEBUG   HandlerThread:4829 [handler.py:handle_request():140] handle_request: shutdown
+2023-04-04 13:27:37,315 INFO    HandlerThread:4829 [handler.py:finish():806] shutting down handler
+2023-04-04 13:27:37,704 INFO    WriterThread:4829 [datastore.py:close():279] close: /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230404_132318-zxe5622y/run-zxe5622y.wandb
+2023-04-04 13:27:38,205 INFO    SenderThread:4829 [sender.py:finish():1114] shutting down sender
+2023-04-04 13:27:38,206 INFO    SenderThread:4829 [file_pusher.py:finish():171] shutting down file pusher
+2023-04-04 13:27:38,206 INFO    SenderThread:4829 [file_pusher.py:join():176] waiting for file pusher
+2023-04-04 13:27:38,211 INFO    MainThread:4829 [internal.py:handle_exit():80] Internal process exited

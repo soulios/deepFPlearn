@@ -1,8 +1,8 @@
 {
   "py/object": "dfpl.options.Options",
-  "inputFile": "example/data/predict_data.csv",
-  "outputDir": "example/results_predict",
-  "outputFile": "predict_data_AR.csv",
+  "inputFile": "/home/zadubrov/data/B_data_AR.csv",
+  "outputDir": "example/results_predict/",
+  "outputFile": "predict_data_B-AR.csv",
   "ecModelDir": "example/new_models",
   "ecWeightsFile": "",
   "fnnModelDir": "example/models/AR_saved_model",

@@ -392,6 +392,10 @@ def fit_and_evaluate_model(x_train: np.ndarray, x_test: np.ndarray, y_train: np.
     model = define_single_label_model(
         input_size=x_train.shape[1], opts=opts, output_bias=initial_bias)
 
+    import wandb
+
+    wandb.init(project="dfpl_exai", name="dfpl-train")
+
     # Define checkpoint to save model weights during training
     checkpoint_model_weights_path = f"{model_file_prefix}.model.weights.hdf5"
     callback_list = cb.nn_callback(checkpoint_path=checkpoint_model_weights_path,
@@ -414,18 +418,25 @@ def fit_and_evaluate_model(x_train: np.ndarray, x_test: np.ndarray, y_train: np.
     # SHAP extension
     ######################################
     # from . import shap_dfpl as sd
- 
-    # sd.shap_explain(x_train, model, target, opts.outputDir, drop_values=False, save_values=True)
+
+   
+    # sd.shap_explain(x_train, x_test, model, target, opts.outputDir, drop_values=False, save_values=True)
     ######################################
 
 
 
-    # Dump shap_value object to a pickle to work with it outside dfpl
-    # import pickle
-    # with open("/home/zadubrov/output/results_train/T_shap_values_full.pickle", "wb") as pkl:
-    #     pickle.dump(shap_values, pkl)
-
-
+    # # Save the model to a pkl
+    if opts.shap_val:
+        import pickle
+        from os import makedirs
+        shap_path = path.join(opts.outputDir, f"shap")
+        makedirs(shap_path, exist_ok=True)
+        # with open(path.join(shap_path, f"model_trained-{target}.pkl"), "wb") as pkl:
+        #     pickle.dump(model, pkl)
+        with open(path.join(shap_path, f"x_train-{target}.csv"), "w") as csv1:
+            np.savetxt(csv1, x_train)
+        # with open(path.join(shap_path, f"y_train-{target}.csv"), "wb") as csv2:
+        #     np.savetxt(csv2, y_train)
 
     # Save and plot model history
     pd.DataFrame(hist.history).to_csv(
@@ -439,7 +450,6 @@ def fit_and_evaluate_model(x_train: np.ndarray, x_test: np.ndarray, y_train: np.
                                  target=target, fold=fold)
 
     return performance
-
 
 
 def preprocess_dataframe(df: pd.DataFrame, opts: options.Options) -> Tuple[pd.DataFrame, Set[str]]:
@@ -547,6 +557,7 @@ def train_single_label_models(df: pd.DataFrame, opts: options.Options) -> None:
 
                 performance = fit_and_evaluate_model(x_train=x_train, x_test=x_test, y_train=y_train, y_test=y_test,
                                                      fold=0, target=target, opts=opts)
+
                 performance_list.append(performance)
                 # all_fold_results = pd.concat([all_fold_results, performance], ignore_index=True)
                 # save complete model

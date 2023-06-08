@@ -1,0 +1,1325 @@
+WARNING:tensorflow:`period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+WARNING  `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+Epoch 1/500
+2023-05-08 16:46:25.973672: I tensorflow/core/grappler/devices.cc:66] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 4
+2023-05-08 16:46:25.973948: I tensorflow/core/grappler/clusters/single_machine.cc:357] Starting new session
+2023-05-08 16:46:26.014809: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 78600 MB memory:  -> device: 0, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:17:00.0, compute capability: 8.0
+2023-05-08 16:46:26.016674: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 78600 MB memory:  -> device: 1, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:65:00.0, compute capability: 8.0
+2023-05-08 16:46:26.017961: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:2 with 78600 MB memory:  -> device: 2, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:ca:00.0, compute capability: 8.0
+2023-05-08 16:46:26.019208: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:3 with 78600 MB memory:  -> device: 3, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:e3:00.0, compute capability: 8.0
+2023-05-08 16:46:26.047220: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:1137] Optimization results for grappler item: graph_to_optimize
+  function_optimizer: function_optimizer did nothing. time = 0.049ms.
+  function_optimizer: function_optimizer did nothing. time = 0.003ms.
+WARNING:tensorflow:From /home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/tensorflow/python/ops/math_ops.py:3777: tensor_shape_from_node_def_name (from tensorflow.python.framework.graph_util_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.compat.v1.graph_util.tensor_shape_from_node_def_name`
+WARNING  From /home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/tensorflow/python/ops/math_ops.py:3777: tensor_shape_from_node_def_name (from tensorflow.python.framework.graph_util_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.compat.v1.graph_util.tensor_shape_from_node_def_name`
+2023-05-08 16:46:26.331703: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:185] None of the MLIR Optimization Passes are enabled (registered 2)
+2023-05-08 16:46:32.748911: I tensorflow/stream_executor/cuda/cuda_blas.cc:1760] TensorFloat-32 will be used for the matrix multiplication. This will only be logged once.
+37/37 - 7s - loss: 0.4905 - accuracy: 0.8129 - auc: 0.5479 - precision: 0.3243 - recall: 0.0425 - balanced_accuracy: 0.5108 - val_loss: 0.4509 - val_accuracy: 0.8269 - val_auc: 0.6181 - val_precision: 1.0000 - val_recall: 0.0330 - val_balanced_accuracy: 0.5153
+Epoch 2/500
+37/37 - 0s - loss: 0.4690 - accuracy: 0.8207 - auc: 0.5957 - precision: 0.4925 - recall: 0.0779 - balanced_accuracy: 0.5296 - val_loss: 0.4316 - val_accuracy: 0.8328 - val_auc: 0.6777 - val_precision: 1.0000 - val_recall: 0.0660 - val_balanced_accuracy: 0.5300
+Epoch 3/500
+37/37 - 0s - loss: 0.4510 - accuracy: 0.8289 - auc: 0.6376 - precision: 0.6434 - recall: 0.0980 - balanced_accuracy: 0.5421 - val_loss: 0.4182 - val_accuracy: 0.8387 - val_auc: 0.7124 - val_precision: 0.9565 - val_recall: 0.1038 - val_balanced_accuracy: 0.5458
+Epoch 4/500
+37/37 - 0s - loss: 0.4425 - accuracy: 0.8308 - auc: 0.6606 - precision: 0.6575 - recall: 0.1133 - balanced_accuracy: 0.5496 - val_loss: 0.4074 - val_accuracy: 0.8438 - val_auc: 0.7348 - val_precision: 0.9655 - val_recall: 0.1321 - val_balanced_accuracy: 0.5588
+Epoch 5/500
+37/37 - 0s - loss: 0.4217 - accuracy: 0.8363 - auc: 0.7062 - precision: 0.7000 - recall: 0.1488 - balanced_accuracy: 0.5671 - val_loss: 0.3993 - val_accuracy: 0.8454 - val_auc: 0.7485 - val_precision: 0.9677 - val_recall: 0.1415 - val_balanced_accuracy: 0.5629
+Epoch 6/500
+37/37 - 0s - loss: 0.4146 - accuracy: 0.8391 - auc: 0.7196 - precision: 0.6977 - recall: 0.1771 - balanced_accuracy: 0.5810 - val_loss: 0.3926 - val_accuracy: 0.8480 - val_auc: 0.7582 - val_precision: 0.9444 - val_recall: 0.1604 - val_balanced_accuracy: 0.5712
+Epoch 7/500
+37/37 - 0s - loss: 0.4048 - accuracy: 0.8414 - auc: 0.7387 - precision: 0.7243 - recall: 0.1830 - balanced_accuracy: 0.5827 - val_loss: 0.3869 - val_accuracy: 0.8497 - val_auc: 0.7673 - val_precision: 0.9250 - val_recall: 0.1745 - val_balanced_accuracy: 0.5780
+Epoch 8/500
+37/37 - 0s - loss: 0.4019 - accuracy: 0.8420 - auc: 0.7405 - precision: 0.7071 - recall: 0.1995 - balanced_accuracy: 0.5908 - val_loss: 0.3821 - val_accuracy: 0.8539 - val_auc: 0.7750 - val_precision: 0.8980 - val_recall: 0.2075 - val_balanced_accuracy: 0.5916
+Epoch 9/500
+37/37 - 0s - loss: 0.3951 - accuracy: 0.8458 - auc: 0.7560 - precision: 0.7312 - recall: 0.2184 - balanced_accuracy: 0.5988 - val_loss: 0.3782 - val_accuracy: 0.8547 - val_auc: 0.7795 - val_precision: 0.9000 - val_recall: 0.2123 - val_balanced_accuracy: 0.5935
+Epoch 10/500
+37/37 - 0s - loss: 0.3877 - accuracy: 0.8484 - auc: 0.7652 - precision: 0.7676 - recall: 0.2184 - balanced_accuracy: 0.6029 - val_loss: 0.3751 - val_accuracy: 0.8564 - val_auc: 0.7826 - val_precision: 0.9038 - val_recall: 0.2217 - val_balanced_accuracy: 0.5977
+Epoch 00010: val_loss improved from inf to 0.37510, saving model to /gpfs0/home/zadubrov/deepFPlearn_exai/example/results_train/AR_single-labeled_Fold-0.model.weights.hdf5
+Epoch 11/500
+37/37 - 0s - loss: 0.3874 - accuracy: 0.8498 - auc: 0.7644 - precision: 0.7500 - recall: 0.2409 - balanced_accuracy: 0.6108 - val_loss: 0.3715 - val_accuracy: 0.8590 - val_auc: 0.7875 - val_precision: 0.9091 - val_recall: 0.2358 - val_balanced_accuracy: 0.6036
+Epoch 12/500
+37/37 - 0s - loss: 0.3787 - accuracy: 0.8515 - auc: 0.7805 - precision: 0.7338 - recall: 0.2668 - balanced_accuracy: 0.6236 - val_loss: 0.3688 - val_accuracy: 0.8590 - val_auc: 0.7920 - val_precision: 0.8571 - val_recall: 0.2547 - val_balanced_accuracy: 0.6109
+Epoch 13/500
+37/37 - 0s - loss: 0.3758 - accuracy: 0.8530 - auc: 0.7835 - precision: 0.7649 - recall: 0.2574 - balanced_accuracy: 0.6204 - val_loss: 0.3661 - val_accuracy: 0.8590 - val_auc: 0.7952 - val_precision: 0.8462 - val_recall: 0.2594 - val_balanced_accuracy: 0.6125
+Epoch 14/500
+37/37 - 0s - loss: 0.3658 - accuracy: 0.8532 - auc: 0.8009 - precision: 0.7420 - recall: 0.2751 - balanced_accuracy: 0.6260 - val_loss: 0.3638 - val_accuracy: 0.8590 - val_auc: 0.7977 - val_precision: 0.8261 - val_recall: 0.2689 - val_balanced_accuracy: 0.6155
+Epoch 15/500
+37/37 - 0s - loss: 0.3616 - accuracy: 0.8547 - auc: 0.8062 - precision: 0.7278 - recall: 0.2999 - balanced_accuracy: 0.6396 - val_loss: 0.3619 - val_accuracy: 0.8590 - val_auc: 0.7999 - val_precision: 0.7778 - val_recall: 0.2972 - val_balanced_accuracy: 0.6724
+Epoch 16/500
+37/37 - 0s - loss: 0.3516 - accuracy: 0.8636 - auc: 0.8188 - precision: 0.8073 - recall: 0.3117 - balanced_accuracy: 0.6480 - val_loss: 0.3603 - val_accuracy: 0.8573 - val_auc: 0.8022 - val_precision: 0.7471 - val_recall: 0.3066 - val_balanced_accuracy: 0.6755
+Epoch 17/500
+37/37 - 0s - loss: 0.3510 - accuracy: 0.8593 - auc: 0.8240 - precision: 0.7638 - recall: 0.3093 - balanced_accuracy: 0.6438 - val_loss: 0.3592 - val_accuracy: 0.8556 - val_auc: 0.8042 - val_precision: 0.7113 - val_recall: 0.3255 - val_balanced_accuracy: 0.6821
+Epoch 18/500
+37/37 - 0s - loss: 0.3439 - accuracy: 0.8636 - auc: 0.8307 - precision: 0.7753 - recall: 0.3341 - balanced_accuracy: 0.6564 - val_loss: 0.3581 - val_accuracy: 0.8539 - val_auc: 0.8066 - val_precision: 0.6822 - val_recall: 0.3443 - val_balanced_accuracy: 0.6875
+Epoch 19/500
+37/37 - 0s - loss: 0.3414 - accuracy: 0.8642 - auc: 0.8331 - precision: 0.7787 - recall: 0.3365 - balanced_accuracy: 0.6580 - val_loss: 0.3571 - val_accuracy: 0.8556 - val_auc: 0.8064 - val_precision: 0.6881 - val_recall: 0.3538 - val_balanced_accuracy: 0.6915
+Epoch 20/500
+37/37 - 0s - loss: 0.3407 - accuracy: 0.8634 - auc: 0.8333 - precision: 0.7703 - recall: 0.3365 - balanced_accuracy: 0.6556 - val_loss: 0.3571 - val_accuracy: 0.8564 - val_auc: 0.8079 - val_precision: 0.6810 - val_recall: 0.3726 - val_balanced_accuracy: 0.6993
+Epoch 00020: val_loss improved from 0.37510 to 0.35714, saving model to /gpfs0/home/zadubrov/deepFPlearn_exai/example/results_train/AR_single-labeled_Fold-0.model.weights.hdf5
+Epoch 21/500
+37/37 - 0s - loss: 0.3342 - accuracy: 0.8669 - auc: 0.8431 - precision: 0.7761 - recall: 0.3601 - balanced_accuracy: 0.6705 - val_loss: 0.3565 - val_accuracy: 0.8573 - val_auc: 0.8082 - val_precision: 0.6870 - val_recall: 0.3726 - val_balanced_accuracy: 0.6998
+Epoch 22/500
+37/37 - 0s - loss: 0.3342 - accuracy: 0.8661 - auc: 0.8428 - precision: 0.7506 - recall: 0.3766 - balanced_accuracy: 0.6743 - val_loss: 0.3565 - val_accuracy: 0.8573 - val_auc: 0.8107 - val_precision: 0.6617 - val_recall: 0.4151 - val_balanced_accuracy: 0.7135
+Epoch 23/500
+37/37 - 0s - loss: 0.3277 - accuracy: 0.8663 - auc: 0.8491 - precision: 0.7610 - recall: 0.3684 - balanced_accuracy: 0.6722 - val_loss: 0.3557 - val_accuracy: 0.8564 - val_auc: 0.8121 - val_precision: 0.6544 - val_recall: 0.4198 - val_balanced_accuracy: 0.7149
+Epoch 24/500
+37/37 - 0s - loss: 0.3184 - accuracy: 0.8701 - auc: 0.8597 - precision: 0.7648 - recall: 0.3955 - balanced_accuracy: 0.6829 - val_loss: 0.3551 - val_accuracy: 0.8573 - val_auc: 0.8141 - val_precision: 0.6547 - val_recall: 0.4292 - val_balanced_accuracy: 0.7183
+Epoch 25/500
+37/37 - 0s - loss: 0.3217 - accuracy: 0.8674 - auc: 0.8600 - precision: 0.7529 - recall: 0.3849 - balanced_accuracy: 0.6787 - val_loss: 0.3557 - val_accuracy: 0.8547 - val_auc: 0.8144 - val_precision: 0.6408 - val_recall: 0.4292 - val_balanced_accuracy: 0.7169
+Epoch 26/500
+37/37 - 0s - loss: 0.3170 - accuracy: 0.8705 - auc: 0.8600 - precision: 0.7566 - recall: 0.4073 - balanced_accuracy: 0.6874 - val_loss: 0.3565 - val_accuracy: 0.8564 - val_auc: 0.8140 - val_precision: 0.6458 - val_recall: 0.4387 - val_balanced_accuracy: 0.7213
+Epoch 27/500
+37/37 - 0s - loss: 0.3147 - accuracy: 0.8733 - auc: 0.8628 - precision: 0.7578 - recall: 0.4286 - balanced_accuracy: 0.7005 - val_loss: 0.3561 - val_accuracy: 0.8581 - val_auc: 0.8146 - val_precision: 0.6549 - val_recall: 0.4387 - val_balanced_accuracy: 0.7223
+Epoch 28/500
+37/37 - 0s - loss: 0.3081 - accuracy: 0.8784 - auc: 0.8686 - precision: 0.8018 - recall: 0.4250 - balanced_accuracy: 0.7019 - val_loss: 0.3578 - val_accuracy: 0.8547 - val_auc: 0.8151 - val_precision: 0.6333 - val_recall: 0.4481 - val_balanced_accuracy: 0.7240
+Epoch 29/500
+37/37 - 0s - loss: 0.3014 - accuracy: 0.8800 - auc: 0.8747 - precision: 0.7730 - recall: 0.4664 - balanced_accuracy: 0.7174 - val_loss: 0.3585 - val_accuracy: 0.8530 - val_auc: 0.8161 - val_precision: 0.6267 - val_recall: 0.4434 - val_balanced_accuracy: 0.7209
+Epoch 30/500
+37/37 - 0s - loss: 0.3011 - accuracy: 0.8822 - auc: 0.8752 - precision: 0.7955 - recall: 0.4593 - balanced_accuracy: 0.7134 - val_loss: 0.3594 - val_accuracy: 0.8514 - val_auc: 0.8169 - val_precision: 0.6184 - val_recall: 0.4434 - val_balanced_accuracy: 0.7199
+Epoch 00030: val_loss did not improve from 0.35714
+Epoch 31/500
+37/37 - 0s - loss: 0.2996 - accuracy: 0.8769 - auc: 0.8786 - precision: 0.7588 - recall: 0.4569 - balanced_accuracy: 0.7090 - val_loss: 0.3601 - val_accuracy: 0.8530 - val_auc: 0.8158 - val_precision: 0.6284 - val_recall: 0.4387 - val_balanced_accuracy: 0.7194
+Epoch 32/500
+37/37 - 0s - loss: 0.2963 - accuracy: 0.8832 - auc: 0.8800 - precision: 0.8000 - recall: 0.4628 - balanced_accuracy: 0.7181 - val_loss: 0.3621 - val_accuracy: 0.8514 - val_auc: 0.8167 - val_precision: 0.6184 - val_recall: 0.4434 - val_balanced_accuracy: 0.7199
+Epoch 33/500
+37/37 - 0s - loss: 0.2850 - accuracy: 0.8872 - auc: 0.8913 - precision: 0.8099 - recall: 0.4829 - balanced_accuracy: 0.7290 - val_loss: 0.3641 - val_accuracy: 0.8505 - val_auc: 0.8179 - val_precision: 0.6101 - val_recall: 0.4575 - val_balanced_accuracy: 0.7253
+Epoch 34/500
+37/37 - 0s - loss: 0.2850 - accuracy: 0.8855 - auc: 0.8929 - precision: 0.7788 - recall: 0.5030 - balanced_accuracy: 0.7387 - val_loss: 0.3657 - val_accuracy: 0.8514 - val_auc: 0.8169 - val_precision: 0.6154 - val_recall: 0.4528 - val_balanced_accuracy: 0.7237
+Epoch 35/500
+37/37 - 0s - loss: 0.2843 - accuracy: 0.8870 - auc: 0.8905 - precision: 0.7910 - recall: 0.5006 - balanced_accuracy: 0.7349 - val_loss: 0.3665 - val_accuracy: 0.8514 - val_auc: 0.8181 - val_precision: 0.6111 - val_recall: 0.4670 - val_balanced_accuracy: 0.7293
+Epoch 36/500
+37/37 - 0s - loss: 0.2799 - accuracy: 0.8881 - auc: 0.8950 - precision: 0.7856 - recall: 0.5148 - balanced_accuracy: 0.7386 - val_loss: 0.3679 - val_accuracy: 0.8514 - val_auc: 0.8169 - val_precision: 0.6125 - val_recall: 0.4623 - val_balanced_accuracy: 0.7271
+Epoch 37/500
+37/37 - 0s - loss: 0.2795 - accuracy: 0.8860 - auc: 0.8948 - precision: 0.7786 - recall: 0.5065 - balanced_accuracy: 0.7392 - val_loss: 0.3697 - val_accuracy: 0.8505 - val_auc: 0.8172 - val_precision: 0.6061 - val_recall: 0.4717 - val_balanced_accuracy: 0.7299
+Epoch 38/500
+37/37 - 0s - loss: 0.2781 - accuracy: 0.8929 - auc: 0.8953 - precision: 0.8069 - recall: 0.5277 - balanced_accuracy: 0.7501 - val_loss: 0.3713 - val_accuracy: 0.8497 - val_auc: 0.8157 - val_precision: 0.6049 - val_recall: 0.4623 - val_balanced_accuracy: 0.7256
+Epoch 39/500
+37/37 - 0s - loss: 0.2789 - accuracy: 0.8887 - auc: 0.8954 - precision: 0.7837 - recall: 0.5218 - balanced_accuracy: 0.7442 - val_loss: 0.3727 - val_accuracy: 0.8497 - val_auc: 0.8169 - val_precision: 0.6037 - val_recall: 0.4670 - val_balanced_accuracy: 0.7272
+Epoch 40/500
+INFO     Computation time for training the single-label model for AR: 0.47 min
+37/37 - 0s - loss: 0.2704 - accuracy: 0.8914 - auc: 0.9044 - precision: 0.8000 - recall: 0.5242 - balanced_accuracy: 0.7452 - val_loss: 0.3773 - val_accuracy: 0.8480 - val_auc: 0.8171 - val_precision: 0.5930 - val_recall: 0.4811 - val_balanced_accuracy: 0.7322
+Epoch 00040: val_loss did not improve from 0.35714
+Epoch 41/500
+37/37 - 0s - loss: 0.2775 - accuracy: 0.8900 - auc: 0.8965 - precision: 0.7763 - recall: 0.5407 - balanced_accuracy: 0.7532 - val_loss: 0.3775 - val_accuracy: 0.8463 - val_auc: 0.8175 - val_precision: 0.5882 - val_recall: 0.4717 - val_balanced_accuracy: 0.7275
+Epoch 42/500
+37/37 - 0s - loss: 0.2669 - accuracy: 0.8944 - auc: 0.9052 - precision: 0.7803 - recall: 0.5702 - balanced_accuracy: 0.7661 - val_loss: 0.3781 - val_accuracy: 0.8488 - val_auc: 0.8164 - val_precision: 0.5976 - val_recall: 0.4764 - val_balanced_accuracy: 0.7303
+Epoch 43/500
+37/37 - 0s - loss: 0.2677 - accuracy: 0.8923 - auc: 0.9059 - precision: 0.7930 - recall: 0.5384 - balanced_accuracy: 0.7550 - val_loss: 0.3802 - val_accuracy: 0.8429 - val_auc: 0.8172 - val_precision: 0.5739 - val_recall: 0.4764 - val_balanced_accuracy: 0.7269
+Epoch 44/500
+37/37 - 0s - loss: 0.2645 - accuracy: 0.8942 - auc: 0.9096 - precision: 0.7952 - recall: 0.5502 - balanced_accuracy: 0.7595 - val_loss: 0.3828 - val_accuracy: 0.8412 - val_auc: 0.8171 - val_precision: 0.5674 - val_recall: 0.4764 - val_balanced_accuracy: 0.7260
+Restoring model weights from the end of the best epoch.
+Epoch 00044: early stopping
+<IPython.core.display.HTML object>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Permutation explainer: 1185it [5:16:21, 16.03s/it]
+Traceback (most recent call last):
+  File "/home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/numpy/lib/npyio.py", line 1424, in savetxt
+    v = format % tuple(row) + newline
+TypeError: must be real number, not Explanation
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "/home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/gpfs0/home/zadubrov/deepFPlearn_exai/dfpl/__main__.py", line 392, in <module>
+    main()
+  File "/gpfs0/home/zadubrov/deepFPlearn_exai/dfpl/__main__.py", line 369, in main
+    train(fixed_opts)
+  File "/gpfs0/home/zadubrov/deepFPlearn_exai/dfpl/__main__.py", line 234, in train
+    sl.train_single_label_models(df=df, opts=opts)
+  File "/gpfs0/home/zadubrov/deepFPlearn_exai/dfpl/single_label_model.py", line 558, in train_single_label_models
+    performance = fit_and_evaluate_model(x_train=x_train, x_test=x_test, y_train=y_train, y_test=y_test,
+  File "/gpfs0/home/zadubrov/deepFPlearn_exai/dfpl/single_label_model.py", line 423, in fit_and_evaluate_model
+    sd.shap_explain(x_train, x_test, model, target, opts.outputDir, drop_values=False, save_values=True)
+  File "/gpfs0/home/zadubrov/deepFPlearn_exai/dfpl/shap_dfpl.py", line 47, in shap_explain
+    np.savetxt(csv, shap_values)
+  File "<__array_function__ internals>", line 5, in savetxt
+  File "/home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/numpy/lib/npyio.py", line 1426, in savetxt
+    raise TypeError("Mismatch between array dtype ('%s') and "
+TypeError: Mismatch between array dtype ('object') and format specifier ('%.18e')

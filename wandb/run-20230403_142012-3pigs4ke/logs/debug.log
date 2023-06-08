@@ -1,0 +1,182 @@
+2023-04-03 14:20:12,514 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Configure stats pid to 49181
+2023-04-03 14:20:12,515 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Loading settings from /home/zadubrov/.config/wandb/settings
+2023-04-03 14:20:12,515 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Loading settings from /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/settings
+2023-04-03 14:20:12,515 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-04-03 14:20:12,515 WARNING MainThread:49181 [wandb_setup.py:_flush():76] Could not find program at -m dfpl.__main__
+2023-04-03 14:20:12,515 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': None, 'program': '-m dfpl.__main__'}
+2023-04-03 14:20:12,515 INFO    MainThread:49181 [wandb_init.py:_log_setup():461] Logging user logs to /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230403_142012-3pigs4ke/logs/debug.log
+2023-04-03 14:20:12,515 INFO    MainThread:49181 [wandb_init.py:_log_setup():462] Logging internal logs to /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230403_142012-3pigs4ke/logs/debug-internal.log
+2023-04-03 14:20:12,515 INFO    MainThread:49181 [wandb_init.py:init():495] calling init triggers
+2023-04-03 14:20:12,516 INFO    MainThread:49181 [wandb_init.py:init():498] wandb.init called with sweep_config: {}
+config: {}
+2023-04-03 14:20:12,516 INFO    MainThread:49181 [wandb_init.py:init():543] wandb.init() called when a run is still active
+2023-04-03 14:22:59,718 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Configure stats pid to 49181
+2023-04-03 14:22:59,718 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Loading settings from /home/zadubrov/.config/wandb/settings
+2023-04-03 14:22:59,719 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Loading settings from /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/settings
+2023-04-03 14:22:59,719 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-04-03 14:22:59,719 WARNING MainThread:49181 [wandb_setup.py:_flush():76] Could not find program at -m dfpl.__main__
+2023-04-03 14:22:59,719 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': None, 'program': '-m dfpl.__main__'}
+2023-04-03 14:22:59,720 INFO    MainThread:49181 [wandb_init.py:_log_setup():461] Logging user logs to /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230403_142259-2replr8k/logs/debug.log
+2023-04-03 14:22:59,720 INFO    MainThread:49181 [wandb_init.py:_log_setup():462] Logging internal logs to /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230403_142259-2replr8k/logs/debug-internal.log
+2023-04-03 14:22:59,720 INFO    MainThread:49181 [wandb_init.py:init():495] calling init triggers
+2023-04-03 14:22:59,720 INFO    MainThread:49181 [wandb_init.py:init():498] wandb.init called with sweep_config: {}
+config: {}
+2023-04-03 14:22:59,720 INFO    MainThread:49181 [wandb_init.py:init():543] wandb.init() called when a run is still active
+2023-04-03 14:25:49,837 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Configure stats pid to 49181
+2023-04-03 14:25:49,837 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Loading settings from /home/zadubrov/.config/wandb/settings
+2023-04-03 14:25:49,838 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Loading settings from /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/settings
+2023-04-03 14:25:49,838 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-04-03 14:25:49,838 WARNING MainThread:49181 [wandb_setup.py:_flush():76] Could not find program at -m dfpl.__main__
+2023-04-03 14:25:49,838 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': None, 'program': '-m dfpl.__main__'}
+2023-04-03 14:25:49,840 INFO    MainThread:49181 [wandb_init.py:_log_setup():461] Logging user logs to /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230403_142549-sps19ixl/logs/debug.log
+2023-04-03 14:25:49,841 INFO    MainThread:49181 [wandb_init.py:_log_setup():462] Logging internal logs to /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230403_142549-sps19ixl/logs/debug-internal.log
+2023-04-03 14:25:49,841 INFO    MainThread:49181 [wandb_init.py:init():495] calling init triggers
+2023-04-03 14:25:49,841 INFO    MainThread:49181 [wandb_init.py:init():498] wandb.init called with sweep_config: {}
+config: {}
+2023-04-03 14:25:49,841 INFO    MainThread:49181 [wandb_init.py:init():543] wandb.init() called when a run is still active
+2023-04-03 14:28:29,209 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Configure stats pid to 49181
+2023-04-03 14:28:29,214 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Loading settings from /home/zadubrov/.config/wandb/settings
+2023-04-03 14:28:29,214 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Loading settings from /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/settings
+2023-04-03 14:28:29,214 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-04-03 14:28:29,215 WARNING MainThread:49181 [wandb_setup.py:_flush():76] Could not find program at -m dfpl.__main__
+2023-04-03 14:28:29,215 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': None, 'program': '-m dfpl.__main__'}
+2023-04-03 14:28:29,215 INFO    MainThread:49181 [wandb_init.py:_log_setup():461] Logging user logs to /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230403_142829-3a9qmkek/logs/debug.log
+2023-04-03 14:28:29,216 INFO    MainThread:49181 [wandb_init.py:_log_setup():462] Logging internal logs to /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230403_142829-3a9qmkek/logs/debug-internal.log
+2023-04-03 14:28:29,216 INFO    MainThread:49181 [wandb_init.py:init():495] calling init triggers
+2023-04-03 14:28:29,216 INFO    MainThread:49181 [wandb_init.py:init():498] wandb.init called with sweep_config: {}
+config: {}
+2023-04-03 14:28:29,216 INFO    MainThread:49181 [wandb_init.py:init():543] wandb.init() called when a run is still active
+2023-04-03 14:31:08,452 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Configure stats pid to 49181
+2023-04-03 14:31:08,452 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Loading settings from /home/zadubrov/.config/wandb/settings
+2023-04-03 14:31:08,452 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Loading settings from /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/settings
+2023-04-03 14:31:08,453 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-04-03 14:31:08,453 WARNING MainThread:49181 [wandb_setup.py:_flush():76] Could not find program at -m dfpl.__main__
+2023-04-03 14:31:08,453 INFO    MainThread:49181 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': None, 'program': '-m dfpl.__main__'}
+2023-04-03 14:31:08,454 INFO    MainThread:49181 [wandb_init.py:_log_setup():461] Logging user logs to /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230403_143108-13vl1ia8/logs/debug.log
+2023-04-03 14:31:08,454 INFO    MainThread:49181 [wandb_init.py:_log_setup():462] Logging internal logs to /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230403_143108-13vl1ia8/logs/debug-internal.log
+2023-04-03 14:31:08,454 INFO    MainThread:49181 [wandb_init.py:init():495] calling init triggers
+2023-04-03 14:31:08,454 INFO    MainThread:49181 [wandb_init.py:init():498] wandb.init called with sweep_config: {}
+config: {}
+2023-04-03 14:31:08,454 INFO    MainThread:49181 [wandb_init.py:init():543] wandb.init() called when a run is still active
+2023-04-03 14:34:06,997 INFO    MainThread:49181 [wandb_run.py:_atexit_cleanup():1862] got exitcode: 0
+2023-04-03 14:34:07,005 INFO    MainThread:49181 [wandb_run.py:_restore():1834] restore
+2023-04-03 14:34:09,584 INFO    MainThread:49181 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 837
+  total_bytes: 837
+}
+
+2023-04-03 14:34:09,750 INFO    MainThread:49181 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 837
+  total_bytes: 837
+}
+
+2023-04-03 14:34:10,025 INFO    MainThread:49181 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 1
+}
+pusher_stats {
+  uploaded_bytes: 837
+  total_bytes: 837
+}
+
+2023-04-03 14:34:10,638 INFO    MainThread:49181 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 5
+}
+pusher_stats {
+  uploaded_bytes: 837
+  total_bytes: 14425
+}
+
+2023-04-03 14:34:10,743 INFO    MainThread:49181 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+}
+pusher_stats {
+  uploaded_bytes: 837
+  total_bytes: 92989
+}
+
+2023-04-03 14:34:10,847 INFO    MainThread:49181 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+}
+pusher_stats {
+  uploaded_bytes: 837
+  total_bytes: 92989
+}
+
+2023-04-03 14:34:10,951 INFO    MainThread:49181 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+}
+pusher_stats {
+  uploaded_bytes: 88664
+  total_bytes: 92989
+}
+
+2023-04-03 14:34:11,054 INFO    MainThread:49181 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+}
+pusher_stats {
+  uploaded_bytes: 92989
+  total_bytes: 92989
+}
+
+2023-04-03 14:34:11,158 INFO    MainThread:49181 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+}
+pusher_stats {
+  uploaded_bytes: 92989
+  total_bytes: 92989
+}
+
+2023-04-03 14:34:11,262 INFO    MainThread:49181 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+}
+pusher_stats {
+  uploaded_bytes: 92989
+  total_bytes: 92989
+}
+
+2023-04-03 14:34:11,365 INFO    MainThread:49181 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+}
+pusher_stats {
+  uploaded_bytes: 92989
+  total_bytes: 92989
+}
+
+2023-04-03 14:34:11,469 INFO    MainThread:49181 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+}
+pusher_stats {
+  uploaded_bytes: 92989
+  total_bytes: 92989
+}
+
+2023-04-03 14:34:12,035 INFO    MainThread:49181 [wandb_run.py:_on_finish():1991] got exit ret: file_counts {
+  wandb_count: 6
+}
+pusher_stats {
+  uploaded_bytes: 92989
+  total_bytes: 92989
+}
+
+2023-04-03 14:34:12,534 INFO    MainThread:49181 [wandb_run.py:_on_finish():1991] got exit ret: done: true
+exit_result {
+}
+file_counts {
+  wandb_count: 6
+}
+pusher_stats {
+  uploaded_bytes: 92989
+  total_bytes: 92989
+}
+local_info {
+}
+
+2023-04-03 14:34:13,786 INFO    MainThread:49181 [wandb_run.py:_footer_history_summary_info():3099] rendering history
+2023-04-03 14:34:13,790 INFO    MainThread:49181 [wandb_run.py:_footer_history_summary_info():3131] rendering summary
+2023-04-03 14:34:13,807 INFO    MainThread:49181 [wandb_run.py:_footer_sync_info():3055] logging synced files

@@ -1,9 +1,8 @@
 {
   "py/object": "dfpl.options.GnnOptions",
   "gnn_type": "dmpnn",
-  "test_path": "example/data/sample.csv",
-  "checkpoint_paths": ["example/S_random/model_0/model.pt"],
+  "test_path": "/home/zadubrov/data/S_dataset-ED.csv",
+  "checkpoint_path": "/home/zadubrov/deepFPlearn_exai/dmpnn/fold_0/model_0/model.pt",
   "save_dir": "output_dmpnn",
-  "saving_name": "DMPNN_random_S_sample_pred.csv",
-  "checkpoint_dir": "./example/"
+  "saving_name": "S_data_ED_scaffold_dmpnn_preds.csv"
 }

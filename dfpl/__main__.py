@@ -3,11 +3,12 @@ import sys
 sys.path.append("./chemprop_repo")
 from chemprop_repo import chemprop
 from chemprop_repo.chemprop import args, train
+from chemprop_repo.chemprop import interpret
 
 # sys.path.append("./CMPNN")
 # from CMPNN.cmpnnchemprop.train import *
 # from CMPNN.cmpnnchemprop.utils import create_logger
-# from CMPNN.training import cross_validate
+# from CMPNN.training import cross_valid
 
 import pandas as pd
 from argparse import Namespace
@@ -28,6 +29,10 @@ from dfpl import predictions
 from dfpl import single_label_model as sl
 from dfpl import rbm as rbm
 from keras.models import load_model
+
+from contextlib import redirect_stdout
+import numpy as np
+
 
 project_directory = pathlib.Path(".").parent.parent.absolute()
 test_train_opts = options.Options(
@@ -109,7 +114,7 @@ def predictdmpnn(opts: options.GnnOptions, JSON_ARG_PATH) -> None:
     Returns:
     - None
     """
-    ignore_elements = ["py/object", "gnn_type", "checkpoint_paths", "save_dir", "saving_name"]
+    ignore_elements = ["py/object", "gnn_type", "checkpoint_paths", "save_dir", "saving_name", "interpret", "configInterpret"]
     # Load options and additional arguments from a JSON file
     arguments, data = createArgsFromJson(JSON_ARG_PATH, ignore_elements, return_json_object=True)
     arguments.append("--preds_path")
@@ -127,6 +132,43 @@ def predictdmpnn(opts: options.GnnOptions, JSON_ARG_PATH) -> None:
     # Make predictions and return the result
     pred = chemprop.train.make_predictions(args=opts, smiles=smiles)
 
+
+def interpretdmpnn(opts: options.GnnOptions, JSON_ARG_PATH) -> None:
+    """
+    Interpret the values using a trained D-MPNN model with the given options.
+    Args:
+    - opts: options.GnnOptions instance containing the details of the prediction
+    - JSON_ARG_PATH: path to a JSON file containing additional arguments for interpretation
+    Returns:
+    - 
+    """
+    ignore_elements = ["py/object", "output_dir", "visualise_smiles"]
+    # Load options and additional arguments from a JSON file
+    arguments, data = createArgsFromJson(JSON_ARG_PATH, ignore_elements, return_json_object=True)
+    opts = chemprop.args.InterpretArgs().parse_args(arguments)
+    chemprop.interpret.interpret_to_file(args=opts, output_dir=data.get("output_dir"),
+                                         visualise_smiles=data.get("visualise_smiles"))
+
+
+def interpretffn(opts: options.Options, JSON_ARG_PATH) -> None:
+    """
+    Interpret the values using a trained FFN model with the given options.
+    Args:
+    - opts: options.Options instance containing the details of the prediction
+    - JSON_ARG_PATH: path to a JSON file containing additional arguments for interpretation
+    Returns:
+    - 
+    """
+    ignore_elements = ["py/object", "output_dir", "predict_path", "drop_values", "threshold", "save_values"]
+    # Load options and additional arguments from a JSON file
+    arguments, data = createArgsFromJson(JSON_ARG_PATH, ignore_elements, return_json_object=True)
+    # opts = chemprop.args.InterpretArgs().parse_args(arguments)
+    # chemprop.interpret.interpret_to_file(args=opts, output_file=os.path.join(data.get("output_dir"), "interpret.csv"))
+
+    x_train = np.genfromtxt(path.join(data.get("output_dir"), "x_train.csv"))
+    x_test = np.genfromtxt(data.get("predict_path"))
+    model = tf.keras.model.load_model(path.join(data.get("output_dir"), "model.pickle"))
+    print(model)
 
 def train(opts: options.Options):
     """
@@ -286,98 +328,31 @@ def main():
             predictgnn_opts = options.GnnOptions.fromCmdArgs(prog_args)
             fixed_opts = dataclasses.replace(
                 predictgnn_opts,
-                checkpoint_dir=makePathAbsolute(predictgnn_opts.checkpoint_dir),
+                # checkpoint_dir=makePathAbsolute(predictgnn_opts.checkpoint_dir),
                 test_path=makePathAbsolute(predictgnn_opts.test_path),
                 preds_path=makePathAbsolute(predictgnn_opts.preds_path),
-                trainAC=False,
-                trainFNN=False
+                # trainAC=False,
+                # trainFNN=False
             )
 
-            createLogger(path.join(fixed_opts.save_dir, "predictgnn.log"))
-            logging.info(f"The following arguments are received or filled with default values:\n{prog_args}")
+            # createLogger(path.join(fixed_opts.save_dir, "predictgnn.log"))
+            # logging.info(f"The following arguments are received or filled with default values:\n{prog_args}")
             # if predictgnn_opts.gnn_type == "cmpnn":
             #     createDirectory(fixed_opts.save_dir)
             #     predictcmpnn(fixed_opts)
             if predictgnn_opts.gnn_type == "dmpnn":
                 predictdmpnn(fixed_opts, prog_args.configFile)
 
-        elif prog_args.method == "train":
-            train_opts = options.Options.fromCmdArgs(prog_args)
-            fixed_opts = dataclasses.replace(
-                train_opts,
-                inputFile=makePathAbsolute(train_opts.inputFile),
-                outputDir=makePathAbsolute(train_opts.outputDir)
-            )
-            createDirectory(fixed_opts.outputDir)
-            createLogger(path.join(fixed_opts.outputDir, "train.log"))
-            logging.info(f"The following arguments are received or filled with default values:\n{fixed_opts}")
-            train(fixed_opts)
-        elif prog_args.method == "predict":
-            predict_opts = options.Options.fromCmdArgs(prog_args)
-            fixed_opts = dataclasses.replace(
-                predict_opts,
-                inputFile=makePathAbsolute(predict_opts.inputFile),
-                outputDir=makePathAbsolute(predict_opts.outputDir),
-                outputFile=makePathAbsolute(path.join(predict_opts.outputDir, predict_opts.outputFile)),
-                ecModelDir=makePathAbsolute(predict_opts.ecModelDir),
-                fnnModelDir=makePathAbsolute(predict_opts.fnnModelDir),
-                trainAC=False,
-                trainFNN=False
-            )
-            createDirectory(fixed_opts.outputDir)
-            createLogger(path.join(fixed_opts.outputDir, "predict.log"))
-            logging.info(f"The following arguments are received or filled with default values:\n{prog_args}")
-            predict(fixed_opts)
-    except AttributeError as e:
-        print(e)
-        parser.print_usage()
-def main():
-    """
-    Main function that runs training/prediction defined by command line arguments
-    """
-    parser = options.createCommandlineParser()
-    prog_args: Namespace = parser.parse_args()
-    try:
-        if prog_args.method == "convert":
-            directory = makePathAbsolute(prog_args.f)
-            if path.isdir(directory):
-                createLogger(path.join(directory, "convert.log"))
-                logging.info(f"Convert all data files in {directory}")
-                fp.convert_all(directory)
-            else:
-                raise ValueError("Input directory is not a directory")
-        elif prog_args.method == "traingnn":
-            traingnn_opts = options.GnnOptions.fromCmdArgs(prog_args)
-            fixed_opts = dataclasses.replace(
-                traingnn_opts,
-                # inputFile=makePathAbsolute(traingnn_opts.data_path),
-                # outputDir=makePathAbsolute(traingnn_opts.save_dir)
-            )
 
-            # if traingnn_opts.gnn_type == "cmpnn":
-            #     createDirectory(fixed_opts.save_dir)
-            #     traincmpnn(fixed_opts)
-            if traingnn_opts.gnn_type == "dmpnn":
-                traindmpnn(fixed_opts)
+        elif prog_args.method == "interpretgnn":
+            interpretgnn_opts = options.GnnOptions.fromCmdArgs(prog_args)
+            fixed_opts = dataclasses.replace(interpretgnn_opts)
+            interpretdmpnn(fixed_opts, interpretgnn_opts.configInterpret)
 
-        elif prog_args.method == "predictgnn":
-            predictgnn_opts = options.GnnOptions.fromCmdArgs(prog_args)
-            fixed_opts = dataclasses.replace(
-                predictgnn_opts,
-                checkpoint_dir=makePathAbsolute(predictgnn_opts.checkpoint_dir),
-                test_path=makePathAbsolute(predictgnn_opts.test_path),
-                preds_path=makePathAbsolute(predictgnn_opts.preds_path),
-                trainAC=False,
-                trainFNN=False
-            )
-
-            createLogger(path.join(fixed_opts.save_dir, "predictgnn.log"))
-            logging.info(f"The following arguments are received or filled with default values:\n{prog_args}")
-            # if predictgnn_opts.gnn_type == "cmpnn":
-            #     createDirectory(fixed_opts.save_dir)
-            #     predictcmpnn(fixed_opts)
-            if predictgnn_opts.gnn_type == "dmpnn":
-                predictdmpnn(fixed_opts, prog_args.configFile)
+        elif prog_args.method == "interpretffn":
+            interpretffn_opts = options.Options.fromCmdArgs(prog_args)
+            fixed_opts = dataclasses.replace(interpretffn_opts)
+            interpretffn(fixed_opts, interpretffn_opts.configInterpretFfn)
 
         elif prog_args.method == "train":
             train_opts = options.Options.fromCmdArgs(prog_args)

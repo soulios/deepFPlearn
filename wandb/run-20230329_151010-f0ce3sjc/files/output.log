@@ -1,0 +1,107 @@
+WARNING:tensorflow:`period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+WARNING  `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+2023-03-29 15:10:32.143902: I tensorflow/core/grappler/devices.cc:66] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 4
+2023-03-29 15:10:32.144199: I tensorflow/core/grappler/clusters/single_machine.cc:357] Starting new session
+2023-03-29 15:10:32.236450: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 78600 MB memory:  -> device: 0, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:17:00.0, compute capability: 8.0
+2023-03-29 15:10:32.243213: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 78600 MB memory:  -> device: 1, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:65:00.0, compute capability: 8.0
+2023-03-29 15:10:32.248194: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:2 with 70 MB memory:  -> device: 2, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:ca:00.0, compute capability: 8.0
+2023-03-29 15:10:32.253529: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:3 with 70 MB memory:  -> device: 3, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:e3:00.0, compute capability: 8.0
+2023-03-29 15:10:32.305359: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:1137] Optimization results for grappler item: graph_to_optimize
+  function_optimizer: function_optimizer did nothing. time = 0.055ms.
+  function_optimizer: function_optimizer did nothing. time = 0.004ms.
+WARNING:tensorflow:From /home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/tensorflow/python/ops/math_ops.py:3777: tensor_shape_from_node_def_name (from tensorflow.python.framework.graph_util_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.compat.v1.graph_util.tensor_shape_from_node_def_name`
+WARNING  From /home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/tensorflow/python/ops/math_ops.py:3777: tensor_shape_from_node_def_name (from tensorflow.python.framework.graph_util_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.compat.v1.graph_util.tensor_shape_from_node_def_name`
+2023-03-29 15:10:32.569802: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:185] None of the MLIR Optimization Passes are enabled (registered 2)
+Epoch 1/10
+2023-03-29 15:10:38.687947: I tensorflow/stream_executor/cuda/cuda_blas.cc:1760] TensorFloat-32 will be used for the matrix multiplication. This will only be logged once.
+35/35 - 7s - loss: 0.5962 - accuracy: 0.7232 - auc: 0.5304 - precision: 0.2931 - recall: 0.1112 - balanced_accuracy: 0.5153 - val_loss: 0.5223 - val_accuracy: 0.7612 - val_auc: 0.6594 - val_precision: 0.5172 - val_recall: 0.0560 - val_balanced_accuracy: 0.5214
+Epoch 2/10
+35/35 - 0s - loss: 0.5579 - accuracy: 0.7399 - auc: 0.6051 - precision: 0.3805 - recall: 0.1383 - balanced_accuracy: 0.5346 - val_loss: 0.4973 - val_accuracy: 0.7773 - val_auc: 0.7204 - val_precision: 0.7111 - val_recall: 0.1194 - val_balanced_accuracy: 0.5524
+Epoch 3/10
+35/35 - 0s - loss: 0.5336 - accuracy: 0.7592 - auc: 0.6456 - precision: 0.4899 - recall: 0.1589 - balanced_accuracy: 0.5541 - val_loss: 0.4810 - val_accuracy: 0.7934 - val_auc: 0.7448 - val_precision: 0.7681 - val_recall: 0.1978 - val_balanced_accuracy: 0.5881
+Epoch 4/10
+35/35 - 0s - loss: 0.5208 - accuracy: 0.7695 - auc: 0.6666 - precision: 0.5523 - recall: 0.1925 - balanced_accuracy: 0.5716 - val_loss: 0.4699 - val_accuracy: 0.8050 - val_auc: 0.7582 - val_precision: 0.7660 - val_recall: 0.2687 - val_balanced_accuracy: 0.6213
+Epoch 5/10
+35/35 - 0s - loss: 0.4971 - accuracy: 0.7728 - auc: 0.7094 - precision: 0.5579 - recall: 0.2430 - balanced_accuracy: 0.5895 - val_loss: 0.4618 - val_accuracy: 0.8059 - val_auc: 0.7656 - val_precision: 0.7339 - val_recall: 0.2985 - val_balanced_accuracy: 0.6334
+Epoch 6/10
+35/35 - 0s - loss: 0.4838 - accuracy: 0.7853 - auc: 0.7294 - precision: 0.6285 - recall: 0.2514 - balanced_accuracy: 0.6046 - val_loss: 0.4550 - val_accuracy: 0.8041 - val_auc: 0.7732 - val_precision: 0.7059 - val_recall: 0.3134 - val_balanced_accuracy: 0.6374
+Epoch 7/10
+35/35 - 0s - loss: 0.4859 - accuracy: 0.7786 - auc: 0.7287 - precision: 0.5823 - recall: 0.2645 - balanced_accuracy: 0.6024 - val_loss: 0.4492 - val_accuracy: 0.8050 - val_auc: 0.7793 - val_precision: 0.6894 - val_recall: 0.3396 - val_balanced_accuracy: 0.6471
+Epoch 8/10
+35/35 - 0s - loss: 0.4774 - accuracy: 0.7858 - auc: 0.7408 - precision: 0.6120 - recall: 0.2860 - balanced_accuracy: 0.6151 - val_loss: 0.4449 - val_accuracy: 0.8095 - val_auc: 0.7844 - val_precision: 0.6897 - val_recall: 0.3731 - val_balanced_accuracy: 0.6616
+Epoch 9/10
+INFO     Computation time for training the single-label model for ER: 0.21 min
+INFO     Network type: FNN
+INFO     Model: "sequential"
+INFO     _________________________________________________________________
+INFO     Layer (type)                 Output Shape              Param #
+INFO     =================================================================
+INFO     dense (Dense)                (None, 1024)              2098176
+INFO     _________________________________________________________________
+INFO     alpha_dropout (AlphaDropout) (None, 1024)              0
+INFO     _________________________________________________________________
+INFO     dense_1 (Dense)              (None, 512)               524800
+INFO     _________________________________________________________________
+INFO     alpha_dropout_1 (AlphaDropou (None, 512)               0
+INFO     _________________________________________________________________
+INFO     dense_2 (Dense)              (None, 256)               131328
+INFO     _________________________________________________________________
+INFO     alpha_dropout_2 (AlphaDropou (None, 256)               0
+INFO     _________________________________________________________________
+INFO     dense_3 (Dense)              (None, 128)               32896
+INFO     _________________________________________________________________
+INFO     alpha_dropout_3 (AlphaDropou (None, 128)               0
+INFO     _________________________________________________________________
+INFO     dense_4 (Dense)              (None, 1)                 129
+INFO     =================================================================
+INFO     Total params: 2,787,329
+INFO     Trainable params: 2,787,329
+INFO     Non-trainable params: 0
+INFO     _________________________________________________________________
+INFO     Evaluating trained model 'ER single-labeled Fold-0' on test data
+35/35 - 0s - loss: 0.4667 - accuracy: 0.7880 - auc: 0.7552 - precision: 0.6196 - recall: 0.2953 - balanced_accuracy: 0.6190 - val_loss: 0.4405 - val_accuracy: 0.8104 - val_auc: 0.7882 - val_precision: 0.6867 - val_recall: 0.3843 - val_balanced_accuracy: 0.6656
+Epoch 10/10
+35/35 - 0s - loss: 0.4539 - accuracy: 0.7999 - auc: 0.7690 - precision: 0.6673 - recall: 0.3262 - balanced_accuracy: 0.6386 - val_loss: 0.4381 - val_accuracy: 0.8059 - val_auc: 0.7931 - val_precision: 0.6527 - val_recall: 0.4067 - val_balanced_accuracy: 0.6704
+Epoch 00010: val_loss improved from inf to 0.43811, saving model to /home/zadubrov/output/results_train/ER_single-labeled_Fold-0.model.weights.hdf5
+INFO     Loss: 0.696
+INFO     Accuracy: 0.5617
+INFO     AUC: 0.5393
+INFO     Precision: 0.2716
+INFO     Recall: 0.4925
+INFO     Balanced Accuracy: 0.5497
+INFO     MCC: 0.0655
+INFO     Network type: FNN
+INFO     Model: "sequential_1"
+INFO     _________________________________________________________________
+INFO     Layer (type)                 Output Shape              Param #
+INFO     =================================================================
+INFO     dense_5 (Dense)              (None, 1024)              2098176
+INFO     _________________________________________________________________
+INFO     alpha_dropout_4 (AlphaDropou (None, 1024)              0
+INFO     _________________________________________________________________
+INFO     dense_6 (Dense)              (None, 512)               524800
+INFO     _________________________________________________________________
+INFO     alpha_dropout_5 (AlphaDropou (None, 512)               0
+INFO     _________________________________________________________________
+INFO     dense_7 (Dense)              (None, 256)               131328
+INFO     _________________________________________________________________
+INFO     alpha_dropout_6 (AlphaDropou (None, 256)               0
+INFO     _________________________________________________________________
+INFO     dense_8 (Dense)              (None, 128)               32896
+INFO     _________________________________________________________________
+INFO     alpha_dropout_7 (AlphaDropou (None, 128)               0
+INFO     _________________________________________________________________
+INFO     dense_9 (Dense)              (None, 1)                 129
+INFO     =================================================================
+INFO     Total params: 2,787,329
+INFO     Trainable params: 2,787,329
+INFO     Non-trainable params: 0
+INFO     _________________________________________________________________
+2023-03-29 15:10:46.693262: W tensorflow/python/util/util.cc:348] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+35/35 [==============================] - 1s 9ms/step - loss: 0.6960 - accuracy: 0.5617 - auc: 0.5393 - precision: 0.2716 - recall: 0.4925 - balanced_accuracy: 0.5497
+INFO:tensorflow:Assets written to: /home/zadubrov/output/results_train/ER_saved_model/assets
+INFO     Assets written to: /home/zadubrov/output/results_train/ER_saved_model/assets

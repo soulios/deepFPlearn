@@ -1,0 +1,63 @@
+WARNING:tensorflow:`period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+WARNING  `period` argument is deprecated. Please use `save_freq` to specify the frequency in number of batches seen.
+Epoch 1/10
+2023-04-26 12:47:40.980106: I tensorflow/core/grappler/devices.cc:66] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 4
+2023-04-26 12:47:40.980715: I tensorflow/core/grappler/clusters/single_machine.cc:357] Starting new session
+2023-04-26 12:47:41.009061: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 78600 MB memory:  -> device: 0, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:17:00.0, compute capability: 8.0
+2023-04-26 12:47:41.010401: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 78600 MB memory:  -> device: 1, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:65:00.0, compute capability: 8.0
+2023-04-26 12:47:41.011406: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:2 with 78600 MB memory:  -> device: 2, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:ca:00.0, compute capability: 8.0
+2023-04-26 12:47:41.012509: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1510] Created device /job:localhost/replica:0/task:0/device:GPU:3 with 78600 MB memory:  -> device: 3, name: NVIDIA A100 80GB PCIe, pci bus id: 0000:e3:00.0, compute capability: 8.0
+2023-04-26 12:47:41.048025: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:1137] Optimization results for grappler item: graph_to_optimize
+  function_optimizer: function_optimizer did nothing. time = 0.06ms.
+  function_optimizer: function_optimizer did nothing. time = 0.003ms.
+WARNING:tensorflow:From /home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/tensorflow/python/ops/math_ops.py:3777: tensor_shape_from_node_def_name (from tensorflow.python.framework.graph_util_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.compat.v1.graph_util.tensor_shape_from_node_def_name`
+WARNING  From /home/zadubrov/.conda/envs/dfpl_exai/lib/python3.9/site-packages/tensorflow/python/ops/math_ops.py:3777: tensor_shape_from_node_def_name (from tensorflow.python.framework.graph_util_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.compat.v1.graph_util.tensor_shape_from_node_def_name`
+2023-04-26 12:47:41.312914: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:185] None of the MLIR Optimization Passes are enabled (registered 2)
+2023-04-26 12:47:45.743319: I tensorflow/stream_executor/cuda/cuda_blas.cc:1760] TensorFloat-32 will be used for the matrix multiplication. This will only be logged once.
+37/37 - 6s - loss: 0.4950 - accuracy: 0.8137 - auc: 0.5399 - precision: 0.2941 - recall: 0.0295 - balanced_accuracy: 0.5078 - val_loss: 0.4575 - val_accuracy: 0.8201 - val_auc: 0.6056 - val_precision: 0.0000e+00 - val_recall: 0.0000e+00 - val_balanced_accuracy: 0.4995
+Epoch 2/10
+37/37 - 0s - loss: 0.4667 - accuracy: 0.8173 - auc: 0.6144 - precision: 0.4308 - recall: 0.0661 - balanced_accuracy: 0.5233 - val_loss: 0.4422 - val_accuracy: 0.8285 - val_auc: 0.6525 - val_precision: 0.8462 - val_recall: 0.0519 - val_balanced_accuracy: 0.5205
+Epoch 3/10
+37/37 - 0s - loss: 0.4423 - accuracy: 0.8296 - auc: 0.6685 - precision: 0.6163 - recall: 0.1251 - balanced_accuracy: 0.5546 - val_loss: 0.4313 - val_accuracy: 0.8328 - val_auc: 0.6840 - val_precision: 0.7917 - val_recall: 0.0896 - val_balanced_accuracy: 0.5376
+Epoch 4/10
+37/37 - 0s - loss: 0.4426 - accuracy: 0.8302 - auc: 0.6634 - precision: 0.6049 - recall: 0.1464 - balanced_accuracy: 0.5645 - val_loss: 0.4230 - val_accuracy: 0.8336 - val_auc: 0.7025 - val_precision: 0.7778 - val_recall: 0.0991 - val_balanced_accuracy: 0.5414
+Epoch 5/10
+37/37 - 1s - loss: 0.4193 - accuracy: 0.8405 - auc: 0.7098 - precision: 0.7323 - recall: 0.1712 - balanced_accuracy: 0.5787 - val_loss: 0.4164 - val_accuracy: 0.8378 - val_auc: 0.7184 - val_precision: 0.8125 - val_recall: 0.1226 - val_balanced_accuracy: 0.5535
+Epoch 6/10
+37/37 - 0s - loss: 0.4120 - accuracy: 0.8418 - auc: 0.7223 - precision: 0.7130 - recall: 0.1936 - balanced_accuracy: 0.5885 - val_loss: 0.4112 - val_accuracy: 0.8378 - val_auc: 0.7275 - val_precision: 0.7632 - val_recall: 0.1368 - val_balanced_accuracy: 0.5582
+Epoch 7/10
+37/37 - 0s - loss: 0.4078 - accuracy: 0.8408 - auc: 0.7328 - precision: 0.6729 - recall: 0.2137 - balanced_accuracy: 0.5956 - val_loss: 0.4068 - val_accuracy: 0.8412 - val_auc: 0.7341 - val_precision: 0.8000 - val_recall: 0.1509 - val_balanced_accuracy: 0.5644
+Epoch 8/10
+37/37 - 1s - loss: 0.3942 - accuracy: 0.8484 - auc: 0.7536 - precision: 0.7471 - recall: 0.2302 - balanced_accuracy: 0.6039 - val_loss: 0.4026 - val_accuracy: 0.8412 - val_auc: 0.7414 - val_precision: 0.7857 - val_recall: 0.1557 - val_balanced_accuracy: 0.5659
+Epoch 9/10
+37/37 - 0s - loss: 0.3894 - accuracy: 0.8522 - auc: 0.7566 - precision: 0.7526 - recall: 0.2586 - balanced_accuracy: 0.6207 - val_loss: 0.3987 - val_accuracy: 0.8378 - val_auc: 0.7489 - val_precision: 0.7000 - val_recall: 0.1651 - val_balanced_accuracy: 0.5689
+Epoch 10/10
+37/37 - 0s - loss: 0.3785 - accuracy: 0.8532 - auc: 0.7803 - precision: 0.7197 - recall: 0.2940 - balanced_accuracy: 0.6351 - val_loss: 0.3947 - val_accuracy: 0.8387 - val_auc: 0.7558 - val_precision: 0.6780 - val_recall: 0.1887 - val_balanced_accuracy: 0.5768
+Epoch 00010: val_loss improved from inf to 0.39468, saving model to /home/zadubrov/output/results_train/AR_single-labeled_Fold-0.model.weights.hdf5
+INFO     Computation time for training the single-label model for AR: 0.2 min
+<IPython.core.display.HTML object>
+[ True  True  True ...  True  True  True]
+<bound method Model.predict of <keras.engine.sequential.Sequential object at 0x2b96d5ea3820>>
+[[0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ ...
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]]
+<class 'numpy.ndarray'>	4735
+<class 'tuple'>	2
+WARNING  Using 4735 background data samples could cause slower run times. Consider using shap.sample(data, K) or shap.kmeans(data, K) to summarize the background as K samples.
+  0%|                                                                                                                                    | 0/1184 [00:00<?, ?it/s]INFO     num_full_subsets = 1
+INFO     remaining_weight_vector = [0.12633044 0.0851996  0.06465146 0.0523369  0.04413955 0.03829529
+ 0.03392206 0.03052986 0.02782468 0.02561946 0.0237895  0.02224848
+ 0.02093476 0.01980315 0.01881977 0.01795874 0.01719992 0.01652744
+ 0.01592862 0.0153932  0.01491282 0.01448056 0.0140907  0.01373844
+ 0.01341972 0.01313112 0.01286973 0.01263304 0.01241892 0.01222553
+ 0.01205126 0.01189475 0.01175481 0.01163042 0.0115207  0.01142489
+ 0.01134236 0.01127256 0.01121505 0.01116946 0.01113551 0.01111299
+ 0.01110177]

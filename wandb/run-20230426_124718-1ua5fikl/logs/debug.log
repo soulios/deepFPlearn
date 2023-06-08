@@ -1,0 +1,27 @@
+2023-04-26 12:47:18,490 INFO    MainThread:35658 [wandb_setup.py:_flush():76] Configure stats pid to 35658
+2023-04-26 12:47:18,491 INFO    MainThread:35658 [wandb_setup.py:_flush():76] Loading settings from /home/zadubrov/.config/wandb/settings
+2023-04-26 12:47:18,491 INFO    MainThread:35658 [wandb_setup.py:_flush():76] Loading settings from /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/settings
+2023-04-26 12:47:18,491 INFO    MainThread:35658 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2023-04-26 12:47:18,491 WARNING MainThread:35658 [wandb_setup.py:_flush():76] Could not find program at -m dfpl.__main__
+2023-04-26 12:47:18,491 INFO    MainThread:35658 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': None, 'program': '-m dfpl.__main__'}
+2023-04-26 12:47:18,491 INFO    MainThread:35658 [wandb_init.py:_log_setup():461] Logging user logs to /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230426_124718-1ua5fikl/logs/debug.log
+2023-04-26 12:47:18,492 INFO    MainThread:35658 [wandb_init.py:_log_setup():462] Logging internal logs to /gpfs0/home/zadubrov/deepFPlearn_exai/wandb/run-20230426_124718-1ua5fikl/logs/debug-internal.log
+2023-04-26 12:47:18,492 INFO    MainThread:35658 [wandb_init.py:init():495] calling init triggers
+2023-04-26 12:47:18,492 INFO    MainThread:35658 [wandb_init.py:init():498] wandb.init called with sweep_config: {}
+config: {}
+2023-04-26 12:47:18,492 INFO    MainThread:35658 [wandb_init.py:init():548] starting backend
+2023-04-26 12:47:18,492 INFO    MainThread:35658 [backend.py:_multiprocessing_setup():97] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2023-04-26 12:47:18,620 INFO    MainThread:35658 [backend.py:ensure_launched():217] starting backend process...
+2023-04-26 12:47:18,733 INFO    MainThread:35658 [backend.py:ensure_launched():222] started backend process with pid: 36377
+2023-04-26 12:47:18,736 INFO    MainThread:35658 [wandb_init.py:init():558] backend started and connected
+2023-04-26 12:47:18,756 INFO    MainThread:35658 [wandb_init.py:init():634] updated telemetry
+2023-04-26 12:47:18,978 INFO    MainThread:35658 [wandb_init.py:init():665] communicating run to backend with 30 second timeout
+2023-04-26 12:47:29,848 INFO    MainThread:35658 [wandb_run.py:_on_init():1919] communicating current version
+2023-04-26 12:47:30,008 INFO    MainThread:35658 [wandb_run.py:_on_init():1923] got version response upgrade_message: "wandb version 0.15.0 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2023-04-26 12:47:30,008 INFO    MainThread:35658 [wandb_init.py:init():700] starting run threads in backend
+2023-04-26 12:47:35,028 INFO    MainThread:35658 [wandb_run.py:_console_start():1893] atexit reg
+2023-04-26 12:47:35,030 INFO    MainThread:35658 [wandb_run.py:_redirect():1766] redirect: SettingsConsole.REDIRECT
+2023-04-26 12:47:35,031 INFO    MainThread:35658 [wandb_run.py:_redirect():1771] Redirecting console.
+2023-04-26 12:47:35,038 INFO    MainThread:35658 [wandb_run.py:_redirect():1827] Redirects installed.
+2023-04-26 12:47:35,039 INFO    MainThread:35658 [wandb_init.py:init():732] run started, returning control to user process
