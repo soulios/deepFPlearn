@@ -81,6 +81,22 @@ The parameters of interpretgnn.json include:
 * min_atoms: min # of atoms respectively
 * visualise_smiles: whether or not visualise rationale (substructures) if found responsible for toxicity (rationale_score > 0.5)
 
+## Interpretfnn
+
+```
+python -m dfpl interpretgnn -f example/interpretgnn.json
+```
+
+The parameters of interpretgnn.json include:
+
+* py/object: dfpl.options.Options object with other important, lower-level parameters.
+* data_path: path to the dataset.
+* predict_path: path to the file with the model's predictions.
+* drop_values: whether to include positions in ECFPs which do not contrubute to the predictions for the sake of reducing computational time.
+* threshold: if drop_values, set the minimal number (== sum of 1's) for a ECFP position as an inclusion criterion.
+* save_values: whether to dump Shapley values to a file in output_dir
+
+
 
 ## Convert
 
