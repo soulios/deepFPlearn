@@ -62,7 +62,7 @@ python -m dfpl predictgnn -f example/predictgnn.json
 ```
 The compounds are predicted with the graph neural network model and results are returned as a float number between 0 and 1.
 
-## Interpretdmpnn
+## Interpretgnn
 Given a trained model, the interpretation mode can be used to explain the model's prediction by attributing to them responsible substructures and generating toxicity score (for more details, see Chemprop's documentation on "predicting"):
 ```
 python -m dfpl interpretgnn -f example/interpretgnn.json
