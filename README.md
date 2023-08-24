@@ -62,6 +62,26 @@ python -m dfpl predictgnn -f example/predictgnn.json
 ```
 The compounds are predicted with the graph neural network model and results are returned as a float number between 0 and 1.
 
+## Interpretdmpnn
+Given a trained model, the interpretation mode can be used to explain the model's prediction by attributing to them responsible substructures and generating toxicity score (for more details, see Chemprop's documentation on "predicting"):
+```
+python -m dfpl interpretgnn -f example/interpretgnn.json
+```
+Returns a table of 3 columns: "smiles", target, "rationale", and "rationale_score". These respectively are: molecule, target receptor, substructure (explanation of the toxicity), and the toxicity score based on MTCS. Explained bein one property (target) at a time. It can be changed in "property_id" in interpretgnn.json file.
+
+To tune interpretation complexity, max and min number of atoms included in "rationale" can be set. I can be done by adjusting "max_atoms" and "min_atoms" parameters in interpretgnn.json file respectively.
+
+The parameters of interpretgnn.json include:
+
+* py/object: dfpl.options.GnnOptions object with other important, lower-level parameters.
+* data_path: path to the dataset.
+* output_dir: path to a directory where the results will be saved into.
+* checkpoint_dir: path to the dir where trained model's stored
+* max_atoms: max # of atoms rationale (substructure that may be responsible for toxicity) can include
+* min_atoms: min # of atoms respectively
+* visualise_smiles: whether or not visualise rationale (substructures) if found responsible for toxicity (rationale_score > 0.5)
+
+
 ## Convert
 
 The convert mode is used to convert .csv or .tsv files into .pkl files for easy access in Python and to reduce memory on disk. The .pkl files then already contain the binary
