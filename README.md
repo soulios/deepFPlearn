@@ -84,7 +84,7 @@ The parameters of interpretgnn.json include:
 ## Interpretfnn
 
 ```
-python -m dfpl interpretgnn -f example/interpretgnn.json
+python -m dfpl interpretfnn -f example/interpretfnn.json
 ```
 
 The parameters of interpretgnn.json include:
