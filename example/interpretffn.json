@@ -1,6 +1,6 @@
 {
   "py/object": "dfpl.options.Options",
-  "data_path": "/home/zadubrov/data/S_dataset-ED.csv",
+  "data_path": "tests/data/S_dataset.csv",
   "output_dir": "example/results_interpret/interpretffn/",
   "predict_path": "example/results_predict/predict_data_B-AR.csv",
   "drop_values": false,

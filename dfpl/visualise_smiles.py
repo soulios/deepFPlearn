@@ -1,7 +1,6 @@
 from os.path import join
 from pathlib import Path
 
-import rdkit
 import rdkit.Chem as Chem
 from matplotlib import colors
 from rdkit.Chem import rdFMCS
@@ -18,7 +17,6 @@ def get_mol(smiles):
 
 def find_matches_one(mol, submol):
     # find all matching atoms for each submol in submol_list in mol.
-    match_dict = {}
     mols = [mol, submol]  # pairwise search
     res = rdFMCS.FindMCS(mols)  # ringMatchesRingOnly=True)
     mcsp = Chem.MolFromSmarts(res.smartsString)

@@ -1,6 +1,6 @@
 {
   "py/object": "dfpl.options.GnnOptions",
-  "data_path": "/home/zadubrov/data/S_dataset.csv",
+  "data_path": "tests/data/S_dataset.csv",
   "output_dir": "example/results_interpret/interpretgnn",
   "checkpoint_dir": "dmpnn/",
   "max_atoms": 20,
