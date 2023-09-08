@@ -1,60 +1,53 @@
-import array
+from typing import List
 
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import wandb
 from matplotlib.axes import Axes
 
 # for NN model functions
 from tensorflow.keras.callbacks import History
 
-import wandb
-
-# for testing in Weights & Biases
-
 
 def get_max_validation_accuracy(history: History) -> str:
     validation = smooth_curve(history.history["val_accuracy"])
-    y_max = max(validation)
+    y_max: float = max(validation)
     return "Max validation accuracy ≈ " + str(round(y_max, 3) * 100) + "%"
 
 
-def get_max_training_balanced_accuracy(history: History) -> str:
-    precision = smooth_curve(history.history["precision"])
-    recall = smooth_curve(history.history["recall"])
-    training_balanced_accuracy = (precision + recall) / 2
-    y_max = max(training_balanced_accuracy)
-    return "Validation balanced accuracy ≈ " + str(round(y_max, 3) * 100) + "%"
-
-
 def get_max_validation_balanced_accuracy(history: History) -> str:
-    validation_precision = smooth_curve(history.history["val_precision"])
-    validation_recall = smooth_curve(history.history["val_recall"])
-    val_balanced_accuracy = (validation_precision + validation_recall) / 2
-    y_max = max(val_balanced_accuracy)
-    return "Validation balanced accuracy ≈ " + str(round(y_max, 3) * 100) + "%"
+    validation_bal_acc = smooth_curve(history.history["val_balanced_accuracy"])
+    y_max: float = max(validation_bal_acc)
+    return "Max validation balanced accuracy ≈ " + str(round(y_max, 3) * 100) + "%"
+
+
+def get_max_training_balanced_accuracy(history: History) -> str:
+    training_bal_acc = smooth_curve(history.history["balanced_accuracy"])
+    y_max: float = max(training_bal_acc)
+    return "Training balanced accuracy ≈ " + str(round(y_max, 3) * 100) + "%"
 
 
 def get_max_training_auc(history: History) -> str:
     training_auc = smooth_curve(history.history["auc"])
-    y_max = max(training_auc)
+    y_max: float = max(training_auc)
     return "Validation AUC ≈ " + str(round(y_max, 3) * 100) + "%"
 
 
 def get_max_validation_auc(history: History) -> str:
     validation_auc = smooth_curve(history.history["val_auc"])
-    y_max = max(validation_auc)
+    y_max: float = max(validation_auc)
     return "Validation AUC ≈ " + str(round(y_max, 3) * 100) + "%"
 
 
 def get_max_training_accuracy(history: History) -> str:
     training = smooth_curve(history.history["accuracy"])
-    y_max = max(training)
+    y_max: float = max(training)
     return "Max training accuracy ≈ " + str(round(y_max, 3) * 100) + "%"
 
 
-def smooth_curve(points: array, factor: float = 0.75) -> array:
-    smoothed_points = []
+def smooth_curve(points: np.ndarray, factor: float = 0.75) -> np.ndarray:
+    smoothed_points: List[float] = []
     for point in points:
         if smoothed_points:
             previous = smoothed_points[-1]
@@ -115,7 +108,7 @@ def plot_history(history: History, file: str) -> None:
     plt.text(
         0.5,
         0.6,
-        get_max_validation_accuracy(history),
+        get_max_validation_balanced_accuracy(history),
         horizontalalignment="right",
         verticalalignment="top",
         transform=ax1.transAxes,
@@ -124,7 +117,7 @@ def plot_history(history: History, file: str) -> None:
     plt.text(
         0.5,
         0.8,
-        get_max_training_accuracy(history),
+        get_max_training_balanced_accuracy(history),
         horizontalalignment="right",
         verticalalignment="top",
         transform=ax1.transAxes,
@@ -222,17 +215,9 @@ def plot_auc(
     :rtype: None
     """
     # Create a boolean mask to filter out zero values
-    nonzero_mask = fpr != 0.0
-
-    # Filter out zero values from fpr and tpr using the mask
-    fpr_filtered = fpr[nonzero_mask]
-    tpr_filtered = tpr[nonzero_mask]
-
     plt.figure()
     plt.plot([0, 1], [0, 1], "k--")
-    plt.plot(
-        fpr_filtered, tpr_filtered, label="Keras (area = {:.3f})".format(auc_value)
-    )
+    plt.plot(fpr, tpr, label=f"Keras (area = {auc_value:.3f})")
     plt.xlabel("False positive rate")
     plt.ylabel("True positive rate")
     plt.title("ROC curve " + target)

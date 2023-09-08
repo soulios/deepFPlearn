@@ -2,7 +2,6 @@ import json
 import logging
 import os
 import pathlib
-import random
 import warnings
 from collections import defaultdict
 from random import Random
@@ -10,10 +9,9 @@ from typing import Dict, List, Set, Tuple, Union
 
 import numpy as np
 import pandas as pd
-from matplotlib import pyplot as plt
 from rdkit import Chem, RDLogger
+from rdkit.Chem import rdMolDescriptors
 from rdkit.Chem.Scaffolds import MurckoScaffold
-from sklearn.model_selection import KFold
 from tqdm import tqdm
 
 RDLogger.DisableLog("rdApp.*")
@@ -33,40 +31,18 @@ def createDirectory(directory: str):
         os.makedirs(path)
 
 
-# def makePlots(save_path: str, training_auc: list, training_loss: list, validation_auc: list, validation_loss: list):
-#
-#     all_data = [training_auc, training_loss, validation_auc, validation_loss]
-#     zipped = list(zip(training_loss, validation_loss,
-#                   training_auc, validation_auc))
-#
-#     metricsdf = pd.DataFrame(
-#         zipped, columns=['LOSS', 'VAL_LOSS', 'AUC', 'VAL_AUC'])
-#     metricsdf.to_csv(f"{save_path}/metrics.csv")
-#
-#     metricsdf.plot(title='Model performance')
-#     plt.savefig(f"{save_path}/plot.png", format='png')
-#
-#     lossesdf = pd.DataFrame(
-#         list(zip(training_loss, validation_loss)), columns=['LOSS', 'VAL_LOSS'])
-#     lossesdf.plot(title='Loss')
-#     plt.savefig(f"{save_path}/loss.png", format='png')
-#
-#     aucdf = pd.DataFrame(
-#         list(zip(training_auc, validation_auc)), columns=['AUC', 'VAL_AUC'])
-#     aucdf.plot(title='AUC')
-#     plt.savefig(f"{save_path}/auc.png", format='png')
-
-
 def createArgsFromJson(in_json: str, ignore_elements: list, return_json_object: bool):
     arguments = []
     with open(in_json, "r") as f:
         data = json.load(f)
-    for i, j in data.items():
-        if str(i) not in ignore_elements:
-            i = "--" + str(i)
-            j = str(j)
-            arguments.append(i)
-            arguments.append(j)
+    for key, value in data.items():
+        if key not in ignore_elements:
+            if key == "extra_metrics" and isinstance(value, list):
+                arguments.append("--extra_metrics")
+                arguments.extend(value)
+            else:
+                arguments.append("--" + str(key))
+                arguments.append(str(value))
     if return_json_object:
         return arguments, data
     return arguments
@@ -77,7 +53,8 @@ def make_mol(s: str, keep_h: bool, add_h: bool, keep_atom_map: bool):
     Builds an RDKit molecule from a SMILES string.
 
     :param s: SMILES string.
-    :param keep_h: Boolean whether to keep hydrogens in the input smiles. This does not add hydrogens, it only keeps them if they are specified.
+    :param keep_h: Boolean whether to keep hydrogens in the input smiles. This does not add hydrogens, it only keeps the
+    m if they are specified.
     :param add_h: Boolean whether to add hydrogens to the input smiles.
     :param keep_atom_map: Boolean whether to keep the original atom mapping.
     :return: RDKit molecule.
@@ -100,8 +77,7 @@ def make_mol(s: str, keep_h: bool, add_h: bool, keep_atom_map: bool):
 
 
 def generate_scaffold(
-    mol: Union[str, Chem.Mol, Tuple[Chem.Mol, Chem.Mol]],
-    include_chirality: bool = False,
+    mol: Union[str, Chem.Mol, Tuple[Chem.Mol, Chem.Mol]], include_chirality: bool = True
 ) -> str:
     """
     Computes the Bemis-Murcko scaffold for a SMILES string, an RDKit molecule, or an InChI string or InChIKey.
@@ -120,24 +96,8 @@ def generate_scaffold(
     scaffold = MurckoScaffold.MurckoScaffoldSmiles(
         mol=mol, includeChirality=include_chirality
     )
+
     return scaffold
-
-
-# def generate_scaffold(mol: Union[str, Chem.Mol, Tuple[Chem.Mol, Chem.Mol]], include_chirality: bool = False) -> str:
-#     """
-#     Computes the Bemis-Murcko scaffold for a SMILES string.
-#
-#     :param mol: A SMILES or an RDKit molecule.
-#     :param include_chirality: Whether to include chirality in the computed scaffold..
-#     :return: The Bemis-Murcko scaffold for the molecule.
-#     """
-#     if isinstance(mol, str):
-#         mol = make_mol(mol, keep_h=False, add_h=False, keep_atom_map=False)
-#     if isinstance(mol, tuple):
-#         mol = mol[0]
-#     scaffold = MurckoScaffold.MurckoScaffoldSmiles(
-#         mol=mol, includeChirality=include_chirality)
-#     return scaffold
 
 
 def scaffold_to_smiles(
@@ -151,21 +111,82 @@ def scaffold_to_smiles(
     :return: A dictionary mapping each unique scaffold to all SMILES (or indices) which have that scaffold.
     """
     scaffolds = defaultdict(set)
-    for i, smiles in tqdm(enumerate(mols), total=len(mols)):
-        scaffold = generate_scaffold(smiles)
+    for i, mol in tqdm(enumerate(mols), total=len(mols)):
+        scaffold = generate_scaffold(mol)
         if use_indices:
             scaffolds[scaffold].add(i)
         else:
-            scaffolds[scaffold].add(smiles)
+            scaffolds[scaffold].add(mol)
 
     return scaffolds
 
 
+# def inchi_to_mol(inchi: str) -> Chem.Mol:
+#     return Chem.inchi.MolFromInchi(inchi)
+def smiles_to_mol(smiles: str) -> Chem.Mol:
+    mol = Chem.MolFromSmiles(smiles)
+    if mol is None:
+        return None
+        # raise ValueError(f"Could not convert SMILES to Mol: {smiles}")
+    return mol
+
+
 def inchi_to_mol(inchi: str) -> Chem.Mol:
-    return Chem.inchi.MolFromInchi(inchi)
+    mol = Chem.MolFromInchi(inchi)
+    if mol is None:
+        return None
+        # raise ValueError(f"Could not convert InChI to Mol: {inchi}")
+    return mol
 
 
-def scaffold_split(
+def weight_split(
+    data: pd.DataFrame, bias: str, sizes: Tuple[float, float, float] = (0.8, 0, 0.2)
+) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    if not (len(sizes) == 3 and np.isclose(sum(sizes), 1)):
+        raise ValueError(f"Invalid train/val/test splits! got: {sizes}")
+    # initial_indices = data.index.to_numpy()
+    train_size, val_size, _ = (
+        sizes[0] * len(data),
+        sizes[1] * len(data),
+        sizes[2] * len(data),
+    )
+    if "inchi" in [x.lower() for x in data.columns]:
+        data["mol"] = data["inchi"].apply(inchi_to_mol)
+    elif "smiles" in [x.lower() for x in data.columns]:
+        data["mol"] = data["smiles"].apply(smiles_to_mol)
+    else:
+        logging.info("Dataframe does not have a SMILES or InChi column")
+    none_mols = data["mol"].isnull().sum()
+    logging.info(f"There are {none_mols} chemicals with no mol objects ")
+    data.dropna(subset=["mol"], inplace=True)
+    data["mol_weight"] = data.apply(
+        lambda row: rdMolDescriptors.CalcExactMolWt(row["mol"])
+        if row["mol"] is not None
+        else None,
+        axis=1,
+    )
+    # data = data.drop(columns=['mol','fp','inchi','toxid','key'], axis=1)
+    sorted_data = data.copy()
+    if bias == "big":
+        sorted_data = data.sort_values(by="mol_weight", ascending=False)
+    elif bias == "small":
+        sorted_data = data.sort_values(by="mol_weight", ascending=True)
+    else:
+        print("Wrong bias, choose small or big")
+    indices = np.arange(len(sorted_data))
+    train_end_idx = int(train_size)
+    val_end_idx = int(train_size + val_size)
+    train_indices = indices[:train_end_idx]
+    val_indices = indices[train_end_idx:val_end_idx]
+    test_indices = indices[val_end_idx:]
+    train_df = sorted_data.iloc[train_indices].reset_index(drop=True)
+    val_df = sorted_data.iloc[val_indices].reset_index(drop=True)
+    test_df = sorted_data.iloc[test_indices].reset_index(drop=True)
+
+    return train_df, val_df, test_df
+
+
+def ae_scaffold_split(
     data: pd.DataFrame,
     sizes: Tuple[float, float, float] = (0.8, 0, 0.2),
     balanced: bool = False,
@@ -190,7 +211,9 @@ def scaffold_split(
         sizes[1] * len(data),
         sizes[2] * len(data),
     )
-    train, val, test = [], [], []
+    train: List[int] = []
+    val: List[int] = []
+    test: List[int] = []
     train_scaffold_count, val_scaffold_count, test_scaffold_count = 0, 0, 0
 
     # Map from scaffold to index in the data
@@ -200,6 +223,10 @@ def scaffold_split(
             (i for i, colname in enumerate(data.columns) if "inchi" in colname.lower()),
             None,
         )
+        if key_molecule_index is None:
+            warnings.warn(
+                "No column with 'inchi' found in the DataFrame. Proceeding with caution."
+            )
         key_mols = data.iloc[:, key_molecule_index].apply(inchi_to_mol).dropna()
     else:
         key_mols = data.iloc[:, key_molecule_index]

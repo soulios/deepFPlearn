@@ -7,7 +7,6 @@
   "ecWeightsFile": "",
   "fnnModelDir": "example/models/AR_saved_model",
   "compressFeatures": true,
-  "useRBM": false,
   "trainAC": true,
   "trainFNN": true
 }

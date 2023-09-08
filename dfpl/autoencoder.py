@@ -2,30 +2,26 @@ import logging
 import math
 import os.path
 from os.path import basename
+from typing import Tuple
 
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import tensorflow.keras.metrics as metrics
-from sklearn.cluster import KMeans
-from sklearn.manifold import TSNE
-from sklearn.metrics import silhouette_score
+import seaborn as sns
+import umap
+import wandb
 from sklearn.model_selection import train_test_split
 from tensorflow.keras import initializers, losses, optimizers
 from tensorflow.keras.layers import Dense, Input
 from tensorflow.keras.models import Model
-from tensorflow.keras.optimizers import Adam
-from umap import UMAP
-from wandb.keras import WandbCallback
 
-import wandb
 from dfpl import callbacks
 from dfpl import history as ht
 from dfpl import options, settings
-from dfpl.utils import *
+from dfpl.utils import ae_scaffold_split, weight_split
 
 
-def define_ac_model(opts: options.Options, output_bias=None) -> (Model, Model):
+def define_ac_model(opts: options.Options, output_bias=None) -> Tuple[Model, Model]:
     """
     This function provides an autoencoder model to reduce a certain input to a compressed version.
 
@@ -66,7 +62,6 @@ def define_ac_model(opts: options.Options, output_bias=None) -> (Model, Model):
         # encoding layers, incl. bottle-neck
         for i in range(1, hidden_layer_count):
             factor_units = 2 ** (i + 1)
-            # print(f'{factor_units}: {int(input_size / factor_units)}')
             if opts.aeActivationFunction != "selu":
                 encoded = Dense(
                     units=int(input_size / factor_units),
@@ -96,7 +91,6 @@ def define_ac_model(opts: options.Options, output_bias=None) -> (Model, Model):
         # decoding layers
         for i in range(hidden_layer_count - 2, 0, -1):
             factor_units = 2**i
-            # print(f'{factor_units}: {int(input_size/factor_units)}')
             if opts.aeActivationFunction != "selu":
                 decoded = Dense(
                     units=int(input_size / factor_units),
@@ -110,7 +104,6 @@ def define_ac_model(opts: options.Options, output_bias=None) -> (Model, Model):
                 )(decoded)
 
         # output layer
-        # The output layer needs to predict the probability of an output which needs
         # to either 0 or 1 and hence we use sigmoid activation function.
         decoded = Dense(
             units=input_size, activation="sigmoid", bias_initializer=output_bias
@@ -129,7 +122,11 @@ def define_ac_model(opts: options.Options, output_bias=None) -> (Model, Model):
     autoencoder.compile(
         optimizer=ac_optimizer,
         loss=losses.BinaryCrossentropy(),
-        metrics=[metrics.AUC(), metrics.Precision(), metrics.Recall()],
+        # metrics=[
+        #     metrics.AUC(),
+        #     metrics.Precision(),
+        #     metrics.Recall()
+        # ]
     )
     return autoencoder, encoder
 
@@ -146,7 +143,7 @@ def train_full_ac(df: pd.DataFrame, opts: options.Options) -> Model:
 
     # If wandb tracking is enabled for autoencoder weights but not for the main program, initialize a new wandb run
     if opts.aeWabTracking and not opts.wabTracking:
-        wandb.init(project=f"AE_{opts.aeSplitType}", config=opts)
+        wandb.init(project=f"AE_{opts.aeSplitType}")
 
     # Define output files for autoencoder and encoder weights
     if opts.ecWeightsFile == "":
@@ -161,9 +158,9 @@ def train_full_ac(df: pd.DataFrame, opts: options.Options) -> Model:
         ac_weights_file = os.path.join(
             opts.outputDir, base_file_name + ".autoencoder.weights.hdf5"
         )
-        ec_weights_file = os.path.join(
-            opts.outputDir, base_file_name + ".encoder.weights.hdf5"
-        )
+        # ec_weights_file = os.path.join(
+        #     opts.outputDir, base_file_name + ".encoder.weights.hdf5"
+        # )
     else:
         # If an encoder weights file is specified, use it as the encoder weights file name
         logging.info(f"AE encoder will be saved in {opts.ecWeightsFile}")
@@ -173,7 +170,7 @@ def train_full_ac(df: pd.DataFrame, opts: options.Options) -> Model:
         ac_weights_file = os.path.join(
             opts.outputDir, base_file_name + ".autoencoder.weights.hdf5"
         )
-        ec_weights_file = os.path.join(opts.outputDir, opts.ecWeightsFile)
+        # ec_weights_file = os.path.join(opts.outputDir, opts.ecWeightsFile)
 
     # Collect the callbacks for training
     callback_list = callbacks.autoencoder_callback(
@@ -194,32 +191,30 @@ def train_full_ac(df: pd.DataFrame, opts: options.Options) -> Model:
     assert 0.0 <= opts.testSize <= 0.5
     if opts.aeSplitType == "random":
         logging.info("Training autoencoder using random split")
+        initial_indices = np.arange(fp_matrix.shape[0])
         if opts.testSize > 0.0:
             # Split data into test and training data
             if opts.aeWabTracking:
-                x_train, x_test = train_test_split(
-                    fp_matrix, test_size=opts.testSize, random_state=42
+                x_train, x_test, train_indices, test_indices = train_test_split(
+                    fp_matrix, initial_indices, test_size=opts.testSize, random_state=42
                 )
             else:
-                x_train, x_test = train_test_split(fp_matrix, test_size=opts.testSize)
+                x_train, x_test, train_indices, test_indices = train_test_split(
+                    fp_matrix, initial_indices, test_size=opts.testSize, random_state=42
+                )
         else:
             x_train = fp_matrix
             x_test = None
-    # Split the data into train and test sets using scaffold split
     elif opts.aeSplitType == "scaffold_balanced":
         logging.info("Training autoencoder using scaffold split")
+        train_indices = np.arange(fp_matrix.shape[0])
         if opts.testSize > 0.0:
-            if opts.aeWabTracking:
-                train_data, val_data, test_data = scaffold_split(
-                    df,
-                    sizes=(1 - opts.testSize, 0.0, opts.testSize),
-                    balanced=True,
-                    seed=42,
-                )
-            else:
-                train_data, val_data, test_data = scaffold_split(
-                    df, sizes=(1 - opts.testSize, 0.0, opts.testSize), balanced=True
-                )
+            train_data, val_data, test_data = ae_scaffold_split(
+                df,
+                sizes=(1 - opts.testSize, 0.0, opts.testSize),
+                balanced=True,
+                seed=42,
+            )
             x_train = np.array(
                 train_data[train_data["fp"].notnull()]["fp"].to_list(),
                 dtype=settings.ac_fp_numpy_type,
@@ -230,12 +225,43 @@ def train_full_ac(df: pd.DataFrame, opts: options.Options) -> Model:
                 dtype=settings.ac_fp_numpy_type,
                 copy=settings.numpy_copy_values,
             )
-            x_val = None
+            train_indices = df[
+                df.index.isin(train_data[train_data["fp"].notnull()].index)
+            ].index.to_numpy()
+            test_indices = df[
+                df.index.isin(test_data[test_data["fp"].notnull()].index)
+            ].index.to_numpy()
         else:
-            x_test = None
-            x_val = None
             x_train = fp_matrix
+            x_test = None
+    elif opts.aeSplitType == "molecular_weight":
+        logging.info("Training autoencoder using molecular weight split")
+        train_indices = np.arange(fp_matrix.shape[0])
+        if opts.testSize > 0.0:
+            train_data, val_data, test_data = weight_split(
+                df, sizes=(1 - opts.testSize, 0.0, opts.testSize), bias="small"
+            )
+            x_train = np.array(
+                train_data[train_data["fp"].notnull()]["fp"].to_list(),
+                dtype=settings.ac_fp_numpy_type,
+                copy=settings.numpy_copy_values,
+            )
+            x_test = np.array(
+                test_data[test_data["fp"].notnull()]["fp"].to_list(),
+                dtype=settings.ac_fp_numpy_type,
+                copy=settings.numpy_copy_values,
+            )
+            df_sorted = df.sort_values(by="mol_weight", ascending=True)
+            # Get the sorted indices from the sorted DataFrame
+            sorted_indices = df_sorted.index.to_numpy()
 
+            # Find the corresponding indices for train_data, val_data, and test_data in the sorted DataFrame
+            train_indices = sorted_indices[df.index.isin(train_data.index)]
+            # val_indices = sorted_indices[df.index.isin(val_data.index)]
+            test_indices = sorted_indices[df.index.isin(test_data.index)]
+        else:
+            x_train = fp_matrix
+            x_test = None
     else:
         raise ValueError(f"Invalid split type: {opts.split_type}")
 
@@ -273,22 +299,6 @@ def train_full_ac(df: pd.DataFrame, opts: options.Options) -> Model:
     )
     logging.info(f"Autoencoder weights stored in file: {ac_weights_file}")
 
-    # Log the autoencoder training metrics to W&B if enabled
-    if opts.aeWabTracking and not opts.wabTracking:
-        wandb.log(
-            {
-                "AE_loss": auto_hist.history["loss"][-1],
-                "AE_val_loss": auto_hist.history["val_loss"][-1],
-                "AE_auc": auto_hist.history["auc"][-1],
-                "AE_val_auc": auto_hist.history["val_auc"][-1],
-                "AE_precision": auto_hist.history["precision"][-1],
-                "AE_val_precision": auto_hist.history["val_precision"][-1],
-                "AE_recall": auto_hist.history["recall"][-1],
-                "AE_val_recall": auto_hist.history["val_recall"][-1],
-                "num_epochs": len(auto_hist.history["loss"]),
-            }
-        )
-
     # Store the autoencoder training history and plot the metrics
     ht.store_and_plot_history(
         base_file_name=os.path.join(opts.outputDir, base_file_name + ".AC"),
@@ -296,15 +306,14 @@ def train_full_ac(df: pd.DataFrame, opts: options.Options) -> Model:
     )
 
     # Save the autoencoder callback model to disk
-    save_path = os.path.join(opts.ecModelDir, f"{opts.aeSplitType}_autoencoder.h5")
+    save_path = os.path.join(opts.ecModelDir, f"{opts.aeSplitType}_autoencoder")
     if opts.testSize > 0.0:
         (callback_autoencoder, callback_encoder) = define_ac_model(opts)
         callback_encoder.save(filepath=save_path)
     else:
         encoder.save(filepath=save_path)
-
     # Return the encoder model of the trained autoencoder
-    return encoder
+    return encoder, train_indices, test_indices
 
 
 def compress_fingerprints(dataframe: pd.DataFrame, encoder: Model) -> pd.DataFrame:
@@ -329,7 +338,6 @@ def compress_fingerprints(dataframe: pd.DataFrame, encoder: Model) -> pd.DataFra
     dataframe["fpcompressed"] = pd.DataFrame(
         {"fpcompressed": [s for s in encoder.predict(fp_matrix)]}, idx
     )
-
     return dataframe
 
 
@@ -337,92 +345,71 @@ def visualize_fingerprints(
     df: pd.DataFrame,
     before_col: str,
     after_col: str,
-    output_dir: str,
-    opts: options.Options,
+    train_indices: np.ndarray,
+    test_indices: np.ndarray,
+    save_as: str,
 ):
-    # Convert the boolean values in the before_col column to floats
-    df[before_col] = df[before_col].apply(lambda x: np.array(x, dtype=float))
+    # Calculate the number of samples to be taken from each set
+    num_samples = 1000
+    train_samples = int(num_samples * len(train_indices) / len(df))
+    test_samples = num_samples - train_samples
 
-    # Get the fingerprints before and after compression
-    before_fingerprints = np.array(df[before_col].to_list())
-    after_fingerprints = np.array(df[after_col].to_list())
+    # Assign train and test data points separately
+    train_data = df.loc[train_indices]
+    test_data = df.loc[test_indices]
 
-    # Create UMAP and t-SNE embeddings for the fingerprints before and after compression
-    before_umap_embedding = UMAP(
-        n_components=2, n_neighbors=10, min_dist=0.1, random_state=42
-    ).fit_transform(before_fingerprints)
-    after_umap_embedding = UMAP(
-        n_components=2, n_neighbors=10, min_dist=0.1, random_state=42
-    ).fit_transform(after_fingerprints)
-    # before_tsne_embedding = TSNE().fit_transform(before_fingerprints)
-    # after_tsne_embedding = TSNE().fit_transform(after_fingerprints)
+    # Sample train and test data points
+    train_data_sampled = train_data.sample(n=train_samples, random_state=42)
+    test_data_sampled = test_data.sample(n=test_samples, random_state=42)
 
-    # Apply the elbow method to find the best number of clusters for k-means
-    # wcss = []
-    # max_clusters = 10
-    # for k in range(1, max_clusters):
-    #     kmeans = KMeans(n_clusters=k)
-    #     kmeans.fit(before_umap_embedding)
-    #     wcss.append(kmeans.inertia_)
-    # plt.plot(range(1, max_clusters), wcss)
-    # plt.title('Elbow Method')
-    # plt.xlabel('Number of clusters')
-    # plt.ylabel('WCSS')
-    # plt.savefig(os.path.join(output_dir, f'wcss_plot_{opts.split_type}.png'))
-    # plt.show()
-    # 3 or 4 clusters seem like a good choice
+    # Concatenate the sampled train and test data
+    df_sampled = pd.concat([train_data_sampled, test_data_sampled])
 
-    # Use silhouette score to choose number of clusters
-    # max_clusters = 5
-    # before_umap_scores = []
-    # for n_clusters in range(2, max_clusters+1):
-    #     labels = KMeans(n_clusters=n_clusters, random_state=42).fit_predict(before_umap_embedding)
-    #     score = silhouette_score(before_umap_embedding, labels)
-    #     before_umap_scores.append(score)
-    # optimal_n_clusters = np.argmax(before_umap_scores) + 2
-    # print(f"Optimal number of clusters for before (UMAP) is {optimal_n_clusters}")
+    # Convert the boolean values in the after_col column to floats
+    df_sampled[after_col] = df_sampled[after_col].apply(
+        lambda x: np.array(x, dtype=float)
+    )
 
-    # Apply k-means clustering to the embeddings
-    n_clusters = (
-        4  # optimal_n_clusters= 3 based on silhouette score but 4 was previously used
+    df_sampled.loc[train_data_sampled.index, "set"] = "train"
+    df_sampled.loc[test_data_sampled.index, "set"] = "test"
+    # Apply UMAP
+    umap_model = umap.UMAP(
+        n_neighbors=15, min_dist=0.1, metric="euclidean", random_state=42
     )
-    before_umap_labels = KMeans(n_clusters=n_clusters, random_state=42).fit_predict(
-        before_umap_embedding
+    # Filter out the rows with invalid arrays
+    umap_results = umap_model.fit_transform(df_sampled[after_col].tolist())
+    # Add UMAP results to the DataFrame
+    df_sampled["umap_x"] = umap_results[:, 0]
+    df_sampled["umap_y"] = umap_results[:, 1]
+
+    # Define custom color palette
+    palette = {"train": "blue", "test": "red"}
+
+    # Create the scatter plot
+    sns.set(style="white")
+    fig, ax = plt.subplots(figsize=(10, 8))
+    split = save_as.split("_", 1)
+    part_after_underscore = split[1]
+    split_type = part_after_underscore.split(".")[0]
+    # Plot the UMAP results
+    for label, grp in df_sampled.groupby("set"):
+        set_label = label
+        color = palette[set_label]
+        alpha = (
+            0.09 if set_label == "train" else 0.9
+        )  # Set different opacities for train and test
+        ax.scatter(
+            grp["umap_x"], grp["umap_y"], label=f"{set_label}", c=color, alpha=alpha
+        )
+
+    # Customize the plot
+    ax.set_title(
+        f"UMAP visualization of molecular fingerprints using {split_type} split",
+        fontsize=14,
     )
-    after_umap_labels = KMeans(n_clusters=n_clusters, random_state=42).fit_predict(
-        after_umap_embedding
-    )
-    # before_tsne_labels = KMeans(n_clusters=n_clusters, random_state=42).fit_predict(before_tsne_embedding)
-    # after_tsne_labels = KMeans(n_clusters=n_clusters, random_state=42).fit_predict(after_tsne_embedding)
-    # Assign same colormap to all plots
-    cmap = plt.get_cmap("rainbow", n_clusters)
-    fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(12, 5))
-    fig.suptitle("Dimensionality reduction and clustering of fingerprints")
-    before_umap_scatter = axes[0].scatter(
-        before_umap_embedding[:, 0],
-        before_umap_embedding[:, 1],
-        c=before_umap_labels,
-        s=5,
-        cmap=cmap,
-    )
-    axes[0].set_title("Before compression (UMAP)")
-    after_umap_scatter = axes[1].scatter(
-        after_umap_embedding[:, 0],
-        after_umap_embedding[:, 1],
-        c=after_umap_labels,
-        s=5,
-        cmap=cmap,
-    )
-    axes[1].set_title("After compression (UMAP)")
-    # before_tsne_scatter = axes[1, 0].scatter(before_tsne_embedding[:, 0], before_tsne_embedding[:, 1], c=before_tsne_labels, s=5, cmap=cmap)
-    # axes[1, 0].set_title('Before compression (t-SNE)')
-    # after_tsne_scatter = axes[1, 1].scatter(after_tsne_embedding[:, 0], after_tsne_embedding[:, 1], c=after_tsne_labels, s=5, cmap=cmap)
-    # axes[1, 1].set_title('After compression (t-SNE)')
-    plt.subplots_adjust(wspace=0.2)
-    plt.tight_layout()
-    plt.savefig(
-        os.path.join(output_dir, f"fingerprints_{opts.split_type}.png"),
-        dpi=300,
-        bbox_inches="tight",
-    )
-    plt.close(fig)
+    ax.set_xlabel("UMAP 1")
+    ax.set_ylabel("UMAP 2")
+    ax.legend(title="", loc="upper right")
+    sns.despine(ax=ax, offset=10)
+    save_path = os.path.join(os.getcwd(), save_as)
+    plt.savefig(save_path)

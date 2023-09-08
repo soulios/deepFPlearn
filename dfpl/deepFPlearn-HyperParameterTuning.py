@@ -117,16 +117,12 @@ for target in dataset.columns[1:7]:
     clf_results.best_estimator_.model.save(filepath=modelfilepathM)
     clf_results.best_estimator_.model.save_weights(filepath=modelfilepathW)
 
-    ### find best performing parameters
+    # find best performing parameters
     file = open(outfilepath, "a")
     file.write(
         "# --------------------------------------------------------------------------- #\n"
     )
-    file.write("### Results for %s target ###\n" % target)
-    file.write(
-        "Best: %f using %s\n" % (clf_results.best_score_, clf_results.best_params_)
-    )
-    file.write(
-        "Calculation time: %s min\n\n" % str(round((time() - start) / 60, ndigits=2))
-    )
+    file.write(f"### Results for {target} target ###\n")
+    file.write(f"Best: {clf_results.best_score_} using {clf_results.best_params_}\n")
+    file.write(f"Calculation time: {round((time() - start) / 60, ndigits=2)} min\n\n")
     file.close()

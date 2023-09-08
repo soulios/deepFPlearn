@@ -1,10 +1,10 @@
-import array
 import logging
 import math
 import re
 import shutil
 import sys
 from time import time
+from typing import List, Union
 
 import numpy as np
 import pandas as pd
@@ -15,7 +15,6 @@ from tensorflow.keras.layers import Dense, Dropout
 
 # for NN model functions
 from tensorflow.keras.models import Model, Sequential
-from wandb.keras import WandbCallback
 
 from dfpl import callbacks as cb
 from dfpl import history as ht
@@ -181,12 +180,12 @@ def define_nn_model_multi(
 
 
 def validate_multi_model_on_test_data(
-    x_test: array,
+    x_test: np.ndarray,
     checkpoint_path: str,
-    y_test: array,
-    col_names: list,
+    y_test: np.ndarray,
+    col_names: List[str],
     result_file: str,
-) -> list:
+) -> List[Union[int, float, str]]:
     """
     Validate the multi label model on a test data set.
 
@@ -390,11 +389,7 @@ def train_nn_models_multi(df: pd.DataFrame, opts: options.Options) -> None:
         fold_no = all_scores.iloc[idx2]["fold_no"]
 
         model_name = (
-            "multi"
-            + "_compressed-"
-            + str(opts.compressFeatures)
-            + ".Fold-"
-            + str(fold_no)
+            "multi_compressed-" + str(opts.compressFeatures) + ".Fold-" + str(fold_no)
         )
         checkpoint_path = opts.outputDir + "/" + model_name + ".checkpoint.model.hdf5"
         best_model_file = checkpoint_path.replace(
