@@ -4,6 +4,9 @@ import os.path
 import pathlib
 from argparse import Namespace
 from os import path
+import tensorflow as tf
+import math
+from tensorflow import keras
 
 import chemprop as cp
 import pandas as pd
@@ -90,6 +93,8 @@ def predictdmpnn(opts: options.GnnOptions, json_arg_path: str) -> None:
         "checkpoint_paths",
         "save_dir",
         "saving_name",
+        "interpret",
+        "configInterpret",
     ]
     # Load options and additional arguments from a JSON file
     arguments, data = createArgsFromJson(
@@ -109,6 +114,58 @@ def predictdmpnn(opts: options.GnnOptions, json_arg_path: str) -> None:
         smiles.append(my_list)
     # Make predictions and return the result
     cp.train.make_predictions(args=opts, smiles=smiles)
+
+
+def interpretdmpnn(opts: options.GnnOptions, JSON_ARG_PATH) -> None:
+    """
+    Interpret the values using a trained D-MPNN model with the given options.
+    Args:
+    - opts: options.GnnOptions instance containing the details of the prediction
+    - JSON_ARG_PATH: path to a JSON file containing additional arguments for interpretation
+    Returns:
+    -
+    """
+    ignore_elements = ["py/object", "output_dir", "visualise_smiles"]
+    # Load options and additional arguments from a JSON file
+    arguments, data = createArgsFromJson(
+        JSON_ARG_PATH, ignore_elements, return_json_object=True
+    )
+    opts = cp.args.InterpretArgs().parse_args(arguments)
+    cp.interpret.interpret_to_file(
+        args=opts,
+        output_dir=data.get("output_dir"),
+        visualise_smiles=data.get("visualise_smiles"),
+    )
+
+
+def interpretffn(opts: options.Options, JSON_ARG_PATH) -> None:
+    """
+    Interpret the values using a trained FFN model with the given options.
+    Args:
+    - opts: options.Options instance containing the details of the prediction
+    - JSON_ARG_PATH: path to a JSON file containing additional arguments for interpretation
+    Returns:
+    -
+    """
+    ignore_elements = [
+        "py/object",
+        "output_dir",
+        "predict_path",
+        "drop_values",
+        "threshold",
+        "save_values",
+    ]
+    # Load options and additional arguments from a JSON file
+    arguments, data = createArgsFromJson(
+        JSON_ARG_PATH, ignore_elements, return_json_object=True
+    )
+    # opts = chemprop.args.InterpretArgs().parse_args(arguments)
+    # chemprop.interpret.interpret_to_file(args=opts, output_file=os.path.join(data.get("output_dir"), "interpret.csv"))
+
+    np.genfromtxt(path.join(data.get("output_dir"), "x_train.csv"))
+    np.genfromtxt(data.get("predict_path"))
+    model = tf.keras.model.load_model(path.join(data.get("output_dir"), "model.pickle"))
+    print(model)
 
 
 def train(opts: options.Options):

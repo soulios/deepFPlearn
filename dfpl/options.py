@@ -60,8 +60,12 @@ class Options:
     snnDepth = 8
     snnWidth = 50
     aeWabTracking: str = ""  # Wand & Biases autoencoder tracking
-    wabTracking: str = ""  # Wand & Biases FNN tracking
-    wabTarget: str = "ER"  # Wand & Biases target used for showing training progress
+    wabTracking: str = "True"  # Wand & Biases FNN tracking
+    wabTarget: str = ""  # Wand & Biases target used for showing training progress
+
+    shap_val: bool = False
+    configInterpretFfn: str = "./example/interpretffn.json"
+    predict_path: str = ""
 
     def saveToFile(self, file: str) -> None:
         """
@@ -133,6 +137,15 @@ class GnnOptions(TrainArgs):
     test_path: str = ""
     save_preds: bool = True
 
+    # Interpretation
+    interpret: bool = False
+    configInterpretGnn: str = "./example/interpretgnn.json"
+    max_atoms: int = 20
+    min_atoms: int = 8
+    property_id: int = 1
+
+    # Uncertainty Estimation
+
     @classmethod
     def fromCmdArgs(cls, args: argparse.Namespace) -> GnnOptions:
         """
@@ -185,6 +198,19 @@ def createCommandlineParser() -> argparse.ArgumentParser:
     )
     parser_predict_gnn.set_defaults(method="predictgnn")
     parsePredictGnn(parser_predict_gnn)
+
+    parser_interpret_gnn = subparsers.add_parser(
+        "interpretgnn", help="Explain the predictions of your GNN models"
+    )
+    parser_interpret_gnn.set_defaults(method="interpretgnn")
+    parseInterpretGnn(parser_interpret_gnn)
+
+    parser_interpret_ffn = subparsers.add_parser(
+        "interpretffn",
+        help="Explain the predictions of your FFN models with SHAPley values",
+    )
+    parser_interpret_ffn.set_defaults(method="interpretffn")
+    parseInterpretFfn(parser_interpret_ffn)
 
     parser_train = subparsers.add_parser(
         "train", help="Train new models with your data"
@@ -1274,6 +1300,229 @@ def parsePredictGnn(parser: argparse.ArgumentParser) -> None:
     )
     training_args.add_argument(
         "--batch_size", type=int, metavar="INT", default=50, help="Batch size"
+    )
+    general_args = parser.add_argument_group("General Configuration")
+    data_args = parser.add_argument_group("Data Configuration")
+    files_args = parser.add_argument_group("Files")
+    training_args = parser.add_argument_group("Training Configuration")
+    files_args.add_argument(
+        "-f",
+        "--configFile",
+        metavar="FILE",
+        type=str,
+        help="Input JSON file that contains all information for training/predicting.",
+        default=argparse.SUPPRESS,
+    )
+    general_args.add_argument(
+        "--gpu",
+        type=int,
+        metavar="INT",
+        choices=list(range(torch.cuda.device_count())),
+        help="Which GPU to use",
+    )
+    general_args.add_argument(
+        "--no_cuda", action="store_true", default=False, help="Turn off cuda"
+    )
+    general_args.add_argument(
+        "--num_workers",
+        type=int,
+        metavar="INT",
+        help="Number of workers for the parallel data loading 0 means sequential",
+    )
+    general_args.add_argument(
+        "--no_cache",
+        type=bool,
+        metavar="BOOL",
+        default=False,
+        help="Turn off caching mol2graph computation",
+    )
+    general_args.add_argument(
+        "--no_cache_mol",
+        type=bool,
+        metavar="BOOL",
+        default=False,
+        help="Whether to not cache the RDKit molecule for each SMILES string to reduce memory\
+                             usage cached by default",
+    )
+    general_args.add_argument(
+        "--empty_cache",
+        type=bool,
+        metavar="BOOL",
+        help="Whether to empty all caches before training or predicting. This is necessary if\
+                             multiple jobs are run within a single script and the atom or bond features change",
+    )
+    files_args.add_argument(
+        "--preds_path",
+        type=str,
+        metavar="FILE",
+        help="Path to CSV file where predictions will be saved",
+        default="",
+    )
+    files_args.add_argument(
+        "--checkpoint_dir",
+        type=str,
+        metavar="DIR",
+        help="Directory from which to load model checkpoints"
+        "(walks directory and ensembles all models that are found)",
+        default="./ckpt",
+    )
+    files_args.add_argument(
+        "--checkpoint_path",
+        type=str,
+        metavar="DIR",
+        help="Path to model checkpoint (.pt file)",
+    )
+    files_args.add_argument(
+        "--checkpoint_paths",
+        type=str,
+        metavar="FILE",
+        nargs="*",
+        help="Path to model checkpoint (.pt file)",
+    )
+    files_args.add_argument(
+        "--data_path",
+        type=str,
+        metavar="FILE",
+        help="Path to CSV file containing testing data for which predictions will be made",
+        default="",
+    )
+    files_args.add_argument(
+        "--test_path",
+        type=str,
+        metavar="FILE",
+        help="Path to CSV file containing testing data for which predictions will be made",
+        default="",
+    )
+    files_args.add_argument(
+        "--features_path",
+        type=str,
+        metavar="FILE",
+        nargs="*",
+        help="Path to features to use in FNN (instead of features_generator)",
+    )
+    files_args.add_argument(
+        "--atom_descriptors_path",
+        type=str,
+        metavar="FILE",
+        help="Path to the extra atom descriptors.",
+    )
+    data_args.add_argument(
+        "--use_compound_names",
+        action="store_true",
+        default=False,
+        help="Use when test data file contains compound names in addition to SMILES strings",
+    )
+    data_args.add_argument(
+        "--no_features_scaling",
+        action="store_true",
+        default=False,
+        help="Turn off scaling of features",
+    )
+    data_args.add_argument(
+        "--max_data_size",
+        type=int,
+        metavar="INT",
+        help="Maximum number of data points to load",
+    )
+    data_args.add_argument(
+        "--smiles_columns",
+        type=str,
+        metavar="STRING",
+        help="List of names of the columns containing SMILES strings.By default, uses the first\
+                             number_of_molecules columns.",
+    )
+    data_args.add_argument(
+        "--number_of_molecules",
+        type=int,
+        metavar="INT",
+        help="Number of molecules in each input to the model.This must equal the length of\
+                             smiles_columns if not None",
+    )
+
+    data_args.add_argument(
+        "--atom_descriptors",
+        type=bool,
+        metavar="Bool",
+        help="Use or not atom descriptors",
+    )
+
+    data_args.add_argument(
+        "--bond_features_size",
+        type=int,
+        metavar="INT",
+        help="Size of the extra bond descriptors that will be used as bond features to featurize a\
+                             given molecule",
+    )
+    training_args.add_argument(
+        "--batch_size", type=int, metavar="INT", default=50, help="Batch size"
+    )
+
+
+def parseInterpretGnn(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        "-f",
+        "--file",
+        metavar="FILE",
+        type=str,
+        help="Path to a json file containing interpretation parameters.",
+        default=argparse.SUPPRESS,
+    )
+    parser.add_argument("--batch_size", type=int, help="Batch size")
+    parser.add_argument(
+        "--property_id",
+        type=int,
+        help="Index of the property of interest in the trained model.",
+    )
+    parser.add_argument("--rollout", type=int, help="Number of rollout steps.")
+    parser.add_argument("--c_puct", type=int, help="Constant factor in MCTS.")
+    parser.add_argument(
+        "--max_atoms", type=int, help="Maximum number of atoms in rationale."
+    )
+    parser.add_argument(
+        "--min_atoms", type=int, help="Maximum number of atoms in rationale."
+    )
+    parser.add_argument(
+        "--prop_delta", type=int, help="Maximum number of atoms in rationale."
+    )
+    parser.add_argument(
+        "--visualise_smiles",
+        type=bool,
+        help="Visualise toxic substructures using RDkit. Images saved within output_dir",
+    )
+
+
+def parseInterpretFfn(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        "-f",
+        "--file",
+        metavar="FILE",
+        type=str,
+        help="Path to a json file containing interpretation parameters.",
+        default=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--data_path",
+        type=str,
+        help="Path to the data, model's predicitons on which shall be explained with SHAP",
+    )
+    parser.add_argument("--output_dir", type=str, help="Output directory.")
+    parser.add_argument(
+        "--predict_path",
+        type=str,
+        help="File with the model's predictions. See: predict.json",
+    )
+    parser.add_argument(
+        "--drop_values",
+        type=bool,
+        help="Include only those #postions in a ECFP, that have the total count of 1's >= threshold for the given training dataset.",
+    )
+    parser.add_argument(
+        "--threshold",
+        type=int,
+        help="For a given dataset, include only those #posiions from total 2048 of ECFPs, that have the count of 1's >= threshold over all training samples.",
+    )
+    parser.add_argument(
+        "--save_values", type=bool, help="Save SHAP values into a file."
     )
 
 

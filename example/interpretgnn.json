@@ -1,0 +1,10 @@
+{
+  "py/object": "dfpl.options.GnnOptions",
+  "data_path": "tests/data/S_dataset.csv",
+  "output_dir": "example/results_interpret/interpretgnn",
+  "checkpoint_dir": "dmpnn/",
+  "max_atoms": 20,
+  "min_atoms": 8,
+  "property_id": 1,
+  "visualise_smiles": true
+}
