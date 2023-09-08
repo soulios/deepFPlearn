@@ -1,22 +1,22 @@
-import pathlib
-import os
-from matplotlib import pyplot as plt
 import json
-import pandas as pd
-from sklearn.model_selection import KFold
-from collections import defaultdict
 import logging
+import os
+import pathlib
+import random
+import warnings
+from collections import defaultdict
 from random import Random
 from typing import Dict, List, Set, Tuple, Union
-import warnings
-import pandas as pd
-from rdkit import Chem
-from rdkit.Chem.Scaffolds import MurckoScaffold
-from tqdm import tqdm
+
 import numpy as np
-import random
-from rdkit import RDLogger
-RDLogger.DisableLog('rdApp.*')
+import pandas as pd
+from matplotlib import pyplot as plt
+from rdkit import Chem, RDLogger
+from rdkit.Chem.Scaffolds import MurckoScaffold
+from sklearn.model_selection import KFold
+from tqdm import tqdm
+
+RDLogger.DisableLog("rdApp.*")
 
 
 def makePathAbsolute(p: str) -> str:
@@ -59,7 +59,7 @@ def createDirectory(directory: str):
 
 def createArgsFromJson(in_json: str, ignore_elements: list, return_json_object: bool):
     arguments = []
-    with open(in_json, 'r') as f:
+    with open(in_json, "r") as f:
         data = json.load(f)
     for i, j in data.items():
         if str(i) not in ignore_elements:
@@ -90,8 +90,7 @@ def make_mol(s: str, keep_h: bool, add_h: bool, keep_atom_map: bool):
         mol = Chem.AddHs(mol)
 
     if keep_atom_map:
-        atom_map_numbers = tuple(atom.GetAtomMapNum()
-                                 for atom in mol.GetAtoms())
+        atom_map_numbers = tuple(atom.GetAtomMapNum() for atom in mol.GetAtoms())
         for idx, map_num in enumerate(atom_map_numbers):
             if idx + 1 != map_num:
                 new_order = np.argsort(atom_map_numbers).tolist()
@@ -99,7 +98,11 @@ def make_mol(s: str, keep_h: bool, add_h: bool, keep_atom_map: bool):
 
     return mol
 
-def generate_scaffold(mol: Union[str, Chem.Mol, Tuple[Chem.Mol, Chem.Mol]], include_chirality: bool = False) -> str:
+
+def generate_scaffold(
+    mol: Union[str, Chem.Mol, Tuple[Chem.Mol, Chem.Mol]],
+    include_chirality: bool = False,
+) -> str:
     """
     Computes the Bemis-Murcko scaffold for a SMILES string, an RDKit molecule, or an InChI string or InChIKey.
 
@@ -108,15 +111,18 @@ def generate_scaffold(mol: Union[str, Chem.Mol, Tuple[Chem.Mol, Chem.Mol]], incl
     :return: The Bemis-Murcko scaffold for the molecule.
     """
     if isinstance(mol, str):
-        if mol.startswith('InChI='):
+        if mol.startswith("InChI="):
             mol = inchi_to_mol(mol)
         else:
             mol = make_mol(mol, keep_h=False, add_h=False, keep_atom_map=False)
     elif isinstance(mol, tuple):
         mol = mol[0]
     scaffold = MurckoScaffold.MurckoScaffoldSmiles(
-        mol=mol, includeChirality=include_chirality)
+        mol=mol, includeChirality=include_chirality
+    )
     return scaffold
+
+
 # def generate_scaffold(mol: Union[str, Chem.Mol, Tuple[Chem.Mol, Chem.Mol]], include_chirality: bool = False) -> str:
 #     """
 #     Computes the Bemis-Murcko scaffold for a SMILES string.
@@ -134,7 +140,9 @@ def generate_scaffold(mol: Union[str, Chem.Mol, Tuple[Chem.Mol, Chem.Mol]], incl
 #     return scaffold
 
 
-def scaffold_to_smiles(mols: List[str], use_indices: bool = False) -> Dict[str, Union[Set[str], Set[int]]]:
+def scaffold_to_smiles(
+    mols: List[str], use_indices: bool = False
+) -> Dict[str, Union[Set[str], Set[int]]]:
     """
     Computes the scaffold for each SMILES and returns a mapping from scaffolds to sets of smiles (or indices).
     :param mols: A list of SMILES.
@@ -152,13 +160,18 @@ def scaffold_to_smiles(mols: List[str], use_indices: bool = False) -> Dict[str, 
 
     return scaffolds
 
+
 def inchi_to_mol(inchi: str) -> Chem.Mol:
     return Chem.inchi.MolFromInchi(inchi)
-def scaffold_split(data: pd.DataFrame,
-                   sizes: Tuple[float, float, float] = (0.8, 0, 0.2),
-                   balanced: bool = False,
-                   key_molecule_index: int = 0,
-                   seed: int = 0) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+
+
+def scaffold_split(
+    data: pd.DataFrame,
+    sizes: Tuple[float, float, float] = (0.8, 0, 0.2),
+    balanced: bool = False,
+    key_molecule_index: int = 0,
+    seed: int = 0,
+) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     """
     Splits a pandas DataFrame by scaffold so that no molecules sharing a scaffold are in different splits.
     :param data: A pandas DataFrame containing SMILES strings and molecule properties.
@@ -172,24 +185,31 @@ def scaffold_split(data: pd.DataFrame,
         raise ValueError(f"Invalid train/val/test splits! got: {sizes}")
 
     # Split
-    train_size, val_size, test_size = sizes[0] * \
-        len(data), sizes[1] * len(data), sizes[2] * len(data)
+    train_size, val_size, test_size = (
+        sizes[0] * len(data),
+        sizes[1] * len(data),
+        sizes[2] * len(data),
+    )
     train, val, test = [], [], []
     train_scaffold_count, val_scaffold_count, test_scaffold_count = 0, 0, 0
 
     # Map from scaffold to index in the data
     key_colnames = data.columns
-    if 'inchi' in key_colnames:
-        key_molecule_index = next((i for i, colname in enumerate(data.columns) if 'inchi' in colname.lower()), None)
+    if "inchi" in key_colnames:
+        key_molecule_index = next(
+            (i for i, colname in enumerate(data.columns) if "inchi" in colname.lower()),
+            None,
+        )
         key_mols = data.iloc[:, key_molecule_index].apply(inchi_to_mol).dropna()
     else:
         key_mols = data.iloc[:, key_molecule_index]
-    scaffold_to_indices = scaffold_to_smiles(
-        key_mols.tolist(), use_indices=True)
+    scaffold_to_indices = scaffold_to_smiles(key_mols.tolist(), use_indices=True)
     # Seed randomness
     random = Random(seed)
 
-    if balanced:  # Put stuff that's bigger than half the val/test size into train, rest just order randomly
+    if (
+        balanced
+    ):  # Put stuff that's bigger than half the val/test size into train, rest just order randomly
         index_sets = list(scaffold_to_indices.values())
         big_index_sets = []
         small_index_sets = []
@@ -203,9 +223,11 @@ def scaffold_split(data: pd.DataFrame,
         random.shuffle(small_index_sets)
         index_sets = big_index_sets + small_index_sets
     else:  # Sort from largest to smallest scaffold sets
-        index_sets = sorted(list(scaffold_to_indices.values()),
-                            key=lambda index_set: len(index_set),
-                            reverse=True)
+        index_sets = sorted(
+            list(scaffold_to_indices.values()),
+            key=lambda index_set: len(index_set),
+            reverse=True,
+        )
     for index_set in index_sets:
         if len(test) + len(index_set) <= test_size:
             test += index_set
@@ -216,10 +238,12 @@ def scaffold_split(data: pd.DataFrame,
         else:
             val += index_set
             val_scaffold_count += 1
-    logging.info(f'Total scaffolds = {len(scaffold_to_indices):,} | '
-                 f'train scaffolds = {train_scaffold_count:,} | '
-                 f'val scaffolds = {val_scaffold_count:,} | '
-                 f'test scaffolds = {test_scaffold_count:,}')
+    logging.info(
+        f"Total scaffolds = {len(scaffold_to_indices):,} | "
+        f"train scaffolds = {train_scaffold_count:,} | "
+        f"val scaffolds = {val_scaffold_count:,} | "
+        f"test scaffolds = {test_scaffold_count:,}"
+    )
 
     log_scaffold_stats(data, index_sets)
     # Map from indices to data
@@ -230,11 +254,12 @@ def scaffold_split(data: pd.DataFrame,
     return train_df, val_df, test_df
 
 
-
-def log_scaffold_stats(data: pd.DataFrame,
-                       index_sets: List[Set[int]],
-                       num_scaffolds: int = 10,
-                       num_labels: int = 20) -> List[Tuple[List[float], List[int]]]:
+def log_scaffold_stats(
+    data: pd.DataFrame,
+    index_sets: List[Set[int]],
+    num_scaffolds: int = 10,
+    num_labels: int = 20,
+) -> List[Tuple[List[float], List[int]]]:
     """
     Logs and returns statistics about counts and average target values in molecular scaffolds.
     :param data: A pandas DataFrame containing SMILES strings and molecule properties.
@@ -245,28 +270,34 @@ def log_scaffold_stats(data: pd.DataFrame,
     across the first :code:num_labels labels and a list of the number of non-zero values for
     the first :code:num_scaffolds scaffolds, sorted in decreasing order of scaffold frequency.
     """
-    logging.info('Label averages per scaffold, in decreasing order of scaffold frequency, '
-                     f'capped at {num_scaffolds} scaffolds and {num_labels} labels:')
+    logging.info(
+        "Label averages per scaffold, in decreasing order of scaffold frequency, "
+        f"capped at {num_scaffolds} scaffolds and {num_labels} labels:"
+    )
 
     stats = []
-    index_sets = sorted(
-        index_sets, key=lambda idx_set: len(idx_set), reverse=True)
+    index_sets = sorted(index_sets, key=lambda idx_set: len(idx_set), reverse=True)
     for scaffold_num, index_set in enumerate(index_sets[:num_scaffolds]):
         data_set = data.iloc[list(index_set)]
-        targets = [ c for c in data.columns if c in ['AR', 'ER', 'ED', 'TR', 'GR','PPARg','Aromatase']]
+        targets = [
+            c
+            for c in data.columns
+            if c in ["AR", "ER", "ED", "TR", "GR", "PPARg", "Aromatase"]
+        ]
         # targets = data_set.iloc[:, 2:].values
         targets = data_set.loc[:, targets].values
 
         with warnings.catch_warnings():  # Likely warning of empty slice of target has no values besides NaN
-            warnings.simplefilter('ignore', category=RuntimeWarning)
+            warnings.simplefilter("ignore", category=RuntimeWarning)
             target_avgs = np.nanmean(targets, axis=0)[:num_labels]
 
         counts = np.count_nonzero(~np.isnan(targets), axis=0)[:num_labels]
         stats.append((target_avgs, counts))
 
-        logging.info(f'Scaffold {scaffold_num}')
+        logging.info(f"Scaffold {scaffold_num}")
         for task_num, (target_avg, count) in enumerate(zip(target_avgs, counts)):
             logging.info(
-                f'Task {task_num}: count = {count:,} | target average = {target_avg:.6f}')
-        logging.info('\n')
+                f"Task {task_num}: count = {count:,} | target average = {target_avg:.6f}"
+            )
+        logging.info("\n")
     return stats

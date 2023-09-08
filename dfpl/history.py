@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 """Store and visualise training histories"""
 
-import pandas as pd
 import logging
-from tensorflow.keras.callbacks import History
-import matplotlib as mpl
-mpl.use('Agg')
-import matplotlib.pyplot as plt
 
+import matplotlib as mpl
+import pandas as pd
+from tensorflow.keras.callbacks import History
+
+mpl.use("Agg")
+import matplotlib.pyplot as plt
 
 # def store_and_plot_history(base_file_name: str, hist: History) -> None:
 #     """
@@ -26,6 +27,7 @@ import matplotlib.pyplot as plt
 
 #     # plot history
 #     ac_epochs = hist.epoch
+
 
 #     # generate a figure of the losses for this fold
 #     plt.figure()
@@ -53,27 +55,32 @@ def store_and_plot_history(base_file_name: str, hist: History) -> None:
     logging.info(f"Neural network training history saved in file: {csv_filename}")
 
     # Plot history of loss and AUC
-    epochs = range(1, len(hist.history['loss']) + 1)
+    epochs = range(1, len(hist.history["loss"]) + 1)
     fig, (ax2, ax1) = plt.subplots(nrows=2, ncols=1, figsize=(10, 10), sharex=True)
-    plt.suptitle('Training and validation metrics of neural network')
-    
+    plt.suptitle("Training and validation metrics of neural network")
+
     # Plot loss and validation loss
-    ax1.plot(epochs, hist.history['loss'], linestyle="--", label='Training loss',color = "blue")
-    ax1.plot(epochs, hist.history['val_loss'], label='Validation loss',color = "blue")
-    ax1.set_ylabel('Loss')
+    ax1.plot(
+        epochs,
+        hist.history["loss"],
+        linestyle="--",
+        label="Training loss",
+        color="blue",
+    )
+    ax1.plot(epochs, hist.history["val_loss"], label="Validation loss", color="blue")
+    ax1.set_ylabel("Loss")
     ax1.legend()
 
     # Plot AUC and validation AUC
-    ax2.plot(epochs, hist.history['auc'],linestyle ="--" , label='Training AUC',color = "blue")
-    ax2.plot(epochs, hist.history['val_auc'], label='Validation AUC',color = "blue")
-    ax2.set_ylabel('AUC')
-    ax2.set_xlabel('Epoch')
+    ax2.plot(
+        epochs, hist.history["auc"], linestyle="--", label="Training AUC", color="blue"
+    )
+    ax2.plot(epochs, hist.history["val_auc"], label="Validation AUC", color="blue")
+    ax2.set_ylabel("AUC")
+    ax2.set_xlabel("Epoch")
     ax2.legend()
 
-
     # Save and close figure
-    plt.savefig(fname=svg_filename, format='svg')
+    plt.savefig(fname=svg_filename, format="svg")
     plt.close()
     logging.info(f"Neural network training history plotted in file: {svg_filename}")
-
-

@@ -1,47 +1,36 @@
-import os.path
-import sys
-sys.path.append("./chemprop_repo")
-from chemprop_repo import chemprop
-from chemprop_repo.chemprop import args, train
-from chemprop_repo.chemprop import interpret
-
-# sys.path.append("./CMPNN")
-# from CMPNN.cmpnnchemprop.train import *
-# from CMPNN.cmpnnchemprop.utils import create_logger
-# from CMPNN.training import cross_valid
-
-import pandas as pd
-from argparse import Namespace
-import logging
-import pathlib
 import dataclasses
-from os import path
-import tensorflow as tf
+import logging
 import math
+import os.path
+import pathlib
+import sys
+from argparse import Namespace
+from contextlib import redirect_stdout
+from os import path
+
+import chemprop as cp
+import numpy as np
+import pandas as pd
+import tensorflow as tf
+from keras.models import load_model
 from tensorflow import keras
 
-from dfpl.utils import makePathAbsolute, createDirectory, createArgsFromJson
-from dfpl import options
-from dfpl import fingerprint as fp
 from dfpl import autoencoder as ac
 from dfpl import feedforwardNN as fNN
-from dfpl import predictions
-from dfpl import single_label_model as sl
+from dfpl import fingerprint as fp
+from dfpl import options, predictions
 from dfpl import rbm as rbm
-from keras.models import load_model
-
-from contextlib import redirect_stdout
-import numpy as np
-
+from dfpl import single_label_model as sl
+from dfpl.utils import createArgsFromJson, createDirectory, makePathAbsolute
 
 project_directory = pathlib.Path(".").parent.parent.absolute()
 test_train_opts = options.Options(
-    inputFile=f'{project_directory}/input_datasets/S_dataset.pkl',
-    outputDir=f'{project_directory}/output_data/console_test',
-    ecWeightsFile=f'{project_directory}/output_data/case_00/AE_S/ae_S.encoder.hdf5',
-    ecModelDir=f'{project_directory}/output_data/case_00/AE_S/saved_model',
-    type='smiles',
-    fpType='topological',
+    inputFile=f"{project_directory}/input_datasets/S_dataset.pkl",
+    outputDir=f"{project_directory}/output_data/console_test",
+    ecWeightsFile=f"{project_directory}/output_data/case_00/AE_S/ae_S.encoder.hdf5",
+    ecModelDir=f"{project_directory}/output_data/case_00/AE_S/saved_model",
+    type="smiles",
+    fpType="topological",
     epochs=100,
     batchSize=1024,
     fpSize=2048,
@@ -54,9 +43,9 @@ test_train_opts = options.Options(
     trainFNN=True,
     compressFeatures=True,
     activationFunction="selu",
-    lossFunction='bce',
-    optimizer='Adam',
-    fnnType='FNN'
+    lossFunction="bce",
+    optimizer="Adam",
+    fnnType="FNN",
 )
 
 test_pred_opts = options.Options(
@@ -66,25 +55,8 @@ test_pred_opts = options.Options(
     ecModelDir=f"{project_directory}/output_data/case_00/AE_S/saved_model",
     fnnModelDir=f"{project_directory}/output_data/console_test/ER_saved_model",
     type="smiles",
-    fpType="topological"
+    fpType="topological",
 )
-
-
-# def traincmpnn(opts: options.GnnOptions):
-#     logger = create_logger(name='traincmpnn')
-#     print("Training CMPNN...")
-#     mean_auc_score, std_auc_score = cross_validate(opts, logger)
-#     print(f'Results: {mean_auc_score:.5f} +/- {std_auc_score:.5f}')
-
-
-# def predictcmpnn(opts: options.GnnOptions) -> None:
-#     df = pd.read_csv(opts.test_path)
-#     # df = df.head(30)
-#     pred, smiles = make_predictions(opts, df.smiles.tolist())
-#     df = pd.DataFrame({'smiles': smiles})
-#     for i in range(len(pred[0])):
-#         df[f'pred_{i}'] = [item[i] for item in pred]
-#     df.to_csv(f'{opts.save_dir}/{opts.saving_name}', index=False)
 
 
 def traindmpnn(opts: options.GnnOptions):
@@ -95,14 +67,18 @@ def traindmpnn(opts: options.GnnOptions):
     Returns:
     - None
     """
-    ignore_elements = ["py/object", "gnn_type"]
+    ignore_elements = ["py/object"]
     # Load options from a JSON file and replace the relevant attributes in `opts`
-    arguments = createArgsFromJson(opts.configFile, ignore_elements, return_json_object=False)
-    opts = chemprop.args.TrainArgs().parse_args(arguments)
+    arguments = createArgsFromJson(
+        opts.configFile, ignore_elements, return_json_object=False
+    )
+    opts = cp.args.TrainArgs().parse_args(arguments)
     print("Training DMPNN...")
     # Train the model and get the mean and standard deviation of AUC score from cross-validation
-    mean_score, std_score = chemprop.train.cross_validate(args=opts, train_func=chemprop.train.run_training)
-    print(f'Results: {mean_score:.5f} +/- {std_score:.5f}')
+    mean_score, std_score = cp.train.cross_validate(
+        args=opts, train_func=cp.train.run_training
+    )
+    print(f"Results: {mean_score:.5f} +/- {std_score:.5f}")
 
 
 def predictdmpnn(opts: options.GnnOptions, JSON_ARG_PATH) -> None:
@@ -114,15 +90,25 @@ def predictdmpnn(opts: options.GnnOptions, JSON_ARG_PATH) -> None:
     Returns:
     - None
     """
-    ignore_elements = ["py/object", "gnn_type", "checkpoint_paths", "save_dir", "saving_name", "interpret", "configInterpret"]
+    ignore_elements = [
+        "py/object",
+        "gnn_type",
+        "checkpoint_paths",
+        "save_dir",
+        "saving_name",
+        "interpret",
+        "configInterpret",
+    ]
     # Load options and additional arguments from a JSON file
-    arguments, data = createArgsFromJson(JSON_ARG_PATH, ignore_elements, return_json_object=True)
+    arguments, data = createArgsFromJson(
+        JSON_ARG_PATH, ignore_elements, return_json_object=True
+    )
     arguments.append("--preds_path")
     arguments.append("")
     save_dir = data.get("save_dir")
     name = data.get("saving_name")
     # Replace relevant attributes in `opts` with loaded options
-    opts = chemprop.args.PredictArgs().parse_args(arguments)
+    opts = cp.args.PredictArgs().parse_args(arguments)
     opts.preds_path = save_dir + "/" + name
     df = pd.read_csv(opts.test_path)
     smiles = []
@@ -130,7 +116,7 @@ def predictdmpnn(opts: options.GnnOptions, JSON_ARG_PATH) -> None:
         my_list = [rows.smiles]
         smiles.append(my_list)
     # Make predictions and return the result
-    pred = chemprop.train.make_predictions(args=opts, smiles=smiles)
+    pred = cp.train.make_predictions(args=opts, smiles=smiles)
 
 
 def interpretdmpnn(opts: options.GnnOptions, JSON_ARG_PATH) -> None:
@@ -140,14 +126,19 @@ def interpretdmpnn(opts: options.GnnOptions, JSON_ARG_PATH) -> None:
     - opts: options.GnnOptions instance containing the details of the prediction
     - JSON_ARG_PATH: path to a JSON file containing additional arguments for interpretation
     Returns:
-    - 
+    -
     """
     ignore_elements = ["py/object", "output_dir", "visualise_smiles"]
     # Load options and additional arguments from a JSON file
-    arguments, data = createArgsFromJson(JSON_ARG_PATH, ignore_elements, return_json_object=True)
-    opts = chemprop.args.InterpretArgs().parse_args(arguments)
-    chemprop.interpret.interpret_to_file(args=opts, output_dir=data.get("output_dir"),
-                                         visualise_smiles=data.get("visualise_smiles"))
+    arguments, data = createArgsFromJson(
+        JSON_ARG_PATH, ignore_elements, return_json_object=True
+    )
+    opts = cp.args.InterpretArgs().parse_args(arguments)
+    cp.interpret.interpret_to_file(
+        args=opts,
+        output_dir=data.get("output_dir"),
+        visualise_smiles=data.get("visualise_smiles"),
+    )
 
 
 def interpretffn(opts: options.Options, JSON_ARG_PATH) -> None:
@@ -157,11 +148,20 @@ def interpretffn(opts: options.Options, JSON_ARG_PATH) -> None:
     - opts: options.Options instance containing the details of the prediction
     - JSON_ARG_PATH: path to a JSON file containing additional arguments for interpretation
     Returns:
-    - 
+    -
     """
-    ignore_elements = ["py/object", "output_dir", "predict_path", "drop_values", "threshold", "save_values"]
+    ignore_elements = [
+        "py/object",
+        "output_dir",
+        "predict_path",
+        "drop_values",
+        "threshold",
+        "save_values",
+    ]
     # Load options and additional arguments from a JSON file
-    arguments, data = createArgsFromJson(JSON_ARG_PATH, ignore_elements, return_json_object=True)
+    arguments, data = createArgsFromJson(
+        JSON_ARG_PATH, ignore_elements, return_json_object=True
+    )
     # opts = chemprop.args.InterpretArgs().parse_args(arguments)
     # chemprop.interpret.interpret_to_file(args=opts, output_file=os.path.join(data.get("output_dir"), "interpret.csv"))
 
@@ -170,6 +170,7 @@ def interpretffn(opts: options.Options, JSON_ARG_PATH) -> None:
     model = tf.keras.model.load_model(path.join(data.get("output_dir"), "model.pickle"))
     print(model)
 
+
 def train(opts: options.Options):
     """
     Run the main training procedure
@@ -177,9 +178,13 @@ def train(opts: options.Options):
     """
     # import data from file and create DataFrame
     if "csv" in opts.inputFile:
-        df = fp.importDataFile(opts.inputFile, import_function=fp.importSmilesCSV, fp_size=opts.fpSize)
+        df = fp.importDataFile(
+            opts.inputFile, import_function=fp.importSmilesCSV, fp_size=opts.fpSize
+        )
     if "tsv" in opts.inputFile:
-        df = fp.importDataFile(opts.inputFile, import_function=fp.importDstoxTSV, fp_size=opts.fpSize)
+        df = fp.importDataFile(
+            opts.inputFile, import_function=fp.importDstoxTSV, fp_size=opts.fpSize
+        )
     # Create output dir if it doesn't exist
     createDirectory(opts.outputDir)
 
@@ -197,14 +202,15 @@ def train(opts: options.Options):
 
     # if feature compression is enabled
     if opts.compressFeatures:
-
         # if an RBM was trained, compress the fingerprints using the RBM
         if opts.useRBM:
-
             # if an RBM was not trained, create the model and fit it on dummy data
             if not opts.trainRBM:
-                rbm_model = rbm.define_rbm_model(opts=options.Options, input_size=opts.fpSize,
-                                                 encoding_dim=opts.encFPSize)
+                rbm_model = rbm.define_rbm_model(
+                    opts=options.Options,
+                    input_size=opts.fpSize,
+                    encoding_dim=opts.encFPSize,
+                )
                 x_run = tf.ones((12, opts.fpSize))
                 rbm_model.fit(x_run, x_run, epochs=1)
                 rbm_model.load_weights(os.path.join(opts.outputDir, opts.ecWeightsFile))
@@ -217,7 +223,6 @@ def train(opts: options.Options):
 
         # if an autoencoder was trained, compress the fingerprints using the autoencoder
         else:
-
             # if an autoencoder was not trained, load the trained model and weights
             if not opts.trainAC:
                 (_, encoder) = ac.define_ac_model(opts=options.Options)
@@ -242,7 +247,9 @@ def predict(opts: options.Options) -> None:
     :param opts: Options defining the details of the prediction
     """
     # Import the input data file using the specified function and fingerprint size
-    df = fp.importDataFile(opts.inputFile, import_function=fp.importSmilesCSV, fp_size=opts.fpSize)
+    df = fp.importDataFile(
+        opts.inputFile, import_function=fp.importSmilesCSV, fp_size=opts.fpSize
+    )
 
     # Create output directory if it doesn't already exist
     createDirectory(opts.outputDir)
@@ -262,14 +269,15 @@ def predict(opts: options.Options) -> None:
     df2 = predictions.predict_values(df=df, opts=opts)
 
     # Extract the column names from the dataframe, excluding the 'fp' and 'fpcompressed' columns
-    names_columns = [c for c in df2.columns if c not in ['fp', 'fpcompressed']]
+    names_columns = [c for c in df2.columns if c not in ["fp", "fpcompressed"]]
 
     # Save the predicted values to a CSV file in the output directory
     df2[names_columns].to_csv(path_or_buf=path.join(opts.outputDir, opts.outputFile))
 
     # Log successful completion of prediction and the file path where the results were saved
-    logging.info(f"Prediction successful. Results written to '{path.join(opts.outputDir, opts.outputFile)}'")
-
+    logging.info(
+        f"Prediction successful. Results written to '{path.join(opts.outputDir, opts.outputFile)}'"
+    )
 
 
 def createLogger(filename: str) -> None:
@@ -286,8 +294,10 @@ def createLogger(filename: str) -> None:
     ch = logging.StreamHandler()
     ch.setLevel(logging.INFO)
     # create formatter and add it to the handlers
-    formatterFile = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    formatterConsole = logging.Formatter('%(levelname)-8s %(message)s')
+    formatterFile = logging.Formatter(
+        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    )
+    formatterConsole = logging.Formatter("%(levelname)-8s %(message)s")
     fh.setFormatter(formatterFile)
     ch.setFormatter(formatterConsole)
     # add the handlers to the logger
@@ -343,7 +353,6 @@ def main():
             if predictgnn_opts.gnn_type == "dmpnn":
                 predictdmpnn(fixed_opts, prog_args.configFile)
 
-
         elif prog_args.method == "interpretgnn":
             interpretgnn_opts = options.GnnOptions.fromCmdArgs(prog_args)
             fixed_opts = dataclasses.replace(interpretgnn_opts)
@@ -359,11 +368,13 @@ def main():
             fixed_opts = dataclasses.replace(
                 train_opts,
                 inputFile=makePathAbsolute(train_opts.inputFile),
-                outputDir=makePathAbsolute(train_opts.outputDir)
+                outputDir=makePathAbsolute(train_opts.outputDir),
             )
             createDirectory(fixed_opts.outputDir)
             createLogger(path.join(fixed_opts.outputDir, "train.log"))
-            logging.info(f"The following arguments are received or filled with default values:\n{fixed_opts}")
+            logging.info(
+                f"The following arguments are received or filled with default values:\n{fixed_opts}"
+            )
             train(fixed_opts)
         elif prog_args.method == "predict":
             predict_opts = options.Options.fromCmdArgs(prog_args)
@@ -371,20 +382,24 @@ def main():
                 predict_opts,
                 inputFile=makePathAbsolute(predict_opts.inputFile),
                 outputDir=makePathAbsolute(predict_opts.outputDir),
-                outputFile=makePathAbsolute(path.join(predict_opts.outputDir, predict_opts.outputFile)),
+                outputFile=makePathAbsolute(
+                    path.join(predict_opts.outputDir, predict_opts.outputFile)
+                ),
                 ecModelDir=makePathAbsolute(predict_opts.ecModelDir),
                 fnnModelDir=makePathAbsolute(predict_opts.fnnModelDir),
                 trainAC=False,
-                trainFNN=False
+                trainFNN=False,
             )
             createDirectory(fixed_opts.outputDir)
             createLogger(path.join(fixed_opts.outputDir, "predict.log"))
-            logging.info(f"The following arguments are received or filled with default values:\n{prog_args}")
+            logging.info(
+                f"The following arguments are received or filled with default values:\n{prog_args}"
+            )
             predict(fixed_opts)
     except AttributeError as e:
         print(e)
         parser.print_usage()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
