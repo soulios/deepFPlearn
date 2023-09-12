@@ -8,6 +8,8 @@ from rdkit.Chem.Draw import MolToImage
 
 
 def get_mol(smiles):
+    if isinstance(smiles, list):
+        smiles = smiles[0]
     mol = Chem.MolFromSmiles(smiles)
     if mol is None:
         return None
@@ -25,7 +27,7 @@ def find_matches_one(mol, submol):
 
 
 # Draw the molecule
-def get_image(mol, output_dir, file_name, atomset=None):
+def get_image(mol, file_name, atomset=None):
     hcolor = colors.to_rgb("green")
     if atomset is not None:
         # highlight the atoms set while drawing the whole molecule.
@@ -38,5 +40,5 @@ def get_image(mol, output_dir, file_name, atomset=None):
         )
     else:
         img = MolToImage(mol, size=(400, 400), fitImage=True)
-    img.save(join(Path(output_dir).absolute(), file_name))
+    img.save(file_name)
     return img

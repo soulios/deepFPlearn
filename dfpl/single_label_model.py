@@ -6,7 +6,7 @@ import sys
 from os import path
 from time import time
 from typing import Tuple, Union
-
+import shap
 import numpy as np
 import pandas as pd
 import tensorflow as tf
@@ -538,6 +538,22 @@ def fit_and_evaluate_model(
     logging.info(
         f"Computation time for training the single-label model for {target}: {trainTime} min"
     )
+    if opts.shap_val:
+        import pickle
+        from os import makedirs
+        # with open(path.join(shap_path, f"model_trained-{target}.pkl"), "wb") as pkl:
+        #     pickle.dump(model, pkl)
+        # with open(path.join(opts.outputDir, f"x_train-{target}.csv"), "w") as csv1:
+        #     np.savetxt(csv1, x_train)
+        # with open(path.join(opts.outputDir, f"x_test-{target}.csv"), "w") as csv1:
+        #     np.savetxt(csv1, x_test)
+
+        # pd.DataFrame(x_train).to_csv(os.path.join(opts.outputDir, f"x_train-{target}.csv"), index=False)
+        # pd.DataFrame(x_test).to_csv(os.path.join(opts.outputDir, f"x_test-{target}.csv"), index=False)
+
+        # with open(path.join(shap_path, f"y_train-{target}.csv"), "wb") as csv2:
+        #     np.savetxt(csv2, y_train)
+
 
     # Save and plot model history
     pd.DataFrame(hist.history).to_csv(path_or_buf=f"{model_file_prefix}.history.csv")
@@ -667,6 +683,9 @@ def train_single_label_models(df: pd.DataFrame, opts: options.Options) -> None:
                 trained_model = define_single_label_model(
                     input_size=len(x[0]), opts=opts
                 )
+                explainer = shap.Explainer(trained_model, x_train, max_evals=3000)
+                shap_values = explainer(x_test[:10])
+                print(shap_values)
                 # trained_model.load_weights
                 # (path.join(opts.outputDir, f"{target}_single-labeled_Fold-0.model.weights.hdf5"))
                 trained_model.save_weights(
@@ -725,6 +744,8 @@ def train_single_label_models(df: pd.DataFrame, opts: options.Options) -> None:
                     trained_model = define_single_label_model(
                         input_size=len(x[0]), opts=opts
                     )
+                    explainer = shap.Explainer(trained_model, x[train], max_evals=2115)
+                    shap_values = explainer(x[train][:10])
                     # trained_model.load_weights
                     # (path.join(opts.outputDir, f"{target}_single-labeled_Fold-0.model.weights.hdf5"))
                     trained_model.save_weights(

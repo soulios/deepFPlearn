@@ -6,8 +6,8 @@
   "ecWeightsFile": "random_autoencoder.hdf5",
   "verbose": 2,
 
-  "trainAC": true,
-  "compressFeatures": true,
+  "trainAC": false,
+  "compressFeatures": false,
   "encFPSize": 256,
 
   "aeSplitType": "random",
@@ -35,12 +35,13 @@
   "fnnType": "FNN",
   "optimizer": "Adam",
   "lossFunction": "bce",
-  "epochs": 100,
+  "epochs": 11,
   "batchSize": 128,
   "activationFunction": "selu",
   "dropout": 0.0107,
   "learningRate": 0.0000022,
   "l2reg": 0.001,
+  "shap_val": false,
 
   "aeWabTracking": false,
   "wabTracking": false,

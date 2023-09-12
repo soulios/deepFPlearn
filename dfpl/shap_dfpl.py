@@ -7,7 +7,7 @@ import shap
 
 
 # Initialise JavaScript
-shap.initjs()
+# shap.initjs()
 
 
 def shap_explain(
@@ -58,8 +58,8 @@ def shap_explain(
             ) as idx:
                 np.savetxt(idx, x_include_labels, fmt="%d", delimiter=";")
     else:
-        explainer = shap.explainers.Permutation(model, x_train, max_evals="auto")
-        shap_values = explainer(x_test)
+        explainer = shap.Explainer(model, np.array(x_train[:10]), max_evals="auto")
+        shap_values = explainer(np.array(x_test[:10]))
 
         if save_values:
             with open(

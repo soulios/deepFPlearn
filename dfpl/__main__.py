@@ -4,9 +4,11 @@ import os.path
 import pathlib
 from argparse import Namespace
 from os import path
+import numpy as np
 import tensorflow as tf
 import math
 from tensorflow import keras
+from pathlib import Path
 
 import chemprop as cp
 import pandas as pd
@@ -18,6 +20,8 @@ from dfpl import fingerprint as fp
 from dfpl import options, predictions
 from dfpl import single_label_model as sl
 from dfpl import vae as vae
+from dfpl import shap_dfpl as sd
+from dfpl import visualise
 from dfpl.utils import createArgsFromJson, createDirectory, makePathAbsolute
 
 project_directory = pathlib.Path(".").parent.parent.absolute()
@@ -115,7 +119,7 @@ def predictdmpnn(opts: options.GnnOptions, json_arg_path: str) -> None:
     # Make predictions and return the result
     cp.train.make_predictions(args=opts, smiles=smiles)
 
-
+import csv
 def interpretdmpnn(opts: options.GnnOptions, JSON_ARG_PATH) -> None:
     """
     Interpret the values using a trained D-MPNN model with the given options.
@@ -131,12 +135,37 @@ def interpretdmpnn(opts: options.GnnOptions, JSON_ARG_PATH) -> None:
         JSON_ARG_PATH, ignore_elements, return_json_object=True
     )
     opts = cp.args.InterpretArgs().parse_args(arguments)
-    cp.interpret.interpret_to_file(
-        args=opts,
-        output_dir=data.get("output_dir"),
-        visualise_smiles=data.get("visualise_smiles"),
+    res = cp.interpret.interpret(
+        args=opts
     )
+    print(res)
+    df = pd.DataFrame(res)
+    df.to_csv('interpretation.csv')
+    # Filter rows where the score is greater than 0.5
+    filtered_df = df[df['score'].astype(float) > 0.5]  # Assuming the score column is named 'score'
 
+    # Counter for naming output PDFs
+    counter = 0
+
+    # Loop through each filtered row to execute your code
+    for index, row in filtered_df.iterrows():
+        smiles = row['smiles']
+        rationale = row['rationale']
+
+        # Increment the counter
+        counter += 1
+
+        # Execute your visualization code
+        mol = visualise.get_mol(smiles)
+        submol = visualise.get_mol(rationale)
+        matches = visualise.find_matches_one(mol, submol)
+
+        # Check if matches are found to avoid IndexError
+        if matches:
+            atomset = list(matches[0])
+            visualise.get_image(mol, f"smiles-{counter}.pdf", atomset)
+        else:
+            print(f"No matches found for smiles-{counter}")
 
 def interpretffn(opts: options.Options, JSON_ARG_PATH) -> None:
     """
@@ -162,10 +191,21 @@ def interpretffn(opts: options.Options, JSON_ARG_PATH) -> None:
     # opts = chemprop.args.InterpretArgs().parse_args(arguments)
     # chemprop.interpret.interpret_to_file(args=opts, output_file=os.path.join(data.get("output_dir"), "interpret.csv"))
 
-    np.genfromtxt(path.join(data.get("output_dir"), "x_train.csv"))
-    np.genfromtxt(data.get("predict_path"))
-    model = tf.keras.model.load_model(path.join(data.get("output_dir"), "model.pickle"))
-    print(model)
+    x_train = pd.read_csv(path.join(data.get("output_dir"), "x_train-AR.csv"))
+    x_test = pd.read_csv(path.join(data.get("output_dir"), "x_test-AR.csv"))
+    print(x_test.shape,x_train.shape)
+    model = tf.keras.models.load_model(path.join(data.get("output_dir"), "AR_saved_model"),
+                                       custom_objects={'balanced_accuracy': sl.balanced_accuracy})
+    print(model.summary())
+    shap_values = sd.shap_explain(x_train=x_train, x_test=x_test, model=model,
+                                  target="AR",
+                                  outputDir=data.get("outputDir"),
+                                  drop_values=data.get("drop_values"),
+                                  threshold=data.get("threshold"),
+                                  save_values=data.get("save_values")
+                                  )
+    plot_types = ["bar", "waterfall", "heatmap", "force"]  # Choose the types of plots you want
+    sd.shap_plots(shap_values, opts, "AR", plot_types)
 
 
 def train(opts: options.Options):
@@ -211,14 +251,14 @@ def train(opts: options.Options):
                 )
         # compress the fingerprints using the autoencoder
         df = ac.compress_fingerprints(df, encoder)
-        # ac.visualize_fingerprints(
-        #     df,
-        #     before_col="fp",
-        #     after_col="fpcompressed",
-        #     train_indices=train_indices,
-        #     test_indices=test_indices,
-        #     save_as=f"UMAP_{opts.aeSplitType}.png",
-        # )
+        ac.visualize_fingerprints(
+            df,
+            before_col="fp",
+            after_col="fpcompressed",
+            train_indices=train_indices,
+            test_indices=test_indices,
+            save_as=f"UMAP_{opts.aeSplitType}.png",
+        )
     # train single label models if requested
     if opts.trainFNN and not opts.enableMultiLabel:
         sl.train_single_label_models(df=df, opts=opts)
@@ -330,6 +370,15 @@ def main():
             )
 
             predictdmpnn(fixed_opts, prog_args.configFile)
+        elif prog_args.method == "interpretgnn":
+            interpretgnn_opts = options.GnnOptions.fromCmdArgs(prog_args)
+            fixed_opts = dataclasses.replace(interpretgnn_opts)
+            interpretdmpnn(fixed_opts, interpretgnn_opts.configInterpretGnn)
+
+        elif prog_args.method == "interpretffn":
+            interpretffn_opts = options.Options.fromCmdArgs(prog_args)
+            fixed_opts = dataclasses.replace(interpretffn_opts)
+            interpretffn(fixed_opts, interpretffn_opts.configInterpretFfn)
 
         elif prog_args.method == "train":
             train_opts = options.Options.fromCmdArgs(prog_args)
