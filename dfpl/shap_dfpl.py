@@ -1,6 +1,6 @@
 import pickle
 from os import path
-
+import tensorflow as tf
 import matplotlib.pyplot as plt
 import numpy as np
 import shap
@@ -8,7 +8,7 @@ import shap
 
 # Initialise JavaScript
 # shap.initjs()
-
+tf.compat.v1.disable_v2_behavior()
 
 def shap_explain(
     x_train,
@@ -20,11 +20,24 @@ def shap_explain(
     threshold=100,
     save_values=False,
 ):
+    y_pred = model.predict(x_test[:1000])
+    print(y_pred)
+    # Get the unique indices where either y_test is 1 or y_pred is 1
+    selected_indices = np.where((np.round(y_pred) == 1))[0]
+    print(selected_indices)
+    x_test = x_test[selected_indices]
+    print(x_test, x_test.shape)
     if drop_values:
         # x_train_to_explain = np.multiply(x_train, 0, where=np.sum(x_train, axis=0, dtype=np.int32, keepdims=True) < threshold)
 
         x_train_to_explain = np.where(
             np.sum(x_train, axis=0, dtype=np.int8, keepdims=True) >= threshold,
+            x_train,
+            0,
+        )
+
+        x_background = np.where(
+            np.sum(x_train, axis=0, dtype=np.int8, keepdims=True) >= threshold/2,
             x_train,
             0,
         )
@@ -34,8 +47,8 @@ def shap_explain(
         # print(x_train_to_explain)
         # print(f"{type(x_train_to_explain)}\t{len(x_train_to_explain)}")
         # print(f"{type(x_include_labels)}\t{len(x_include_labels[2])}")
-        explainer = shap.KernelExplainer(model, x_train_to_explain)
-        shap_values, indices = explainer.shap_values(x_test)
+        explainer = shap.DeepExplainer(model, x_train_to_explain, x_background)
+        shap_values = explainer.shap_values(x_test)
 
         if save_values:
             with open(

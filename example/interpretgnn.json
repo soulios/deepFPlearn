@@ -1,9 +1,9 @@
 {
   "py/object": "dfpl.options.GnnOptions",
-  "data_path": "tests/data/smiles.csv",
-  "checkpoint_dir": "dmpnn-random/fold_0/model_0/",
+  "data_path": "tests/data/B_data_ER_smiles.csv",
+  "checkpoint_dir": "dmpnn-random/fold_2/model_0/",
   "max_atoms": 20,
   "min_atoms": 8,
-  "property_id": 1,
-  "visualise_smiles": true
+  "property_id": 2,
+  "visualise_smiles": false
 }

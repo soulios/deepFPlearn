@@ -119,7 +119,6 @@ def predictdmpnn(opts: options.GnnOptions, json_arg_path: str) -> None:
     # Make predictions and return the result
     cp.train.make_predictions(args=opts, smiles=smiles)
 
-import csv
 def interpretdmpnn(opts: options.GnnOptions, JSON_ARG_PATH) -> None:
     """
     Interpret the values using a trained D-MPNN model with the given options.
@@ -138,34 +137,35 @@ def interpretdmpnn(opts: options.GnnOptions, JSON_ARG_PATH) -> None:
     res = cp.interpret.interpret(
         args=opts
     )
-    print(res)
-    df = pd.DataFrame(res)
+    df = pd.DataFrame.from_dict(res)
     df.to_csv('interpretation.csv')
     # Filter rows where the score is greater than 0.5
-    filtered_df = df[df['score'].astype(float) > 0.5]  # Assuming the score column is named 'score'
-
+    filtered_df = df[df['score'].astype(float) > 0.5]
+    if filtered_df.empty:
+        print("No rows have a score greater than 0.5.")
     # Counter for naming output PDFs
-    counter = 0
+    else:
+        counter = 0
 
     # Loop through each filtered row to execute your code
-    for index, row in filtered_df.iterrows():
-        smiles = row['smiles']
-        rationale = row['rationale']
+        for index, row in filtered_df.iterrows():
+            smiles = row['smiles']
+            rationale = row['rationale']
 
-        # Increment the counter
-        counter += 1
+            # Increment the counter
+            counter += 1
 
-        # Execute your visualization code
-        mol = visualise.get_mol(smiles)
-        submol = visualise.get_mol(rationale)
-        matches = visualise.find_matches_one(mol, submol)
+            # Execute your visualization code
+            mol = visualise.get_mol(smiles)
+            submol = visualise.get_mol(rationale)
+            matches = visualise.find_matches_one(mol, submol)
 
-        # Check if matches are found to avoid IndexError
-        if matches:
-            atomset = list(matches[0])
-            visualise.get_image(mol, f"smiles-{counter}.pdf", atomset)
-        else:
-            print(f"No matches found for smiles-{counter}")
+            # Check if matches are found to avoid IndexError
+            if matches:
+                atomset = list(matches[0])
+                visualise.get_image(mol, f"smiles-{counter}.pdf", atomset)
+            else:
+                print(f"No matches found for smiles-{counter}")
 
 def interpretffn(opts: options.Options, JSON_ARG_PATH) -> None:
     """

@@ -35,10 +35,11 @@ from dfpl import options
 from dfpl import plot as pl
 from dfpl import settings
 from dfpl.utils import ae_scaffold_split, weight_split
+from dfpl import shap_dfpl as sd
 
 
 def prepare_nn_training_data(
-    df: pd.DataFrame, target: str, opts: options.Options, return_dataframe: bool = False
+        df: pd.DataFrame, target: str, opts: options.Options, return_dataframe: bool = False
 ) -> Union[Tuple[np.ndarray, np.ndarray], pd.DataFrame]:
     # Check the value counts and abort if too imbalanced
     allowed_imbalance = 0.1
@@ -181,7 +182,7 @@ def prepare_nn_training_data(
 
 # This function defines a feedforward neural network (FNN) with the given input size, options, and output bias
 def build_fnn_network(
-    input_size: int, opts: options.Options, output_bias=None
+        input_size: int, opts: options.Options, output_bias=None
 ) -> Model:
     # Set the output bias if it is provided
     if output_bias is not None:
@@ -257,7 +258,7 @@ def build_fnn_network(
 
 # This function defines a shallow neural network (SNN) with the given input size, options, and output bias
 def build_snn_network(
-    input_size: int, opts: options.Options, output_bias=None
+        input_size: int, opts: options.Options, output_bias=None
 ) -> Model:
     # Set the output bias if it is provided
     if output_bias is not None:
@@ -311,7 +312,7 @@ def balanced_accuracy(y_true: np.ndarray, y_pred: np.ndarray) -> np.float64:
 
 
 def define_single_label_model(
-    input_size: int, opts: options.Options, output_bias=None
+        input_size: int, opts: options.Options, output_bias=None
 ) -> Model:
     """
     Defines and compiles the single-label neural network model.
@@ -372,12 +373,12 @@ def define_single_label_model(
 
 
 def evaluate_model(
-    x_test: np.ndarray,
-    y_test: np.ndarray,
-    file_prefix: str,
-    model: Model,
-    target: str,
-    fold: int,
+        x_test: np.ndarray,
+        y_test: np.ndarray,
+        file_prefix: str,
+        model: Model,
+        target: str,
+        fold: int,
 ) -> pd.DataFrame:
     # Log that we're evaluating the model on the test data
     name = path.basename(file_prefix).replace("_", " ")
@@ -484,13 +485,13 @@ def evaluate_model(
 
 
 def fit_and_evaluate_model(
-    x_train: np.ndarray,
-    x_test: np.ndarray,
-    y_train: np.ndarray,
-    y_test: np.ndarray,
-    fold: int,
-    target: str,
-    opts: options.Options,
+        x_train: np.ndarray,
+        x_test: np.ndarray,
+        y_train: np.ndarray,
+        y_test: np.ndarray,
+        fold: int,
+        target: str,
+        opts: options.Options,
 ) -> pd.DataFrame:
     # Print info about training
     logging.info(f"Training of fold number: {fold}")
@@ -554,7 +555,6 @@ def fit_and_evaluate_model(
         # with open(path.join(shap_path, f"y_train-{target}.csv"), "wb") as csv2:
         #     np.savetxt(csv2, y_train)
 
-
     # Save and plot model history
     pd.DataFrame(hist.history).to_csv(path_or_buf=f"{model_file_prefix}.history.csv")
     pl.plot_history(history=hist, file=f"{model_file_prefix}.history.svg")
@@ -574,11 +574,11 @@ def fit_and_evaluate_model(
 
 
 def get_x_y(
-    df: pd.DataFrame,
-    target: str,
-    train_set: pd.DataFrame,
-    test_set: pd.DataFrame,
-    opts: options.Options,
+        df: pd.DataFrame,
+        target: str,
+        train_set: pd.DataFrame,
+        test_set: pd.DataFrame,
+        opts: options.Options,
 ):
     train_indices = train_set.index
     test_indices = test_set.index
@@ -683,9 +683,17 @@ def train_single_label_models(df: pd.DataFrame, opts: options.Options) -> None:
                 trained_model = define_single_label_model(
                     input_size=len(x[0]), opts=opts
                 )
-                explainer = shap.Explainer(trained_model, x_train, max_evals=3000)
-                shap_values = explainer(x_test[:10])
-                print(shap_values)
+                # explainer = shap.PermutationExplainer(trained_model.predict, x_train, max_evals='auto')
+                # shap_values = explainer(x_train[:10])
+                # print(shap_values)
+                # shaps = sd.shap_explain(x_train=x_train, x_test=x_test, model=trained_model,
+                #                 target=target,
+                #                 outputDir=opts.outputDir,
+                #                 drop_values=True,
+                #                 threshold=100,
+                #                 save_values=True
+                #                 )
+                # sd.shap_plots(shaps,opts=opts,target=target,plot_type=['bar','waterfall'])
                 # trained_model.load_weights
                 # (path.join(opts.outputDir, f"{target}_single-labeled_Fold-0.model.weights.hdf5"))
                 trained_model.save_weights(
@@ -744,8 +752,8 @@ def train_single_label_models(df: pd.DataFrame, opts: options.Options) -> None:
                     trained_model = define_single_label_model(
                         input_size=len(x[0]), opts=opts
                     )
-                    explainer = shap.Explainer(trained_model, x[train], max_evals=2115)
-                    shap_values = explainer(x[train][:10])
+                    # explainer = shap.Explainer(trained_model, x[train], max_evals=2115)
+                    # shap_values = explainer(x[train][:10])
                     # trained_model.load_weights
                     # (path.join(opts.outputDir, f"{target}_single-labeled_Fold-0.model.weights.hdf5"))
                     trained_model.save_weights(
