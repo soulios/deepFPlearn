@@ -32,7 +32,7 @@ def define_ac_model(opts: options.Options, output_bias=None) -> Tuple[Model, Mod
     """
     input_size = opts.fpSize
     encoding_dim = opts.encFPSize
-    ac_optimizer = optimizers.Adam(
+    ac_optimizer = optimizers.legacy.Adam(
         learning_rate=opts.aeLearningRate, decay=opts.aeLearningRateDecay
     )
 

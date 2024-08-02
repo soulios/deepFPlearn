@@ -336,9 +336,9 @@ def define_single_label_model(
 
     # Set the optimizer according to the option selected
     if opts.optimizer == "Adam":
-        my_optimizer = optimizers.Adam(learning_rate=opts.learningRate)
+        my_optimizer = optimizers.legacy.Adam(learning_rate=opts.learningRate)
     elif opts.optimizer == "SGD":
-        my_optimizer = optimizers.SGD(lr=opts.learningRate, momentum=0.9)
+        my_optimizer = optimizers.legacy.SGD(lr=opts.learningRate, momentum=0.9)
     else:
         logging.error(f"Your selected optimizer is not supported: {opts.optimizer}.")
         sys.exit("Unsupported optimizer")
