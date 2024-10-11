@@ -61,6 +61,9 @@ def shap_explain(
     explainer = shap.KernelExplainer(model.predict, x_background)
 
     shap_values = explainer.shap_values(x_test_selected)
+    explanation = shap.Explanation(
+        values=shap_values, base_values=explainer.expected_value, data=x_test_selected
+    )
     if len(shap_values.shape) == 3:
         # Reshape (flatten) the SHAP values by merging features and classes into one dimension
         num_samples, num_features, num_classes = shap_values.shape
@@ -74,11 +77,11 @@ def shap_explain(
         with open(path.join(outputDir, f"shap_values-threshold-{threshold}-{target}.csv"), "w") as csv_file:
             np.savetxt(csv_file, shap_values)
 
-    return shap_values
+    return shap_values, explanation
 
 
 
-def shap_plots(shap_values, opts, target, plot_type=["bar", "waterfall"]):
+def shap_plots(shap_values,explanation, opts, target, plot_type=["bar", "waterfall"]):
     if "bar" in plot_type:
         shap.plots.bar(shap_values, max_display=10, show=False)
         plt.savefig(
@@ -92,9 +95,8 @@ def shap_plots(shap_values, opts, target, plot_type=["bar", "waterfall"]):
         plt.close()
 
     if "waterfall" in plot_type:
-        shap.plots._waterfall.waterfall_legacy(
-            shap_values.base_values[0][0],
-            shap_values.values[0],
+        shap.plots.waterfall(
+            explanation,
             max_display=15,
             show=False,
         )
@@ -121,8 +123,7 @@ def shap_plots(shap_values, opts, target, plot_type=["bar", "waterfall"]):
 
     if "force" in plot_type:
         shap.plots.force(
-            shap_values.base_values[0],
-            shap_values.values[0],
+            explanation,
             matplotlib=True,
             show=False,
         )
