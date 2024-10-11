@@ -61,7 +61,12 @@ def shap_explain(
     explainer = shap.KernelExplainer(model.predict, x_background)
 
     shap_values = explainer.shap_values(x_test_selected)
-
+    if len(shap_values.shape) == 3:
+        # Reshape (flatten) the SHAP values by merging features and classes into one dimension
+        num_samples, num_features, num_classes = shap_values.shape
+        shap_values = shap_values.reshape(num_samples, -1)  # Merge the last two dimensions
+    else:
+        shap_values = shap_values
     # Save SHAP values if requested
     if save_values:
         with open(path.join(outputDir, f"shap_values-threshold-{threshold}-{target}.pickle"), "wb") as pkl:
