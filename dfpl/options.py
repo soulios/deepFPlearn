@@ -59,6 +59,7 @@ class Options:
     threshold: float = 0.5
     visualizeLatent: bool = False  # only if autoencoder is trained or loaded
     gpu: int = None
+    save_splits: bool = False
     aeWabTracking: bool = False  # Wand & Biases autoencoder tracking
     wabTracking: bool = False  # Wand & Biases FNN tracking
     wabTarget: str = "AR"  # Wand & Biases target used for showing training progress
@@ -71,10 +72,23 @@ class Options:
         with jsonFile.open("w") as f:
             f.write(jsonpickle.encode(self))
 
+    # @classmethod
+    # def fromCmdArgs(cls, args: argparse.Namespace) -> "Options":
+        # return parseCmdArgs(cls, args)
     @classmethod
-    def fromCmdArgs(cls, args: argparse.Namespace) -> "Options":
-        return parseCmdArgs(cls, args)
+    def fromCmdArgs(cls, args: argparse.Namespace, json_config: Optional[dict] = None )-> "Options":
+        # Initialize with JSON config if provided
+        if json_config:
+            opts = cls(**json_config)
+        else:
+            opts = cls()
 
+        # Update with command-line arguments
+        for key, value in vars(args).items():
+            if value is not None:
+                setattr(opts, key, value)
+
+        return opts
 
 @dataclass
 class GnnOptions(TrainArgs):
@@ -133,6 +147,18 @@ def createCommandlineParser() -> argparse.ArgumentParser:
     )
     parser_predict_gnn.set_defaults(method="predictgnn")
     parsePredictGnn(parser_predict_gnn)
+    parser_interpret_gnn = subparsers.add_parser(
+        "interpretgnn", help="Explain the predictions of your GNN models"
+    )
+    parser_interpret_gnn.set_defaults(method="interpretgnn")
+    parseInterpretGnn(parser_interpret_gnn)
+
+    parser_interpret_ffn = subparsers.add_parser(
+        "interpretffn",
+        help="Explain the predictions of your FFN models with SHAPley values",
+    )
+    parser_interpret_ffn.set_defaults(method="interpretffn")
+    parseInterpretFfn(parser_interpret_ffn)
 
     parser_train = subparsers.add_parser(
         "train", help="Train new models with your data"
@@ -152,6 +178,77 @@ def createCommandlineParser() -> argparse.ArgumentParser:
     parser_convert.set_defaults(method="convert")
     parseInputConvert(parser_convert)
     return parser
+
+
+def parseInterpretGnn(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        "-f",
+        "--configFile",
+        metavar="FILE",
+        type=str,
+        help="Path to a json file containing interpretation parameters.",
+        default=argparse.SUPPRESS,
+    )
+    parser.add_argument("--data_path", type=str, help= "path with smiles to explain")
+    parser.add_argument("--checkpoint_dir", type=str, help="directory where the model is stored")
+    parser.add_argument("--batch_size", type=int, help="Batch size")
+    parser.add_argument(
+        "--property_id",
+        type=int,
+        help="Index of the property of interest in the trained model.",
+    )
+    parser.add_argument("--rollout", type=int, help="Number of rollout steps.")
+    parser.add_argument("--c_puct", type=int, help="Constant factor in MCTS.")
+    parser.add_argument(
+        "--max_atoms", type=int, help="Maximum number of atoms in rationale."
+    )
+    parser.add_argument(
+        "--min_atoms", type=int, help="Maximum number of atoms in rationale."
+    )
+    parser.add_argument(
+        "--prop_delta", type=int, help="Maximum number of atoms in rationale."
+    )
+    parser.add_argument(
+        "--visualise_smiles",
+        type=bool,
+        help="Visualise toxic substructures using RDkit. Images saved within output_dir",
+        default=True
+    )
+
+def parseInterpretFfn(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        "-f",
+        "--configFile",
+        metavar="FILE",
+        type=str,
+        help="Path to a json file containing interpretation parameters.",
+        default=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--data_path",
+        type=str,
+        help="Path to the data, model's predicitons on which shall be explained with SHAP",
+    )
+    parser.add_argument("--output_dir", type=str, help="Output directory.")
+    parser.add_argument(
+        "--predict_path",
+        type=str,
+        help="File with the model's predictions. See: predict.json",
+    )
+    parser.add_argument("--target", type=str, help="Target to be explained.")
+    parser.add_argument(
+        "--drop_values",
+        type=bool,
+        help="Include only those #postions in a ECFP, that have the total count of 1's >= threshold for the given training dataset.",
+    )
+    parser.add_argument(
+        "--threshold",
+        type=int,
+        help="For a given dataset, include only those #posiions from total 2048 of ECFPs, that have the count of 1's >= threshold over all training samples.",
+    )
+    parser.add_argument(
+        "--save_values", type=bool, help="Save SHAP values into a file."
+    )
 
 
 def parseInputTrain(parser: argparse.ArgumentParser) -> None:

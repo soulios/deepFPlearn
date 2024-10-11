@@ -28,6 +28,7 @@ from tensorflow.keras.losses import (
     MeanSquaredError,
 )
 from tensorflow.keras.models import Model, Sequential
+tf.compat.v1.disable_v2_behavior()
 
 from dfpl import callbacks as cb
 from dfpl import options
@@ -587,7 +588,30 @@ def get_x_y(
     x_test = x_test.astype("float32")
     y_test = y_test.astype("float32")
     return x_train, y_train, x_test, y_test
+def save_split_to_csv(x_train, x_test, y_train, y_test, target, fold_no, opts):
+    """
+    Save train and test splits to CSV files for a given fold and target.
 
+    :param x_train: Training data features
+    :param x_test: Test data features
+    :param y_train: Training data labels
+    :param y_test: Test data labels
+    :param target: The target column name
+    :param fold_no: The fold number
+    :param opts: The command line arguments in the options class
+    """
+    train_data = pd.DataFrame(x_train)
+    train_data[target] = y_train
+    test_data = pd.DataFrame(x_test)
+    test_data[target] = y_test
+
+    # Save to CSV
+    train_data.to_csv(
+        os.path.join(opts.outputDir, f"{target}_train_fold_{fold_no}.csv"), index=False
+    )
+    test_data.to_csv(
+        os.path.join(opts.outputDir, f"{target}_test_fold_{fold_no}.csv"), index=False
+    )
 
 def train_single_label_models(df: pd.DataFrame, opts: options.Options) -> None:
     """
@@ -645,6 +669,8 @@ def train_single_label_models(df: pd.DataFrame, opts: options.Options) -> None:
                     x_train, x_test, y_train, y_test = train_test_split(
                         x, y, stratify=y, test_size=opts.testSize, random_state=1
                     )
+                    if opts.save_splits:
+                        save_split_to_csv(x_train, x_test, y_train, y_test, target, 0, opts)
                     logging.info(
                         f"Splitting train/test data with fixed random initializer"
                     )
@@ -652,6 +678,8 @@ def train_single_label_models(df: pd.DataFrame, opts: options.Options) -> None:
                     x_train, x_test, y_train, y_test = train_test_split(
                         x, y, stratify=y, test_size=opts.testSize
                     )
+                    if opts.save_splits:
+                        save_split_to_csv(x_train, x_test, y_train, y_test, target, 0, opts)
 
                 performance = fit_and_evaluate_model(
                     x_train=x_train,
@@ -687,6 +715,11 @@ def train_single_label_models(df: pd.DataFrame, opts: options.Options) -> None:
                 fold_no = 1
                 # split the data
                 for train, test in kfold_c_validator.split(x, y):
+                    x_train, x_test = x[train], x[test]
+                    y_train, y_test = y[train], y[test]
+                    if opts.save_splits:
+                        save_split_to_csv(x_train, x_test, y_train, y_test, target, fold_no, opts)
+
                     if opts.wabTracking and not opts.aeWabTracking:
                         wandb.init(
                             project=f"FNN_{opts.threshold}_{opts.split_type}",
@@ -711,13 +744,13 @@ def train_single_label_models(df: pd.DataFrame, opts: options.Options) -> None:
                         )
 
                     performance = fit_and_evaluate_model(
-                        x_train=x[train],
-                        x_test=x[test],
-                        y_train=y[train],
-                        y_test=y[test],
+                        x_train=x_train,
+                        x_test=x_test,
+                        y_train=y_train,
+                        y_test=y_test,
                         fold=fold_no,
                         target=target,
-                        opts=opts,
+                        opts=opts
                     )
                     performance_list.append(performance)
 
@@ -807,6 +840,8 @@ def train_single_label_models(df: pd.DataFrame, opts: options.Options) -> None:
                 x_train, y_train, x_test, y_test = get_x_y(
                     df_task, target, train_set, test_set, opts
                 )
+                if opts.save_splits:
+                    save_split_to_csv(x_train, x_test, y_train, y_test, target, 0, opts)
                 if opts.wabTracking and not opts.aeWabTracking:
                     wandb.init(
                         project=f"FFN_{opts.split_type}",
@@ -856,6 +891,8 @@ def train_single_label_models(df: pd.DataFrame, opts: options.Options) -> None:
                     x_train, y_train, x_test, y_test = get_x_y(
                         df_task, target, train_set, test_set, opts
                     )
+                    if opts.save_splits:
+                        save_split_to_csv(x_train, x_test, y_train, y_test, target, fold_no, opts)
                     if opts.wabTracking and not opts.aeWabTracking:
                         wandb.init(
                             project=f"FFN_{opts.split_type}",
@@ -957,6 +994,8 @@ def train_single_label_models(df: pd.DataFrame, opts: options.Options) -> None:
                 x_train, y_train, x_test, y_test = get_x_y(
                     df_task, target, train_set, test_set, opts
                 )
+                if opts.save_splits:
+                    save_split_to_csv(x_train, x_test, y_train, y_test, target, 0, opts)
                 if opts.wabTracking and not opts.aeWabTracking:
                     wandb.init(
                         project=f"FFN_{opts.split_type}AE_{opts.aeSplitType}",

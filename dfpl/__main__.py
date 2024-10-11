@@ -6,12 +6,15 @@ from os import path
 
 import chemprop as cp
 from keras.models import load_model
-
+import pandas as pd
 from dfpl import autoencoder as ac
 from dfpl import feedforwardNN as fNN
 from dfpl import fingerprint as fp
 from dfpl import options, predictions
 from dfpl import single_label_model as sl
+from dfpl import shap_dfpl as sd
+from dfpl import interpret as explain
+from dfpl import visualise
 from dfpl import vae as vae
 from dfpl.utils import createArgsFromJson, createDirectory, makePathAbsolute
 
@@ -48,6 +51,68 @@ def predictdmpnn(opts: options.GnnOptions) -> None:
 
     cp.train.make_predictions(args=opts)
 
+def interpretdmpnn(opts: options.GnnOptions) -> None:
+    """
+    Interpret the values using a trained D-MPNN model with the given options.
+    Args:
+    - opts: options.GnnOptions instance containing the details of the prediction
+    - JSON_ARG_PATH: path to a JSON file containing additional arguments for interpretation
+    Returns:
+    -
+    """
+    ignore_elements = ["py/object"]
+    # Load options and additional arguments from a JSON file
+    arguments = createArgsFromJson(
+        jsonFile=opts.configFile
+    )
+    opts = cp.args.InterpretArgs().parse_args(arguments)
+    # Define the target properties and their corresponding IDs
+    target_properties = {'AR': 1, 'ER': 2, 'ED': 7}
+
+    for target_name, property_id in target_properties.items():
+        opts.property_id = property_id
+        df = explain.interpret(
+            args=opts,visualise_smiles=True
+        )
+        df.to_csv(f'interpretation_{target_name}.csv', index=False)
+
+def interpretffn(opts: options.Options) -> None:
+    """
+    Interpret the values using a trained FFN model with the given options.
+
+    Args:
+    - opts: options.Options instance containing the details of the prediction
+
+    Returns:
+    -
+    """
+    args = createArgsFromJson(
+        jsonFile=opts.configFile
+    )
+
+    def list_to_dict(args_list):
+        if len(args_list) % 2 != 0:
+            raise ValueError("List length must be even, with alternating keys and values.")
+        return {args_list[i]: args_list[i + 1] for i in range(0, len(args_list), 2)}
+
+    args = list_to_dict(args)
+    #read all except the last column
+    x_train = pd.read_csv(path.join(opts.outputDir, f"{args.get('--target')}_train_fold_0.csv"), index_col=-1)
+    x_test = pd.read_csv(path.join(opts.outputDir, f"{args.get('--target')}_test_fold_0.csv"), index_col=-1)
+    print(x_test.shape,x_train.shape)
+    model = tf.keras.models.load_model(path.join(opts.outputDir, "NR-AR_saved_model"),
+                                       custom_objects={'balanced_accuracy': sl.balanced_accuracy})
+    print(model.summary())
+    shap_values = sd.shap_explain(x_train=x_train, x_test=x_test, model=model,
+                                  target=args.get("--target"),
+                                  outputDir=opts.outputDir,
+                                  drop_values=args.get("--drop_values"),
+                                  threshold=args.get("--threshold"),
+                                  save_values=args.get("--save_values")
+                                  )
+    plot_types = ["bar", "waterfall", "heatmap", "force"]
+    plot_types = ["waterfall"]
+    sd.shap_plots(shap_values, opts, args.get("--target"), plot_types)
 
 def train(opts: options.Options):
     """
@@ -238,6 +303,14 @@ def main():
                 f"The following arguments are received or filled with default values:\n{prog_args}"
             )
             predict(fixed_opts)
+        elif prog_args.method == "interpretgnn":
+            interpretgnn_opts = options.GnnOptions.fromCmdArgs(prog_args)
+            interpretdmpnn(interpretgnn_opts)
+
+        elif prog_args.method == "interpretffn":
+            interpretffn_opts = options.Options.fromCmdArgs(prog_args)
+            interpretffn(interpretffn_opts)
+
     except AttributeError as e:
         print(e)
         parser.print_usage()

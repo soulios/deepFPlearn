@@ -30,7 +30,7 @@
   "gpu": "",
 
   "trainFNN": true,
-  "kFolds": 2,
+  "kFolds": 1,
   "threshold": 0.5,
   "testSize": 0.2,
   "fnnType": "FNN",
@@ -44,6 +44,7 @@
   "learningRateDecay": 0.96,
   "l2reg": 0.001,
 
+  "save_splits": true,
   "aeWabTracking": false,
   "wabTracking": false,
   "wabTarget": ""
