@@ -1,13 +1,10 @@
 import dataclasses
 import logging
 import os.path
-import pathlib
 from argparse import Namespace
 from os import path
 
 import chemprop as cp
-import pandas as pd
-from keras.models import load_model
 
 from dfpl import autoencoder as ac
 from dfpl import feedforwardNN as fNN
@@ -27,7 +24,7 @@ def traindmpnn(opts: options.GnnOptions) -> None:
     - None
     """
     # Load options from a JSON file and replace the relevant attributes in `opts`
-    arguments = createArgsFromJson(jsonFile = opts.configFile)
+    arguments = createArgsFromJson(jsonFile=opts.configFile)
     opts = cp.args.TrainArgs().parse_args(arguments)
     logging.info("Training DMPNN...")
     mean_score, std_score = cp.train.cross_validate(
@@ -45,7 +42,7 @@ def predictdmpnn(opts: options.GnnOptions) -> None:
     - None
     """
     # Load options and additional arguments from a JSON file
-    arguments = createArgsFromJson(jsonFile = opts.configFile)
+    arguments = createArgsFromJson(jsonFile=opts.configFile)
     opts = cp.args.PredictArgs().parse_args(arguments)
 
     cp.train.make_predictions(args=opts)
@@ -81,26 +78,25 @@ def train(opts: options.Options):
         if not opts.trainAC:
             if opts.aeType == "variational":
                 (autoencoder, encoder) = vae.define_vae_model(opts=options.Options())
-            else:
+            elif opts.aeType == "deterministic":
                 (autoencoder, encoder) = ac.define_ac_model(opts=options.Options())
-
-            if opts.ecWeightsFile == "":
-                encoder = load_model(opts.ecModelDir)
             else:
-                autoencoder.load_weights(
-                    os.path.join(opts.ecModelDir, opts.ecWeightsFile)
-                )
+                raise ValueError(f"Unknown autoencoder type: {opts.aeType}")
+
+            if opts.ecWeightsFile != "":
+                encoder.load_weights(os.path.join(opts.ecModelDir, opts.ecWeightsFile))
         # compress the fingerprints using the autoencoder
         df = ac.compress_fingerprints(df, encoder)
-        if opts.visualizeLatent:
-            ac.visualize_fingerprints(
-                df,
-                before_col="fp",
-                after_col="fpcompressed",
-                train_indices=train_indices,
-                test_indices=test_indices,
-                save_as=f"UMAP_{opts.aeSplitType}.png",
-            )
+    if opts.visualizeLatent and opts.trainAC:
+        logging.info("Visualizing latent space")
+        ac.visualize_fingerprints(
+            df,
+            before_col="fp",
+            after_col="fpcompressed",
+            train_indices=train_indices,
+            test_indices=test_indices,
+            save_as=f"UMAP_{opts.aeSplitType}.png",
+        )
     # train single label models if requested
     if opts.trainFNN and not opts.enableMultiLabel:
         sl.train_single_label_models(df=df, opts=opts)
@@ -132,10 +128,10 @@ def predict(opts: options.Options) -> None:
         if opts.aeType == "variational":
             (autoencoder, encoder) = vae.define_vae_model(opts=options.Options())
         # Load trained model for autoencoder
-        if opts.ecWeightsFile == "":
-            encoder = load_model(opts.ecModelDir)
-        else:
+        if opts.ecWeightsFile != "":
             encoder.load_weights(os.path.join(opts.ecModelDir, opts.ecWeightsFile))
+        else:
+            raise ValueError("No weights file specified for encoder")
         df = ac.compress_fingerprints(df, encoder)
 
     # Run predictions on the compressed fingerprints and store the results in a dataframe
@@ -201,27 +197,17 @@ def main():
 
         elif prog_args.method == "predictgnn":
             predictgnn_opts = options.GnnOptions.fromCmdArgs(prog_args)
-            fixed_opts = dataclasses.replace(
-                predictgnn_opts,
-                test_path=makePathAbsolute(predictgnn_opts.test_path),
-                preds_path=makePathAbsolute(predictgnn_opts.preds_path),
-            )
             createLogger("predictgnn.log")
-            predictdmpnn(fixed_opts)
+            predictdmpnn(predictgnn_opts)
 
         elif prog_args.method == "train":
             train_opts = options.Options.fromCmdArgs(prog_args)
-            fixed_opts = dataclasses.replace(
-                train_opts,
-                inputFile=makePathAbsolute(train_opts.inputFile),
-                outputDir=makePathAbsolute(train_opts.outputDir),
-            )
-            createDirectory(fixed_opts.outputDir)
-            createLogger(path.join(fixed_opts.outputDir, "train.log"))
+            createDirectory(train_opts.outputDir)
+            createLogger(path.join(train_opts.outputDir, "train.log"))
             logging.info(
-                f"The following arguments are received or filled with default values:\n{fixed_opts}"
+                f"The following arguments are received or filled with default values:\n{train_opts}"
             )
-            train(fixed_opts)
+            train(train_opts)
         elif prog_args.method == "predict":
             predict_opts = options.Options.fromCmdArgs(prog_args)
             fixed_opts = dataclasses.replace(
