@@ -1,6 +1,7 @@
 import math
 from typing import Callable, Dict, List, Set, Tuple
 import pathlib
+import os
 import numpy as np
 import pandas as pd
 from rdkit import Chem
@@ -10,6 +11,7 @@ from chemprop.data import get_data_from_smiles, get_header, get_smiles, Molecule
 from chemprop.train import predict
 from chemprop.utils import load_args, load_checkpoint, load_scalers, timeit
 import dfpl.visualise as vis
+
 MIN_ATOMS = 15
 C_PUCT = 10
 
@@ -322,9 +324,11 @@ def interpret(args: InterpretArgs, visualise_smiles: bool) -> List[Dict[str, flo
     MIN_ATOMS = args.min_atoms
 
     all_smiles = get_smiles(path=args.data_path, smiles_columns=args.smiles_columns)
-    header = get_header(path=args.data_path)
-
-    property_name = header[args.property_id] if len(header) > args.property_id else 'score'
+    parent_dir = os.path.dirname(os.path.abspath(args.checkpoint_dir))
+    task_path = os.path.join(parent_dir, 'test_preds.csv')
+    property_names = [col for col in get_header(path=task_path) if 'true' not in col.lower() and col not in args.smiles_columns]
+    print(f'Property names: {property_names}')
+    property_name = property_names[args.property_id-1]
     print(f'smiles,{property_name},rationale,rationale_score')
     results = []
     img_list = []
@@ -371,7 +375,10 @@ def interpret(args: InterpretArgs, visualise_smiles: bool) -> List[Dict[str, flo
     grid_size = vis.calculate_grid_size(total_images)  # Calculate the best fit grid size
 
     combined_image = vis.combine_images(img_list, grid_size=grid_size)
-    combined_image.save(f"explanations_{property_name}.png")  # Sa
+    combined_image.save(f"explanations_{property_name}.png")
+    # save the  results in a csv file
+    results_df = pd.DataFrame(results)
+    results_df.to_csv(f"explanations_{property_name}.csv", index=False)
     return pd.DataFrame(results)
 
 

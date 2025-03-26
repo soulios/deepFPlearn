@@ -67,14 +67,7 @@ def interpretdmpnn(opts: options.GnnOptions) -> None:
     )
     opts = cp.args.InterpretArgs().parse_args(arguments)
     # Define the target properties and their corresponding IDs
-    target_properties = {'AR': 1, 'ER': 2, 'ED': 7}
-
-    for target_name, property_id in target_properties.items():
-        opts.property_id = property_id
-        df = explain.interpret(
-            args=opts,visualise_smiles=True
-        )
-        df.to_csv(f'interpretation_{target_name}.csv', index=False)
+    df_explain = explain.interpret(args=opts, visualise_smiles=True)
 
 def interpretffn(opts: options.Options) -> None:
     """

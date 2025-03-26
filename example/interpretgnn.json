@@ -1,6 +1,6 @@
 {
   "py/object": "dfpl.options.GnnOptions",
-  "data_path": "tests/data/interp.csv",
+  "data_path": "tests/data/smiles.csv",
   "checkpoint_dir": "dmpnn-random/fold_0/model_0/",
   "max_atoms": 20,
   "min_atoms": 8,
