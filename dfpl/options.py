@@ -153,12 +153,6 @@ def createCommandlineParser() -> argparse.ArgumentParser:
     parser_interpret_gnn.set_defaults(method="interpretgnn")
     parseInterpretGnn(parser_interpret_gnn)
 
-    parser_interpret_ffn = subparsers.add_parser(
-        "interpretffn",
-        help="Explain the predictions of your FFN models with SHAPley values",
-    )
-    parser_interpret_ffn.set_defaults(method="interpretffn")
-    parseInterpretFfn(parser_interpret_ffn)
 
     parser_train = subparsers.add_parser(
         "train", help="Train new models with your data"
@@ -213,41 +207,6 @@ def parseInterpretGnn(parser: argparse.ArgumentParser) -> None:
         type=bool,
         help="Visualise toxic substructures using RDkit. Images saved within output_dir",
         default=True
-    )
-
-def parseInterpretFfn(parser: argparse.ArgumentParser) -> None:
-    parser.add_argument(
-        "-f",
-        "--configFile",
-        metavar="FILE",
-        type=str,
-        help="Path to a json file containing interpretation parameters.",
-        default=argparse.SUPPRESS,
-    )
-    parser.add_argument(
-        "--data_path",
-        type=str,
-        help="Path to the data, model's predicitons on which shall be explained with SHAP",
-    )
-    parser.add_argument("--output_dir", type=str, help="Output directory.")
-    parser.add_argument(
-        "--predict_path",
-        type=str,
-        help="File with the model's predictions. See: predict.json",
-    )
-    parser.add_argument("--target", type=str, help="Target to be explained.")
-    parser.add_argument(
-        "--drop_values",
-        type=bool,
-        help="Include only those #postions in a ECFP, that have the total count of 1's >= threshold for the given training dataset.",
-    )
-    parser.add_argument(
-        "--threshold",
-        type=int,
-        help="For a given dataset, include only those #posiions from total 2048 of ECFPs, that have the count of 1's >= threshold over all training samples.",
-    )
-    parser.add_argument(
-        "--save_values", type=bool, help="Save SHAP values into a file."
     )
 
 

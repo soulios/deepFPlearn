@@ -6,6 +6,7 @@ from os import path
 
 import chemprop as cp
 from keras.models import load_model
+import tensorflow as tf
 import pandas as pd
 from dfpl import autoencoder as ac
 from dfpl import feedforwardNN as fNN
@@ -90,22 +91,30 @@ def interpretffn(opts: options.Options) -> None:
 
     args = list_to_dict(args)
     #read all except the last column
-    x_train = pd.read_csv(path.join(opts.outputDir, f"{args.get('--target')}_train_fold_0.csv"), index_col=-1)
-    x_test = pd.read_csv(path.join(opts.outputDir, f"{args.get('--target')}_test_fold_0.csv"), index_col=-1)
+    x_train = pd.read_csv(path.join(opts.outputDir, args.get("--target"), "train_fold_0.csv"), index_col=-1)
+    x_test = pd.read_csv(path.join(opts.outputDir, args.get("--target"), "test_fold_0.csv"), index_col=-1)
     print(x_test.shape,x_train.shape)
-    model = tf.keras.models.load_model(path.join(opts.outputDir, "NR-AR_saved_model"),
-                                       custom_objects={'balanced_accuracy': sl.balanced_accuracy})
-    print(model.summary())
-    shap_values = sd.shap_explain(x_train=x_train, x_test=x_test, model=model,
-                                  target=args.get("--target"),
-                                  outputDir=opts.outputDir,
-                                  drop_values=args.get("--drop_values"),
-                                  threshold=args.get("--threshold"),
-                                  save_values=args.get("--save_values")
-                                  )
-    plot_types = ["bar", "waterfall", "heatmap", "force"]
-    plot_types = ["waterfall"]
-    sd.shap_plots(shap_values, opts, args.get("--target"), plot_types)
+
+    model = sl.define_single_label_model(input_size=x_train.shape[1], opts=opts)
+    # Load the model weights
+    weights_path = path.join(opts.outputDir, args.get("--target"), "model_weights.h5")
+    model.load_weights(weights_path)
+    shap_values, explanation = sd.shap_explain(
+        x_train=x_train,
+        x_test=x_test,
+        model=model,
+        target=args.get("--target"),
+        output_dir=opts.outputDir,
+        drop_values=args.get("--drop_values"),
+        threshold=args.get("--threshold"),
+        save_values=args.get("--save_values")
+    )
+
+    # Specify the plot types (you can choose one or multiple)
+    plot_types = ["force","bar"]
+
+    # Now pass both the shap_values and the explanation to shap_plots along with the output directory
+    sd.shap_plots(shap_values, explanation, opts.outputDir, args.get("--target"), plot_types)
 
 def train(opts: options.Options):
     """
@@ -300,9 +309,6 @@ def main():
             interpretgnn_opts = options.GnnOptions.fromCmdArgs(prog_args)
             interpretdmpnn(interpretgnn_opts)
 
-        elif prog_args.method == "interpretffn":
-            interpretffn_opts = options.Options.fromCmdArgs(prog_args)
-            interpretffn(interpretffn_opts)
 
     except AttributeError as e:
         print(e)
